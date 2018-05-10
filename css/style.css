@@ -1,0 +1,35 @@
+html,
+body,
+#map {
+   margin: 0;
+   padding: 0;
+   height: 100%;
+   width: 100%;
+}
+
+body {
+   padding-top: 60px;
+}
+
+/** Navbar **/
+#navbar {
+   margin-bottom: 0;
+   padding: 5px 0;
+   background: #005fa2;  
+}
+
+div.navbar-header > h1 {
+   margin: 0;
+   padding-top: 5px;
+   font-size: 1.75em;
+}
+    
+/* panels */
+#panelResults {
+    display: block;
+    position: absolute;
+    left: 50px;
+    top: 70px;
+    opacity: 0;
+    z-index: 1050;
+}

@@ -235,7 +235,7 @@ function selectZoningService(pin) {
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-function getParcelZoningDistrict(parcel,zoningURL) {
+function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          console.log('An error with the request has occured');
@@ -265,20 +265,16 @@ function getParcelZoningDistrict(parcel,zoningURL) {
             
             // add array for each zoning district to master array            
             zoningInfo.push(results);
-          }
-            
-          // add municipal-specific service to map
-          // may want to always display zoning service - action step
-          zoningLayer.addLayer(L.esri.featureLayer({url: zoningURL, renderer: L.canvas()}));
+          }         
 
          // call populate results function
-         populateResults(zoningInfo);  
+         populateResults(zoningInfo, resultsElement, resultsPanel);  
       }       
     });
 }
 
 // function to select parcel based upon pin
-function selectParcelByPin(pin, taxParcelLayer) {
+function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
    // attribute query expression
    var queryString = "PIN = '" + pin + "'";
    // tax parcel service
@@ -288,7 +284,7 @@ function selectParcelByPin(pin, taxParcelLayer) {
    var tps3 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42'
    
    // query request - where method
-   L.esri.query({url: tps1}).where(queryString).run(function(error,response) {
+   L.esri.query({url: tps3}).where(queryString).run(function(error,response) {
       if (error) {
          console.log('An error with the request has occured');
          // create error message for user or console or both
@@ -328,7 +324,7 @@ function selectParcelByPin(pin, taxParcelLayer) {
         map.fitBounds(taxParcelLayer.getBounds());
       
         // call zoning query function
-        getParcelZoningDistrict(taxParcel,selectZoningService(pin));   
+        getParcelZoningDistrict(taxParcelLayer,selectZoningService(pin), resultsElement, resultsPanel);   
        } 
     });
   }
