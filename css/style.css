@@ -1,35 +1,197 @@
-html,
-body,
-#map {
-   margin: 0;
-   padding: 0;
-   height: 100%;
-   width: 100%;
+/*** General Settings ***/
+html, 
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 body {
-   padding-top: 60px;
+    padding-top: 55px;
 }
 
-/** Navbar **/
+/*** Navigation ***/
 #navbar {
-   margin-bottom: 0;
-   padding: 5px 0;
-   background: #005fa2;  
+    margin-bottom: 0;
+    background-color: #196fa6;    
 }
 
-div.navbar-header > h1 {
-   margin: 0;
-   padding-top: 5px;
-   font-size: 1.75em;
+#navbar,
+span.glyphicon-menu-hamburger,
+span.menu-label {
+    color: #fff;    
 }
-    
-/* panels */
-#panelResults {
-    display: block;
+
+#navbar input[type="text"] {
+    color: #000;
+}
+
+span.glyphicon-menu-hamburger,
+span.menu-label {
+    font-size: 1.5em;  
+}
+
+#navbar h1 {
+    font-size: 2em;
+    margin: 10px 0;
+}
+
+.navbar-default .navbar-nav>li>a.dropdown-toggle {
+    transition: background-color 0.2s ease-in;
+}
+
+#search {
+    background: #000;    
+    padding: 5px;
+    border-radius: 8px;
+    transition: color 0.3s ease-in, background 0.3s ease-in;
+}
+
+#search:hover,
+#search:focus {
+    background: #EAAB00;
+    color: #000;
+}
+
+/* Menu text */
+.menu-label {
+    font-weight: bold;
+}
+
+.calcite-maps .dropdown-toggle span {
+    top: 5px;
+}
+
+/*** Leaflet Controls ****/
+.calcite-maps .leaflet-top, .calcite-maps .leaflet-bottom {
+    z-index: 500;
+}
+
+.calcite-maps .leaflet-control-attribution {
+    position: relative;
+    right: 20px;
+}
+
+.calcite-maps .leaflet-control-zoomhome.leaflet-bar > a,
+.calcite-maps .leaflet-control-locate.leaflet-bar > a {
+    width: 32px;
+	height: 32px;
+	line-height: 32px;
+	border-radius: 0;
+}
+
+.calcite-maps .leaflet-control-zoomhome,
+.calcite-maps .leaflet-control-locate.leaflet-bar {
+	margin-left: 15px;
+}
+
+.calcite-maps .leaflet-control-locate.leaflet-bar {
+    margin-top: 15px;
+}
+
+/* Leaflet Zoom Home */
+.calcite-maps.nav-position-top .leaflet-control-zoomhome  {
+	margin-top: 80px;
+}
+
+.calcite-maps.nav-position-top-fixed .leaflet-control-zoomhome {
+	margin-top: 20px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+.leaflet-control-locate a {
+    color: #000;
+}
+
+/*** Panels ***/
+.panel-container {
     position: absolute;
-    left: 50px;
-    top: 70px;
+    top: 90px;
+    right: 15px;    
+    z-index: 650;
+}
+
+.panel {
+    width: 250px;
+    min-height: 150px;
+}
+
+.panel-default > .panel-heading {
+    background-color: #196fa6;
+}
+
+span.glyphicon-remove {
+    float: right;
+    transition: color 0.2s ease-in;
+}
+
+span.glyphicon-remove:hover,
+span.glyphicon-remove:focus {
+    color: #000;
+}
+
+.panel-title > a,
+.calcite-maps .panel-title span.glyphicon.glyphicon-remove {
+    color: #fff;
+}
+
+.calcite-maps .panel-title span.glyphicon.glyphicon-remove:hover {
+    color: #000;
+}
+
+#panelResults {
+    position: absolute;
+    display: block;
+    left: 75px;
+    top: 65px;
+    width: 300px;
     opacity: 0;
     z-index: 1050;
+}
+
+/*** Media Query ***/
+@media screen and (max-width: 767px) {
+    ul.dropdown-menu li {
+        border-top: solid 1px #efefef;
+    }
+    
+    /*** Panels ***/
+    .panel-container,
+    .panel-group {
+        z-index: 2000;
+    }
+    
+    #panelSearch .panel-body {
+        min-height: 400px;
+    }  
+    
+    #panelSearch .panel-control {
+        padding: 5px;
+    }
+    
+    .calcite-maps .geocoder-control-suggestions {
+        min-height: 200px;
+    }
+    
+    .calcite-maps .panel-body {
+        overflow-y: scroll;
+    }
+   
+    li.dropdown.open ul.dropdown-menu li:active {
+        background: #75a8c9;              
+    } 
+}
+
+@media screen and (min-width: 768px) and (max-width: 875px) {
+    .calcite-maps .navbar-title {
+        font-size: 1.05em;
+    }
+    
+    .calcite-maps .navbar-subtitle {
+        font-size: 0.75em;
+    }
 }

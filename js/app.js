@@ -1,7 +1,6 @@
 "use strict";
 
 /*** DOM Objects ***/
-// use jQuery instead?
 // panel containing zoning district information
 var resultsPanel = document.getElementById('panelResults');
 // element within panel containing results of analysis
@@ -9,14 +8,46 @@ var resultsEl = document.getElementById('results');
 // search form element
 var userForm = document.getElementById('search');
 
+/***  Basemap Changer ***/
+function setBasemap(selectedBasemap) {    
+    if (basemap) {
+	   map.removeLayer(basemap);        
+	}	
+    if (selectedBasemap === 'OpenStreetMap') {
+        basemap = L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
+	} else {
+	   basemap = L.esri.basemapLayer(selectedBasemap);
+	}	
+    map.addLayer(basemap);	
+    if (esriLayerLabels) {
+        map.removeLayer(esriLayerLabels);
+	}
+    if (grayCanvasLabels) {
+        map.removeLayer(grayCanvasLabels);
+    }
+	if (selectedBasemap === 'Imagery' || selectedBasemap === 'Gray') {
+	    esriLayerLabels = L.esri.basemapLayer(selectedBasemap + 'Labels');
+		map.addLayer(esriLayerLabels);
+	}
+    // add world transportation service to Imagery basemap
+    if (selectedBasemap === 'Imagery') {
+            worldTransportation.addTo(map);            
+    } else if (map.hasLayer(worldTransportation)) {
+            map.removeLayer(worldTransportation);
+    }
+}
+
 /*** Map Objects ***/                                                                                // Map
 var map = L.map('map', {
    center: [40.15, -77.25],
    zoom: 10               
 });
 
-// Basemap - Light Gray Canvas
-var esriStreets = L.esri.basemapLayer('Gray').addTo(map);
+// ESRI Basemaps
+var basemap = L.esri.basemapLayer('Gray').addTo(map);
+var grayCanvasLabels = L.esri.basemapLayer('GrayLabels').addTo(map);
+var esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
+var worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries
 var municipalService = L.esri.dynamicMapLayer({
@@ -24,26 +55,12 @@ var municipalService = L.esri.dynamicMapLayer({
     maxZoom: 14 
 }).addTo(map);
 
-// automate creating array for sub-layers for zoning
-var zoningSubLayers = [];
-
-for (var i = 5; i < 38; i++) {
-    zoningSubLayers.push(i);
-}
-
-// Generalized Zoning
-var zoningGeneralized = L.esri.dynamicMapLayer({
-    url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Zoning/MapServer',
-    minZoom: 14,
-    layers: zoningSubLayers,
-    opacity: 0.5
-}).addTo(map);
-
-// Zoning By District - not sure which one to use yet
+// Zoning By District
 var zoningGeneralized = L.esri.dynamicMapLayer({
     url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/ZoningByDistrict/MapServer',
-    minZoom: 14    
-}); 
+    minZoom: 14,
+    opacity: 0.35
+}).addTo(map);
 
 // Container for selected parel
 var taxParcel =  L.geoJson().addTo(map);
@@ -56,7 +73,7 @@ userForm.addEventListener('click', function(e) {
    // change opacity back to 0
    resultsPanel.style.opacity = 0;
    
-   // get pin element
+   // get pin value entered in form
    var pin = document.getElementById('pin').value;   
    
    // Remove previous tax parcel GeoJSON feature

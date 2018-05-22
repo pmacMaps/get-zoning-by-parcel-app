@@ -9,7 +9,7 @@
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="node_modules/leaflet/dist/leaflet.css" />
-        <link rel="stylesheet" type="text/css" href="libs/leaflet.zoomhome-master/dist/leaflet.zoomhome.css" />
+        <link rel="stylesheet" type="text/css" href="libs/leaflet.zoomhome-master/dist/leaflet.zoomhome.css" />   
         <link rel="stylesheet" type="text/css" href="css/style.css" />        
     </head>
     <body>
@@ -30,16 +30,15 @@
                     <ul class="nav navbar-nav navbar-right">
                        <!-- Search - hidden on small screens, in options menu -->
                        <li class="hidden-xs">
-                          <form id="searchForm" class="navbar-form navbar-search">
-                             <form>
-                                <label for="pin">Parcel ID (PIN)</label>
-                                <input id="pin" type="text" />
-                                <input id="search" type="submit" value="Perform Search" />
-                             </form>
+                          <form id="searchForm" class="navbar-form navbar-search">                     
+                              <label for="pin">Parcel ID (PIN)</label>
+                              <input id="pin" type="text" />
+                              <input id="search" type="submit" value="Perform Search" />
+                          </form>
                        </li>
                        <!-- Options dropdown menu -->
                        <li class="dropdown" role="presentation">
-                          <a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">  Menu</span></a>
+                           <a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">  Menu</span></a>
                           <ul class="dropdown-menu">
                              <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                              <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Zoning Search</a></li>
@@ -103,10 +102,10 @@
                  <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
                     <div class="panel-body">
                        <select id="selectStandardBasemap" class="form-control">
-                                    <option value="Streets" selected>Streets</option>
-                                    <option value="Gray">Minimalist</option>
-                                    <option value="Imagery">Satellite</option>
-                                    <option value="OpenStreetMap">Open Street Map</option>
+                                   <option value="Gray" selected>Minimalist</option>         
+                                   <option value="Streets">Streets</option>                
+                                   <option value="Imagery">Satellite</option>
+                                   <option value="OpenStreetMap">Open Street Map</option>
                                 </select>
                     </div>
                  </div>
@@ -143,18 +142,18 @@
               </div>
               <!-- /. Disclaimer Panel -->
            </div>
-           <!-- Results Panel -->
-           <div id="panelResults" class="panel panel-default collapse">
+         </div> <!-- /.panel-group -->
+         <!-- Results Panel -->
+         <div id="panelResults" class="panel panel-default collapse">
               <div id="headingResults" class="panel-heading">
                  <div class="panel-title">
-                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseResults" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseResults"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Results</a>
+                    <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseResults" data-parent="#collapseResults" aria-expanded="false" aria-controls="collapseResults"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Results</a>
                     <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelResults"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                  </div>
               </div>
               <div id="results" class="panel-body"></div>
            </div>
-           <!-- /. Results Panel -->   
-        </div> <!-- /.panel-group -->
+           <!-- /. Results Panel -->
         <!-- Scripts -->
         <script src="node_modules/jquery/dist/jquery.min.js"></script>
         <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

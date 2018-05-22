@@ -12,9 +12,9 @@ function populateResults(results, resultsElement, resultsPanel) {
    } else {
      for (var i = 0; i < results.length; i++) {
          resultsContent += '<ul>';
-         resultsContent += '<li>Zoning District:' + results[i][0] + '</li>';
-         resultsContent += '<li>Zoning Code:' + results[i][1] + '</li>';
-         resultsContent += '<li>Zoning Category:' + results[i][2] + '</li>';
+         resultsContent += '<li>Zoning District: ' + results[i][0] + '</li>';
+         resultsContent += '<li>Zoning Code: ' + results[i][1] + '</li>';
+         resultsContent += '<li>Zoning Category: ' + results[i][2] + '</li>';
          resultsContent += '</ul>';    
      }     
    }
@@ -284,7 +284,7 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
    var tps3 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42'
    
    // query request - where method
-   L.esri.query({url: tps3}).where(queryString).run(function(error,response) {
+   L.esri.query({url: tps2}).where(queryString).run(function(error,response) {
       if (error) {
          console.log('An error with the request has occured');
          // create error message for user or console or both
@@ -328,3 +328,14 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
        } 
     });
   }
+
+$(document).ready(function() {
+    // Basemap changed
+	$("#selectStandardBasemap").on("change", function(e) {
+        setBasemap($(this).val());
+    });
+    
+    $('#panelResults a.panel-close').click(function() {
+       $('#panelResults').css('opacity', 0); 
+    });
+});
