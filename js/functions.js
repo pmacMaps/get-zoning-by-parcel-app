@@ -6,9 +6,8 @@ function populateResults(results, resultsElement, resultsPanel) {
    var resultsContent = '<div>';
    
    // expecting items in results    
-   if (results.length < 0) {
-      resultsContent += '<p>An error occured getting the zoning information</p>';
-      resultsContent += '</div>';       
+   if (results.length < 1) {
+      resultsContent += '<p>An error occured getting the zoning information</p>';   
    } else {
      for (var i = 0; i < results.length; i++) {
          resultsContent += '<ul>';
@@ -258,13 +257,13 @@ function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) 
             var zoningDistrictCategory = response.features[i].properties.ZoneType;
             
             // array to hold results for each zoning district  
-            var results = [];
-            results[0] = zoningDistrictName;
-            results[1] = zoningDistrictCode;
-            results[2] = zoningDistrictCategory;
+            var resultsArray = [];
+            resultsArray[0] = zoningDistrictName;
+            resultsArray[1] = zoningDistrictCode;
+            resultsArray[2] = zoningDistrictCategory;
             
             // add array for each zoning district to master array            
-            zoningInfo.push(results);
+            zoningInfo.push(resultsArray);
           }         
 
          // call populate results function
