@@ -107,6 +107,21 @@ span.menu-label {
     color: #000;
 }
 
+.feat-popup {
+   font-size: 1.125em;
+   color: #000;    
+}
+
+.feat-popup h3 {
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.feat-popup ul {
+    list-style-type: none;
+}
+
 /*** Panels ***/
 .panel-container {
     position: absolute;
@@ -116,7 +131,7 @@ span.menu-label {
 }
 
 .panel {
-    width: 250px;
+    width: 350px;
     min-height: 150px;
 }
 

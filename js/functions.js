@@ -23,7 +23,7 @@ function populateResults(results, resultsElement, resultsPanel) {
    
    // set content of resultsEl
    resultsElement.innerHTML = resultsContent;
-   
+   // show panel
    resultsPanel.style.opacity = 1;  
 }
 
@@ -237,13 +237,20 @@ function selectZoningService(pin) {
 function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
-         console.log('An error with the request has occured');
-         // create error message for user or console or both
-         // place message in results panel - action step
+         // add message to console
+         console.warn('An error with zoning service request has occured');
+         console.warn('Code: ' + error.code + '; Message: ' + error.message);
+         // set content of results element
+         resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact the website manager.';
+         // show panel
+         resultsPanel.style.opacity = 1;  
       } else if (response.features < 1) {
-         console.log('No features returned or an issue occured');
-         // add message to user
-         // place message in results panel - action step
+         // add message to console
+         console.warn('No zoning district features returned or an error occured');
+         // set content of results element
+         resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact the website manager.';
+         // show panel
+         resultsPanel.style.opacity = 1; 
       } 
         else {
           // array to hold all zoning information
@@ -280,18 +287,25 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
    // if tps1 keeps producing errors, use tps2 or tps3
    var tps1 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Tax_Assessment/Parcels/MapServer/42';
    var tps2 = 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/TaxParcelsBackup/FeatureServer/0';
-   var tps3 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42'
-   
+   var tps3 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42';
+     
    // query request - where method
-   L.esri.query({url: tps2}).where(queryString).run(function(error,response) {
+   L.esri.query({url: tps3}).where(queryString).run(function(error,response) {
       if (error) {
-         console.log('An error with the request has occured');
-         // create error message for user or console or both
-        // place message in results panel - action step
-      } else if (response.features < 1) {
-         console.log('No features returned');
-         // add message to user 
-         // place message in results panel - action step  
+         // add message to console
+         console.warn('An error with the parcels service request has occured');
+         console.warn('Code: ' + error.code + '; Message: ' + error.message);
+         // set content of results element
+         resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact the website manager.';
+         // show panel
+         resultsPanel.style.opacity = 1;        
+      } else if (response.features < 1) {        
+         // add message to console
+         console.log('No parcel features returned');
+         // set content of results element
+         resultsElement.innerHTML = 'No parcel features were found. Please check the parcel ID you entered and try again.  If problems persists, contact the website manager.';
+         // show panel
+         resultsPanel.style.opacity = 1; 
       } else {
         // add data to geojson object
         taxParcelLayer.addData(response);
@@ -306,8 +320,8 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
         });      
         // bind popup
         taxParcelLayer.bindPopup(function(layer) {
-           var popupContent = '<div>';
-           popupContent += '<h3>{PIN}</h3>';
+           var popupContent = '<div class="feat-popup">';
+           popupContent += '<h3>Parcel: {PIN}</h3>';
            popupContent += '<ul>';
            popupContent += '<li>Address: {SITUS}</li>';
            popupContent += '<li>Municipality: {MUNI_NAME}</li>';
