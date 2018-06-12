@@ -1,5 +1,33 @@
 "use strict";
 
+// viewport width
+var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+/*** Map & Device Size Functions ***/
+// Set the initial map zoom level based upon viewport width
+function setInitialMapZoom(windowWidth) {
+    var mapZoom;    
+    if (windowWidth < 500) {
+        mapZoom = 9; 
+    } else if (windowWidth >= 500 && windowWidth < 1000) {
+        mapZoom = 10; 
+    } else {
+        mapZoom = 11;  
+    }
+    return mapZoom;
+}
+
+// Set max width of pop-up window 
+function setPopupMaxWidth(windowWidth) {
+    var maxWidth;
+    if (windowWidth < 450 ) {
+        maxWidth = 240;
+    } else {
+        maxWidth = 300;
+    }
+    return maxWidth;
+}
+
 // function to populate zoning query results to display element
 function populateResults(results, resultsElement, resultsPanel) {
     // element to hold results content;
@@ -331,7 +359,7 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
            
            return L.Util.template(popupContent, layer.feature.properties);
            
-        });
+        }, {maxWidth: setPopupMaxWidth(windowWidth)});
         
         // set map around selected parcel
         map.fitBounds(taxParcelLayer.getBounds());

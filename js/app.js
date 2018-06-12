@@ -7,6 +7,8 @@ var resultsPanel = document.getElementById('panelResults');
 var resultsEl = document.getElementById('results');
 // search form element
 var userForm = document.getElementById('search');
+// center coordinates for map
+var homeCoords = [40.15, -77.25];
 
 /***  Basemap Changer ***/
 function setBasemap(selectedBasemap) {    
@@ -39,9 +41,18 @@ function setBasemap(selectedBasemap) {
 
 /*** Map Objects ***/                                                                                // Map
 var map = L.map('map', {
-   center: [40.15, -77.25],
-   zoom: 10               
+   center: homeCoords,
+   zoom: setInitialMapZoom(windowWidth),    
+   zoomControl: false               
 });
+
+/*** Zoom Home Control ***/
+var zoomHome = L.Control.zoomHome({
+    position: 'topleft',
+    zoomHomeTitle: 'Full map extent',
+    homeCoordinates: homeCoords,
+    homeZoom: setInitialMapZoom(windowWidth)
+}).addTo(map);
 
 // ESRI Basemaps
 var basemap = L.esri.basemapLayer('Gray').addTo(map);
@@ -51,7 +62,7 @@ var worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries
 var municipalService = L.esri.dynamicMapLayer({
-    url:'//gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
+   url:'//gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
     maxZoom: 14 
 }).addTo(map);
 
