@@ -27,8 +27,10 @@
   "author": "Patrick McKinney, Cumberland County GIS",
   "license": "ISC",
   "dependencies": {
+    "4": "0.0.0",
     "bootstrap": "^3.3.7",
     "esri-leaflet": "^2.1.4",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
     "leaflet": "^1.3.1",
     "leaflet.locatecontrol": "^0.62.0",
