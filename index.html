@@ -34,19 +34,19 @@
                  </div>
                  <!-- Navbar collapse -->
                  <div id="mainNav" class="collapse navbar-collapse" aria-expanded="false" role="navigation">
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav navbar-right">                      
                        <!-- Search - hidden on small screens, in options menu -->
                        <li class="hidden-xs">
-                          <form id="searchForm" class="navbar-form navbar-search">                     
-                              <label for="pin">Parcel ID (PIN)</label>
-                              <input id="pin" type="text" />
-                              <input id="search" type="submit" value="Perform Search" />
-                          </form>
+                            <form class="navbar-form navbar-search">
+                                <div id="geocode" class="geocode-navbar"></div>
+                            </form>
                        </li>
                        <!-- Options dropdown menu -->
                        <li class="dropdown" role="presentation">
                            <a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">  Menu</span></a>
                           <ul class="dropdown-menu">
+                             <!-- Search - hidden on small screens, shown in modal -->
+                             <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                              <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                              <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Zoning Search</a></li>
                              <li><a id="basemapsNavMenu" class="" role="button" data-target="#panelBasemaps"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>

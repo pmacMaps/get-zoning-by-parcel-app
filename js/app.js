@@ -1,12 +1,9 @@
 "use strict";
 
-/*** DOM Objects ***/
 // panel containing zoning district information
 var resultsPanel = document.getElementById('panelResults');
 // element within panel containing results of analysis
 var resultsEl = document.getElementById('results');
-// search form element
-var userForm = document.getElementById('search');
 // center coordinates for map
 var homeCoords = [40.15, -77.25];
 
@@ -39,8 +36,7 @@ function setBasemap(selectedBasemap) {
     }
 }
 
-/*** Map Objects ***/                                                                                // Map
-var map = L.map('map', {
+/*** Map Objects ***/                                                                        var map = L.map('map', {
    center: homeCoords,
    zoom: setInitialMapZoom(windowWidth),    
    zoomControl: false               
@@ -91,8 +87,8 @@ var taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
 var SearchControl = L.esri.Geocoding.geosearch({
     useMapBounds: false,
     providers: [taxParcelsProvider],
-    placeholder: 'Tax Parcel Search',
-    title: 'Tax Parcel Search',
+    placeholder: 'Tax Parcel Search (PIN or Address)',
+    title: 'Enter PIN or Address',
     expanded: true,
     collapseAfterResult: false,
     zoomToResult: false
@@ -115,9 +111,14 @@ SearchControl.on('results', function(data) {
             taxParcel.clearLayers();
         }
     
-        // call parcel query function
-        // resultText will fail if it hits a street address
-        // would need to handle that context
+        // call parcel query function        
         selectParcelByPin(pin, taxParcel, resultsEl, resultsPanel);
+    } else {
+        // add message to console
+        console.log('No parcel features returned');
+        // set content of results element
+         resultsEl.innerHTML = 'No parcel features were found. Please check the parcel ID you entered and try again.  If problems persists, contact the website manager.';
+         // show panel
+         resultsPanel.style.opacity = 1; 
     }
 });

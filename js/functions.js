@@ -28,6 +28,21 @@ function setPopupMaxWidth(windowWidth) {
     return maxWidth;
 }
 
+// Attach search control for desktop or mobile
+function attachSearch() {
+    var parentName = $(".geocoder-control").parent().attr("id"),
+    geocoder = $(".geocoder-control"),
+    width = $(window).width();
+
+    if (width <= 1024 && parentName !== "geocodeMobile") {
+        geocoder.detach();
+        $("#geocodeMobile").append(geocoder);
+    } else if (width > 1024 && parentName !== "geocode"){
+        geocoder.detach();
+        $("#geocode").append(geocoder);
+    }
+}
+
 // function to populate zoning query results to display element
 function populateResults(results, resultsElement, resultsPanel) {
     // element to hold results content;
@@ -371,6 +386,8 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
   }
 
 $(document).ready(function() {
+    attachSearch();
+    
     // Basemap changed
 	$("#selectStandardBasemap").on("change", function(e) {
         setBasemap($(this).val());
@@ -379,4 +396,9 @@ $(document).ready(function() {
     $('#panelResults a.panel-close').click(function() {
        $('#panelResults').css('opacity', 0); 
     });
+});
+
+// resize event
+$(window).resize(function() {   
+    attachSearch();
 });

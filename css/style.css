@@ -40,19 +40,6 @@ span.menu-label {
     transition: background-color 0.2s ease-in;
 }
 
-#search {
-    background: #000;    
-    padding: 5px;
-    border-radius: 8px;
-    transition: color 0.3s ease-in, background 0.3s ease-in;
-}
-
-#search:hover,
-#search:focus {
-    background: #EAAB00;
-    color: #000;
-}
-
 /* Menu text */
 .menu-label {
     font-weight: bold;
@@ -63,39 +50,81 @@ span.menu-label {
 }
 
 /*** Leaflet Controls ****/
-.calcite-maps .leaflet-top, .calcite-maps .leaflet-bottom {
+.leaflet-top, .calcite-maps .leaflet-bottom {
     z-index: 500;
 }
 
-.calcite-maps .leaflet-control-attribution {
+.leaflet-control-attribution {
     position: relative;
     right: 20px;
 }
 
-.calcite-maps .leaflet-control-zoomhome.leaflet-bar > a,
-.calcite-maps .leaflet-control-locate.leaflet-bar > a {
+.leaflet-control-zoomhome.leaflet-bar > a,
+.leaflet-control-locate.leaflet-bar > a {
     width: 32px;
 	height: 32px;
 	line-height: 32px;
 	border-radius: 0;
 }
 
-.calcite-maps .leaflet-control-zoomhome,
-.calcite-maps .leaflet-control-locate.leaflet-bar {
+.leaflet-control-zoomhome,
+.leaflet-control-locate.leaflet-bar {
 	margin-left: 15px;
 }
 
-.calcite-maps .leaflet-control-locate.leaflet-bar {
+.leaflet-control-locate.leaflet-bar {
     margin-top: 15px;
 }
 
 /* Leaflet Zoom Home */
-.calcite-maps.nav-position-top .leaflet-control-zoomhome  {
+.nav-position-top .leaflet-control-zoomhome  {
 	margin-top: 80px;
 }
 
-.calcite-maps.nav-position-top-fixed .leaflet-control-zoomhome {
+.nav-position-top-fixed .leaflet-control-zoomhome {
 	margin-top: 20px;
+}
+
+/* Geocode Control */
+#geocode {
+    color: #333;
+}
+
+.geocoder-control-expanded, 
+.leaflet-touch .geocoder-control-expanded {
+	min-width: 275px;
+	width: 100%;
+}
+
+.geocoder-control-input.leaflet-bar {
+	padding: 7px;
+	box-shadow: none;
+	border-radius: 0;
+	border: 1px #959595 solid;    
+}
+
+.geocode-panel .geocoder-control-input.leaflet-bar {
+	padding: 9px;
+}
+
+.navbar .geocode-navbar {
+	margin-top: 0;
+}
+
+.panel .geocode-panel {
+	margin-top: 0;
+}
+
+.panel .geocode-panel .geocoder-control {
+	margin: 4px 0 6px;
+}
+
+.geocoder-control-suggestions {
+	box-shadow: none;
+	border-radius: 0;
+	border: 1px solid #ccc;
+    width: auto;
+    left: -50px;
 }
 
 #map {
