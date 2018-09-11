@@ -1,11 +1,11 @@
 "use strict";
 
 // panel containing zoning district information
-var resultsPanel = document.getElementById('panelResults');
+const resultsPanel = document.getElementById('panelResults');
 // element within panel containing results of analysis
-var resultsEl = document.getElementById('results');
+const resultsEl = document.getElementById('results');
 // center coordinates for map
-var homeCoords = [40.15, -77.25];
+const homeCoords = [40.15, -77.25];
 
 /***  Basemap Changer ***/
 function setBasemap(selectedBasemap) {    
@@ -36,14 +36,14 @@ function setBasemap(selectedBasemap) {
     }
 }
 
-/*** Map Objects ***/                                                                        var map = L.map('map', {
+/*** Map Objects ***/                                                                const map = L.map('map', {
    center: homeCoords,
    zoom: setInitialMapZoom(windowWidth),    
    zoomControl: false               
 });
 
 /*** Zoom Home Control ***/
-var zoomHome = L.Control.zoomHome({
+const zoomHome = L.Control.zoomHome({
     position: 'topleft',
     zoomHomeTitle: 'Full map extent',
     homeCoordinates: homeCoords,
@@ -51,29 +51,28 @@ var zoomHome = L.Control.zoomHome({
 }).addTo(map);
 
 // ESRI Basemaps
-var basemap = L.esri.basemapLayer('Gray').addTo(map);
-var grayCanvasLabels = L.esri.basemapLayer('GrayLabels').addTo(map);
-var esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
-var worldTransportation = L.esri.basemapLayer('ImageryTransportation');
+let basemap = L.esri.basemapLayer('Gray').addTo(map);
+const grayCanvasLabels = L.esri.basemapLayer('GrayLabels').addTo(map);
+const esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
+const worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries
-var municipalService = L.esri.dynamicMapLayer({
-   url:'//gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
+const municipalService = L.esri.dynamicMapLayer({   url:'//gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
     maxZoom: 14 
 }).addTo(map);
 
 // Zoning By District
-var zoningGeneralized = L.esri.dynamicMapLayer({
+const zoningDistrictsService = L.esri.dynamicMapLayer({
     url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/ZoningByDistrict/MapServer',
     minZoom: 14,
     opacity: 0.35
 }).addTo(map);
 
 // Container for selected parel
-var taxParcel =  L.geoJson().addTo(map);
+const taxParcel =  L.geoJson().addTo(map);
 
 // call functions within Esri Leaflet Geocoder
-var taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
+const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
     url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42',
     maxResults: 10,
     attribution: 'Cumberland County',
@@ -84,7 +83,7 @@ var taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
         }        
 });
 
-var SearchControl = L.esri.Geocoding.geosearch({
+const SearchControl = L.esri.Geocoding.geosearch({
     useMapBounds: false,
     providers: [taxParcelsProvider],
     placeholder: 'Tax Parcel Search (PIN or Address)',
@@ -95,16 +94,14 @@ var SearchControl = L.esri.Geocoding.geosearch({
 }).addTo(map);
     
 /*** Address search results event ***/
-SearchControl.on('results', function(data) {  
+SearchControl.on('results', function(data) {    
     // change opacity back to 0
     resultsPanel.style.opacity = 0;
     
     // check for results
     if (data.results.length > 0) {
-       var resultText = data.results[0].text;
-       console.log(resultText);
-       var pin = resultText.split(" ")[0];
-       console.log(pin);
+       const resultText = data.results[0].text;       
+       const pin = resultText.split(" ")[0];       
         
         // Remove previous tax parcel GeoJSON feature
         if (taxParcel.getLayers().length > 0) {
@@ -121,4 +118,7 @@ SearchControl.on('results', function(data) {
          // show panel
          resultsPanel.style.opacity = 1; 
     }
+    
+    // hide search modal
+    $('#panelSearch').hide();
 });

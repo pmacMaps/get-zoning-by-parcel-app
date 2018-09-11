@@ -1,12 +1,12 @@
 "use strict";
 
 // viewport width
-var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 /*** Map & Device Size Functions ***/
 // Set the initial map zoom level based upon viewport width
 function setInitialMapZoom(windowWidth) {
-    var mapZoom;    
+    let mapZoom;    
     if (windowWidth < 500) {
         mapZoom = 9; 
     } else if (windowWidth >= 500 && windowWidth < 1000) {
@@ -19,7 +19,7 @@ function setInitialMapZoom(windowWidth) {
 
 // Set max width of pop-up window 
 function setPopupMaxWidth(windowWidth) {
-    var maxWidth;
+    let maxWidth;
     if (windowWidth < 450 ) {
         maxWidth = 240;
     } else {
@@ -30,7 +30,7 @@ function setPopupMaxWidth(windowWidth) {
 
 // Attach search control for desktop or mobile
 function attachSearch() {
-    var parentName = $(".geocoder-control").parent().attr("id"),
+    const parentName = $(".geocoder-control").parent().attr("id"),
     geocoder = $(".geocoder-control"),
     width = $(window).width();
 
@@ -46,13 +46,13 @@ function attachSearch() {
 // function to populate zoning query results to display element
 function populateResults(results, resultsElement, resultsPanel) {
     // element to hold results content;
-   var resultsContent = '<div>';
+   let resultsContent = '<div>';
    
    // expecting items in results    
    if (results.length < 1) {
       resultsContent += '<p>An error occured getting the zoning information</p>';   
    } else {
-     for (var i = 0; i < results.length; i++) {
+     for (let i = 0; i < results.length; i++) {
          resultsContent += '<ul>';
          resultsContent += '<li>Zoning District: ' + results[i][0] + '</li>';
          resultsContent += '<li>Zoning Code: ' + results[i][1] + '</li>';
@@ -73,11 +73,11 @@ function populateResults(results, resultsElement, resultsPanel) {
 // function to get zoning service for spatial query
 function selectZoningService(pin) {
    // base zoning url
-   var baseUrl = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Zoning/MapServer';
+   const baseUrl = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Zoning/MapServer';
    // first two digits of parcel (municipal code)
-   var muniCode = pin.split("-")[0];
+   const muniCode = pin.split("-")[0];
    // zoning URL for municipality
-   var zoningUrl;
+   let zoningUrl;
    
    // set URL based upon muni code
    switch(muniCode) {
@@ -297,17 +297,17 @@ function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) 
       } 
         else {
           // array to hold all zoning information
-          var zoningInfo = [];
+          let zoningInfo = [];
           
           // loop through all zoning districts intersecting parcels
-          for (var i = 0; i < response.features.length; i++) {
+          for (let i = 0; i < response.features.length; i++) {
              // fields from service
-            var zoningDistrictName = response.features[i].properties.ZoneName;
-            var zoningDistrictCode = response.features[i].properties.ZoneCode; 
-            var zoningDistrictCategory = response.features[i].properties.ZoneType;
+            const zoningDistrictName = response.features[i].properties.ZoneName;
+            const zoningDistrictCode = response.features[i].properties.ZoneCode; 
+            const zoningDistrictCategory = response.features[i].properties.ZoneType;
             
             // array to hold results for each zoning district  
-            var resultsArray = [];
+            let resultsArray = [];
             resultsArray[0] = zoningDistrictName;
             resultsArray[1] = zoningDistrictCode;
             resultsArray[2] = zoningDistrictCategory;

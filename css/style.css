@@ -26,6 +26,11 @@ span.menu-label {
     color: #000;
 }
 
+.navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-toggle:hover {
+    background-color: #000;
+}
+
 span.glyphicon-menu-hamburger,
 span.menu-label {
     font-size: 1.5em;  
@@ -161,7 +166,9 @@ span.menu-label {
 
 .panel {
     width: 350px;
-    min-height: 150px;
+    min-height: 200px;
+    max-height: 350px;
+    overflow-y: scroll;
 }
 
 .panel-default > .panel-heading {
@@ -198,9 +205,41 @@ span.glyphicon-remove:focus {
 }
 
 /*** Media Query ***/
+@media screen and (max-width: 450px) {
+    .panel-container {
+        right: 0px;
+    }
+}
+
 @media screen and (max-width: 767px) {
+    body {
+        padding-top: 50px;
+    }
+    
+    #navbar h1 {
+        font-size: 1.5em;
+        padding: 0px 5px;
+    }
+    
+    .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #fff;    
+    }
+    
+    .navbar-default .navbar-toggle {
+        border-color: #fff;
+    }
+    
+    .navbar-default .navbar-toggle .icon-bar {
+        background-color: #fff;
+    }
+    
     ul.dropdown-menu li {
         border-top: solid 1px #efefef;
+    }
+    
+    /* geocode search */
+    .geocoder-control-suggestions {
+        left: 0px;
     }
     
     /*** Panels ***/
@@ -217,8 +256,12 @@ span.glyphicon-remove:focus {
         padding: 5px;
     }
     
+    li.geocoder-control-suggestion {
+        max-width: 300px;        
+    }
+    
     .calcite-maps .geocoder-control-suggestions {
-        min-height: 200px;
+         min-height: 200px;     
     }
     
     .calcite-maps .panel-body {
@@ -237,5 +280,5 @@ span.glyphicon-remove:focus {
     
     .calcite-maps .navbar-subtitle {
         font-size: 0.75em;
-    }
+    }   
 }

@@ -2,7 +2,7 @@
 <html lang="en">
     <head>       
         <meta charset="utf-8">
-        <title>Get Zoning Districts By Parcel</title>
+        <title>Find Zoning District By Tax Parcel</title>
         <meta name="description" content="Demo app to get the zoning district for a parcel within Cumberland County, Pennsylvania">
         <meta name="author" content="Patrick McKinney, Cumberland County GIS">
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -30,7 +30,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                    <h1>Find Zoning By Parcel (Demo)</h1>
+                    <h1>Find Zoning By Parcel</h1>
                  </div>
                  <!-- Navbar collapse -->
                  <div id="mainNav" class="collapse navbar-collapse" aria-expanded="false" role="navigation">
@@ -46,9 +46,8 @@
                            <a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">  Menu</span></a>
                           <ul class="dropdown-menu">
                              <!-- Search - hidden on small screens, shown in modal -->
-                             <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-                             <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
-                             <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Zoning Search</a></li>
+                             <li><a id="searchNavMenu" class="visible-xs visible-sm" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Zoning Search</a></li>
+                             <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>                         
                              <li><a id="basemapsNavMenu" class="" role="button" data-target="#panelBasemaps"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
                              <li><a id="legendNavMenu" class="" role="button" data-target="#panelLegend"><span class="glyphicon glyphicon-list"></span> Legend</a></li>
                              <li><a id="disclaimerNavMenu" class="" role="button" data-target="#panelDisclaimer"><span class="glyphicon glyphicon-exclamation-sign"></span> Disclaimer</a></li>
@@ -93,7 +92,7 @@
               <div id="panelSearch" class="panel panel-default collapse">
                  <div id="headingSearch" class="panel-heading" role="tab">
                     <div class="panel-title">
-                       <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a>
+                       <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Zoning Search</a>
                        <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
                     </div>
                  </div>
