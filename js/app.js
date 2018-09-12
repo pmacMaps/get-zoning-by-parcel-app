@@ -53,7 +53,7 @@ const zoomHome = L.Control.zoomHome({
 // ESRI Basemaps
 let basemap = L.esri.basemapLayer('Gray').addTo(map);
 const grayCanvasLabels = L.esri.basemapLayer('GrayLabels').addTo(map);
-const esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
+let esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
 const worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries

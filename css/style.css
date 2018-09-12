@@ -167,8 +167,21 @@ span.menu-label {
 .panel {
     width: 350px;
     min-height: 200px;
+    
+}
+
+.panel-body {
     max-height: 350px;
     overflow-y: scroll;
+}
+
+.panel-body a {
+    text-decoration: underline;
+}
+
+.panel-body a:hover,
+.panel-body a:focus {
+    text-decoration: none;
 }
 
 .panel-default > .panel-heading {
@@ -192,6 +205,10 @@ span.glyphicon-remove:focus {
 
 .calcite-maps .panel-title span.glyphicon.glyphicon-remove:hover {
     color: #000;
+}
+
+#panelInfo .panel-body ul {
+    list-style-type: disc;
 }
 
 #panelResults {

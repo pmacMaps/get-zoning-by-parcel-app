@@ -75,10 +75,11 @@
                  </div>
                  <div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
                     <div class="panel-body">
-                        <p class="text-danger">This is a demonstration app and under active development.</p>
-                       <p>This is a concept app that allows users to enter a parcel ID (pin number) and get a listing of the zoning district(s) that intersect the parcel.  Testing is still required to ensure the analysis works properly.</p>
-                       <p>It should also be noted this app is only as good as the underlying zoning district data maintained by Cumberland County (PA).  Below are some sample PIN numbers to test the app.  Another option would be to allow users to search by PIN or address.  The municipality for the corresponding address could be shown in the hint bar for results.</p>
-                       <h3>Sample PIN Numbers:</h3>
+                        <p class="text-danger">This is a demonstration app and under active development.  It should <u>not</u> be considered a production appliction.</p>
+                       <p class="text-warning">This map is provided as a general guide to the zoning district for properties in Cumberland County. Please refer to each municipality's official zoning map and ordinance for the official district for a property.</p> 
+                       <p>This is a concept app that allows users to enter a parcel ID (pin number) or address and get a listing of the zoning district(s) that intersect the property.</p>             
+                       <p>Below are some sample PIN numbers to test the app.</p>
+                       <h4>Sample PIN Numbers:</h4>
                        <ul>
                             <li>Parcel with single zoning district: <strong>40-31-2187-062</strong></li>
                             <li>Parcel with multiple zoning districts: <strong>22-12-0350-052</strong></li>
@@ -115,6 +116,7 @@
                  </div>
                  <div id="collapseBasemaps" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingBasemaps">
                     <div class="panel-body">
+                       <p>You can change the base map by selecting one of the options in the list below:</p>
                        <select id="selectStandardBasemap" class="form-control">
                                    <option value="Gray" selected>Minimalist</option>         
                                    <option value="Streets">Streets</option>                
@@ -135,7 +137,8 @@
                  </div>
                  <div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
                     <div class="panel-body">
-                       <p>Default text</p>
+                       <p>This is an area to place a legend of map layers.</p>
+                        <p>You may want to check out the <a href="https://github.com/w8r/esri-leaflet-legend" target="_blank">Esri Leaflet Legend</a> library for this.</p>
                     </div>
                  </div>
               </div>
