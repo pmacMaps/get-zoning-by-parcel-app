@@ -1,4 +1,4 @@
-"use strict";
+﻿"use strict";
 
 // panel containing zoning district information
 const resultsPanel = document.getElementById('panelResults');
@@ -117,8 +117,5 @@ SearchControl.on('results', function(data) {
          resultsEl.innerHTML = 'No parcel features were found. Please check the parcel ID you entered and try again.  If problems persists, contact the website manager.';
          // show panel
          resultsPanel.style.opacity = 1; 
-    }
-    
-    // hide search modal
-    $('#panelSearch').hide();
+    }    
 });
