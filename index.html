@@ -14,7 +14,11 @@
         <!-- Stylesheets -->
         <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="css/fa-4.7.0/css/font-awesome.min.css" />
-        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />       
+        <!-- Calcite-Maps -->
+        <link rel="stylesheet" href="libs/esri-calcite/css/calcite-maps.css">
+        <link rel="stylesheet" href="libs/esri-calcite/css/calcite-maps-esrileaflet.css">
+        <link rel="stylesheet" href="libs/esri-calcite/css/themes.css">        
         <link rel="stylesheet" type="text/css" href="libs/leaflet.zoomhome-master/dist/leaflet.zoomhome.css" />
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />        
@@ -46,7 +50,7 @@
                            <a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">  Menu</span></a>
                           <ul class="dropdown-menu">
                              <!-- Search - hidden on small screens, shown in modal -->
-                             <li><a id="searchNavMenu" class="visible-xs visible-sm" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Zoning Search</a></li>
+                             <li><a id="searchNavMenu" class="visible-xs visible-sm" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Parcel Search</a></li>
                              <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>                         
                              <li><a id="basemapsNavMenu" class="" role="button" data-target="#panelBasemaps"><span class="glyphicon glyphicon-th-large"></span> Basemaps</a></li>
                              <li><a id="legendNavMenu" class="" role="button" data-target="#panelLegend"><span class="glyphicon glyphicon-list"></span> Legend</a></li>
@@ -118,8 +122,8 @@
                     <div class="panel-body">
                        <p>You can change the base map by selecting one of the options in the list below:</p>
                        <select id="selectStandardBasemap" class="form-control">
-                                   <option value="Gray" selected>Minimalist</option>         
-                                   <option value="Streets">Streets</option>                
+                                   <option value="Gray" selected>Minimalist</option>     
+                                   <option value="Streets">Streets</option>              
                                    <option value="Imagery">Satellite</option>
                                    <option value="OpenStreetMap">Open Street Map</option>
                                 </select>
@@ -156,7 +160,7 @@
                         <p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service. Every reasonable effort has been made to assure the accuracy of these maps and data. No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
                         <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
                         <p>PROPRIETARY INFORMATION: All information on this website is proprietary. Any resale of this information is prohibited.</p>
-                        <p>Contents: © 2018 Cumberland County, Pennsylvania.</p>
+                        <p>Contents: © 2019 Cumberland County, Pennsylvania.</p>
                         <p>BY USING THIS DATA, I UNDERSTAND AND KNOWINGLY CONSENT TO THE ABOVE TERMS AND CONDITIONS</p>                       
                     </div>
                  </div>
@@ -181,8 +185,9 @@
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="libs/leaflet.zoomhome-master/dist/leaflet.zoomhome.min.js"></script>
         <script src="https://unpkg.com/esri-leaflet@2.2.4/dist/esri-leaflet.js"></script>
-        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.js"></script>
-        <script src="js/calciteMaps.js"></script>
+        <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.14/dist/esri-leaflet-geocoder.js"></script>              
+        <script src="libs/esri-calcite/js/calcitemaps.js"></script>
+        <script src="libs/leaflet.zoomhome-master/dist/leaflet.zoomhome.min.js"></script>              
         <script src="js/selectZoningService.js"></script>
         <script src="js/query.js"></script>
         <script src="js/functions.js"></script>
