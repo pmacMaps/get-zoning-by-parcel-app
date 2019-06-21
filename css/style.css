@@ -239,7 +239,8 @@ span.glyphicon-remove:focus {
     }
     
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-    color: #fff;    
+        color: #fff; 
+        padding: 10px;   
     }
     
     .navbar-default .navbar-toggle {
