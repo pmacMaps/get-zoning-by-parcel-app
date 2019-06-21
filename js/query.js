@@ -52,11 +52,8 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
    // attribute query expression
    const queryString = "PIN = '" + pin + "'";
    // tax parcel service
-   // if tps1 keeps producing errors, use tps2 or tps3
-   const tps1 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Tax_Assessment/Parcels/MapServer/42';
-   const tps2 = 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/TaxParcelsBackup/FeatureServer/0';
-   const tps3 = '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42';
-     
+   const tps1 = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Tax_Assessment/Parcels/MapServer/42';
+        
    // query request - where method
    L.esri.query({url: tps1}).fields(['PIN', 'SITUS', 'MUNI_NAME', 'OWNER']).where(queryString).run(function(error,response) {
       if (error) {

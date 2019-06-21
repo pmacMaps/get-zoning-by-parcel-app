@@ -13,7 +13,7 @@ function setBasemap(selectedBasemap) {
 	   map.removeLayer(basemap);        
 	}	
     if (selectedBasemap === 'OpenStreetMap') {
-        basemap = L.tileLayer("//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
+        basemap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
 	} else {
 	   basemap = L.esri.basemapLayer(selectedBasemap);
 	}	
@@ -57,13 +57,13 @@ let esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
 const worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries
-const municipalService = L.esri.dynamicMapLayer({   url:'//gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
+const municipalService = L.esri.dynamicMapLayer({   url:'https://gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
     maxZoom: 14 
 }).addTo(map);
 
 // Zoning By District
 const zoningDistrictsService = L.esri.dynamicMapLayer({
-    url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/ZoningByDistrict/MapServer',
+    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/ZoningByDistrict/MapServer',
     minZoom: 14,
     opacity: 0.35
 }).addTo(map);
@@ -73,7 +73,7 @@ const taxParcel =  L.geoJson().addTo(map);
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
-    url: '//gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42',
+    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42',
     maxResults: 10,
     attribution: 'Cumberland County',
     label: 'Tax Parcels',
