@@ -50,8 +50,8 @@ span.menu-label {
     font-weight: bold;
 }
 
-.calcite-maps .dropdown-toggle span {
-    top: 5px;
+ul.nav a.dropdown-toggle span {
+    top: 4px;
 }
 
 /*** Leaflet Controls ****/

@@ -34,6 +34,8 @@ function setBasemap(selectedBasemap) {
     } else if (map.hasLayer(worldTransportation)) {
             map.removeLayer(worldTransportation);
     }
+    // close panel
+    $('#panelBasemaps').collapse("hide");
 }
 
 /*** Map Objects ***/                                                                const map = L.map('map', {
