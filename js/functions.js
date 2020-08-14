@@ -6,18 +6,18 @@ let windowWidth = window.innerWidth || document.documentElement.clientWidth || d
 /*** Map & Device Size Functions ***/
 // Set the initial map zoom level based upon viewport width
 function setInitialMapZoom(windowWidth) {
-    let mapZoom;    
+    let mapZoom;
     if (windowWidth < 500) {
-        mapZoom = 9; 
+        mapZoom = 9;
     } else if (windowWidth >= 500 && windowWidth < 1000) {
-        mapZoom = 10; 
+        mapZoom = 10;
     } else {
-        mapZoom = 11;  
+        mapZoom = 11;
     }
     return mapZoom;
 }
 
-// Set max width of pop-up window 
+// Set max width of pop-up window
 function setPopupMaxWidth(windowWidth) {
     let maxWidth;
     if (windowWidth < 450 ) {
@@ -47,43 +47,43 @@ function attachSearch() {
 function populateResults(results, resultsElement, resultsPanel) {
     // element to hold results content;
    let resultsContent = '<div>';
-   
-   // expecting items in results    
+
+   // expecting items in results
    if (results.length < 1) {
-      resultsContent += '<p>An error occured getting the zoning information</p>';   
+      resultsContent += '<p>An error occured getting the zoning information</p>';
    } else {
      for (let i = 0; i < results.length; i++) {
          resultsContent += '<ul>';
          resultsContent += '<li>Zoning District: ' + results[i][0] + '</li>';
          resultsContent += '<li>Zoning Code: ' + results[i][1] + '</li>';
          resultsContent += '<li>Zoning Category: ' + results[i][2] + '</li>';
-         resultsContent += '</ul>';    
-     }     
+         resultsContent += '</ul>';
+     }
    }
-   
+
    // close div element
    resultsContent += '</div>';
-   
+
    // set content of resultsEl
    resultsElement.innerHTML = resultsContent;
    // show panel
-   resultsPanel.style.opacity = 1;  
+   resultsPanel.style.opacity = 1;
 }
 
 $(document).ready(function() {
     attachSearch();
-    
+
     // Basemap changed
 	$("#selectStandardBasemap").on("change", function(e) {
         setBasemap($(this).val());
     });
-    
+
     $('#panelResults a.panel-close').click(function() {
-       $('#panelResults').css('opacity', 0); 
+       $('#panelResults').css('opacity', 0);
     });
 });
 
 // resize event
-$(window).resize(function() {   
+$(window).resize(function() {
     attachSearch();
 });

@@ -8,29 +8,36 @@ const resultsEl = document.getElementById('results');
 const homeCoords = [40.15, -77.25];
 
 /***  Basemap Changer ***/
-function setBasemap(selectedBasemap) {    
+function setBasemap(selectedBasemap) {
+
     if (basemap) {
-	   map.removeLayer(basemap);        
-	}	
+	   map.removeLayer(basemap);
+    }
+
     if (selectedBasemap === 'OpenStreetMap') {
         basemap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
 	} else {
 	   basemap = L.esri.basemapLayer(selectedBasemap);
-	}	
-    map.addLayer(basemap);	
+    }
+
+    map.addLayer(basemap);
+
     if (esriLayerLabels) {
         map.removeLayer(esriLayerLabels);
 	}
+
     if (grayCanvasLabels) {
         map.removeLayer(grayCanvasLabels);
     }
+
 	if (selectedBasemap === 'Imagery' || selectedBasemap === 'Gray') {
 	    esriLayerLabels = L.esri.basemapLayer(selectedBasemap + 'Labels');
 		map.addLayer(esriLayerLabels);
 	}
+
     // add world transportation service to Imagery basemap
     if (selectedBasemap === 'Imagery') {
-            worldTransportation.addTo(map);            
+            worldTransportation.addTo(map);
     } else if (map.hasLayer(worldTransportation)) {
             map.removeLayer(worldTransportation);
     }
@@ -40,8 +47,8 @@ function setBasemap(selectedBasemap) {
 
 /*** Map Objects ***/                                                                const map = L.map('map', {
    center: homeCoords,
-   zoom: setInitialMapZoom(windowWidth),    
-   zoomControl: false               
+   zoom: setInitialMapZoom(windowWidth),
+   zoomControl: false
 });
 
 /*** Zoom Home Control ***/
@@ -59,15 +66,9 @@ let esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
 const worldTransportation = L.esri.basemapLayer('ImageryTransportation');
 
 // Municipal Boundaries
-const municipalService = L.esri.dynamicMapLayer({   url:'https://gis.ccpa.net/arcgiswebadaptor/rest/services/ArcGIS_Online/MunicipalBoundaries/MapServer',
-    maxZoom: 14 
-}).addTo(map);
-
-// Zoning By District
-const zoningDistrictsService = L.esri.dynamicMapLayer({
-    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/ZoningByDistrict/MapServer',
-    minZoom: 14,
-    opacity: 0.35
+const municipalService = L.esri.dynamicMapLayer({
+    url:'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Municipal_Boundaries/MapServer',
+    maxZoom: 14
 }).addTo(map);
 
 // Container for selected parel
@@ -75,14 +76,14 @@ const taxParcel =  L.geoJson().addTo(map);
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
-    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Parcels/MapServer/42',
-    maxResults: 10,
+    url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
+    maxResults: 8,
     attribution: 'Cumberland County',
     label: 'Tax Parcels',
-    searchFields: ['PIN', 'SITUS'],
+    searchFields: ['Link', 'SITUS'],
         formatSuggestion: function(feature){
-            return feature.properties.PIN + ' (' + feature.properties.SITUS + ', ' + feature.properties.MUNI_NAME + ')';
-        }        
+            return feature.properties.Link + ' (' + feature.properties.SITUS + ', ' + feature.properties.MUNI_NAME + ')';
+        }
 });
 
 const SearchControl = L.esri.Geocoding.geosearch({
@@ -94,23 +95,23 @@ const SearchControl = L.esri.Geocoding.geosearch({
     collapseAfterResult: false,
     zoomToResult: false
 }).addTo(map);
-    
+
 /*** Address search results event ***/
-SearchControl.on('results', function(data) {    
+SearchControl.on('results', function(data) {
     // change opacity back to 0
     resultsPanel.style.opacity = 0;
-    
+
     // check for results
     if (data.results.length > 0) {
-       const resultText = data.results[0].text;       
-       const pin = resultText.split(" ")[0];       
-        
+       const resultText = data.results[0].text;
+       const pin = resultText.split(" ")[0];
+
         // Remove previous tax parcel GeoJSON feature
         if (taxParcel.getLayers().length > 0) {
             taxParcel.clearLayers();
         }
-    
-        // call parcel query function        
+
+        // call parcel query function
         selectParcelByPin(pin, taxParcel, resultsEl, resultsPanel);
     } else {
         // add message to console
@@ -118,6 +119,6 @@ SearchControl.on('results', function(data) {
         // set content of results element
          resultsEl.innerHTML = 'No parcel features were found. Please check the parcel ID you entered and try again.  If problems persists, contact the website manager.';
          // show panel
-         resultsPanel.style.opacity = 1; 
-    }    
+         resultsPanel.style.opacity = 1;
+    }
 });

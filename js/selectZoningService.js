@@ -3,15 +3,15 @@
 // function to get zoning service for spatial query
 function selectZoningService(pin) {
    // base zoning url
-   const baseUrl = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Zoning/MapServer';
+   const baseUrl = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer';
    // first two digits of parcel (municipal code)
    const muniCode = pin.split("-")[0];
    // zoning URL for municipality
    let zoningUrl;
-   
+
    // set URL based upon muni code
    switch(muniCode) {
-         // Camp Hill         
+         // Camp Hill
          case '01':
             zoningUrl = baseUrl + '/5';
             break;
