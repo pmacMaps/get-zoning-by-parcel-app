@@ -1,40 +1,34 @@
 ﻿"use strict";
 
-// panel containing zoning district information
+// panel containing results of zoning district analysis
 const resultsPanel = document.getElementById('panelResults');
-// element within panel containing results of analysis
+// element within results panel containing text for results of analysis
 const resultsEl = document.getElementById('results');
 // center coordinates for map
 const homeCoords = [40.15, -77.25];
 
 /***  Basemap Changer ***/
+// make arrow function
 function setBasemap(selectedBasemap) {
-
     if (basemap) {
 	   map.removeLayer(basemap);
     }
-
     if (selectedBasemap === 'OpenStreetMap') {
         basemap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
 	} else {
 	   basemap = L.esri.basemapLayer(selectedBasemap);
     }
-
     map.addLayer(basemap);
-
     if (esriLayerLabels) {
         map.removeLayer(esriLayerLabels);
 	}
-
     if (grayCanvasLabels) {
         map.removeLayer(grayCanvasLabels);
     }
-
 	if (selectedBasemap === 'Imagery' || selectedBasemap === 'Gray') {
 	    esriLayerLabels = L.esri.basemapLayer(selectedBasemap + 'Labels');
 		map.addLayer(esriLayerLabels);
 	}
-
     // add world transportation service to Imagery basemap
     if (selectedBasemap === 'Imagery') {
             worldTransportation.addTo(map);
@@ -113,7 +107,7 @@ SearchControl.on('results', function(data) {
 
         // call parcel query function
         selectParcelByPin(pin, taxParcel, resultsEl, resultsPanel);
-    } else {
+    } else { // no results found
         // add message to console
         console.log('No parcel features returned');
         // set content of results element
