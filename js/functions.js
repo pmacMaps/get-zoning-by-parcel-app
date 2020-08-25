@@ -54,9 +54,9 @@ function populateResults(results, resultsElement, resultsPanel) {
    } else {
      for (let i = 0; i < results.length; i++) {
          resultsContent += '<ul>';
-         resultsContent += '<li>Zoning District: ' + results[i][0] + '</li>';
-         resultsContent += '<li>Zoning Code: ' + results[i][1] + '</li>';
-         resultsContent += '<li>Zoning Category: ' + results[i][2] + '</li>';
+         resultsContent += '<li>Zoning District: <strong>' + results[i][0] + '</strong></li>';
+         resultsContent += '<li>Zoning Code: <strong>' + results[i][1] + '</strong></li>';
+         resultsContent += '<li>Zoning Category: <strong>' + results[i][2] + '</strong></li>';
          resultsContent += '</ul>';
      }
    }

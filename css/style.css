@@ -1,5 +1,5 @@
 /*** General Settings ***/
-html, 
+html,
 body {
     margin: 0;
     padding: 0;
@@ -13,27 +13,27 @@ body {
 /*** Navigation ***/
 #navbar {
     margin-bottom: 0;
-    background-color: #196fa6;    
+    background-color: #196fa6;
 }
 
 #navbar,
 span.glyphicon-menu-hamburger,
 span.menu-label {
-    color: #fff;    
+    color: #fff;
 }
 
 #navbar input[type="text"] {
     color: #000;
 }
 
-.navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
     background-color: #000;
 }
 
 span.glyphicon-menu-hamburger,
 span.menu-label {
-    font-size: 1.5em;  
+    font-size: 1.5em;
 }
 
 #navbar h1 {
@@ -95,7 +95,7 @@ ul.nav a.dropdown-toggle span {
     color: #333;
 }
 
-.geocoder-control-expanded, 
+.geocoder-control-expanded,
 .leaflet-touch .geocoder-control-expanded {
 	min-width: 275px;
 	width: 100%;
@@ -105,7 +105,7 @@ ul.nav a.dropdown-toggle span {
 	padding: 7px;
 	box-shadow: none;
 	border-radius: 0;
-	border: 1px #959595 solid;    
+	border: 1px #959595 solid;
 }
 
 .geocode-panel .geocoder-control-input.leaflet-bar {
@@ -143,7 +143,7 @@ ul.nav a.dropdown-toggle span {
 
 .feat-popup {
    font-size: 1.125em;
-   color: #000;    
+   color: #000;
 }
 
 .feat-popup h3 {
@@ -160,19 +160,22 @@ ul.nav a.dropdown-toggle span {
 .panel-container {
     position: absolute;
     top: 90px;
-    right: 15px;    
+    right: 15px;
     z-index: 650;
 }
 
 .panel {
     width: 350px;
     min-height: 200px;
-    
 }
 
 .panel-body {
     max-height: 350px;
     overflow-y: scroll;
+}
+
+#panelResults .panel-body {
+    max-height: none;
 }
 
 .panel-body a {
@@ -232,71 +235,71 @@ span.glyphicon-remove:focus {
     body {
         padding-top: 50px;
     }
-    
+
     #navbar h1 {
         font-size: 1.5em;
         padding: 0px 5px;
     }
-    
+
     .navbar-default .navbar-nav .open .dropdown-menu>li>a {
-        color: #fff; 
-        padding: 10px;   
+        color: #fff;
+        padding: 10px;
     }
-    
+
     .navbar-default .navbar-toggle {
         border-color: #fff;
     }
-    
+
     .navbar-default .navbar-toggle .icon-bar {
         background-color: #fff;
     }
-    
+
     ul.dropdown-menu li {
         border-top: solid 1px #efefef;
     }
-    
+
     /* geocode search */
     .geocoder-control-suggestions {
         left: 0px;
     }
-    
+
     /*** Panels ***/
     .panel-container,
     .panel-group {
         z-index: 2000;
     }
-    
+
     #panelSearch .panel-body {
         min-height: 400px;
-    }  
-    
+    }
+
     #panelSearch .panel-control {
         padding: 5px;
     }
-    
+
     li.geocoder-control-suggestion {
-        max-width: 300px;        
+        max-width: 300px;
     }
-    
+
     .calcite-maps .geocoder-control-suggestions {
-         min-height: 200px;     
+         min-height: 200px;
     }
-    
+
     .calcite-maps .panel-body {
         overflow-y: scroll;
     }
-   
+
     li.dropdown.open ul.dropdown-menu li:active {
-        background: #75a8c9;              
-    } 
+        background: #75a8c9;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 875px) {
     .calcite-maps .navbar-title {
         font-size: 1.05em;
     }
-    
+
     .calcite-maps .navbar-subtitle {
         font-size: 0.75em;
-    }   
+    }
 }
