@@ -1,12 +1,10 @@
 "use strict";
 
-// viewport width
-let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-
 /*** Map & Device Size Functions ***/
 // Set the initial map zoom level based upon viewport width
-function setInitialMapZoom(windowWidth) {
+const setInitialMapZoom = (windowWidth) => {
     let mapZoom;
+
     if (windowWidth < 500) {
         mapZoom = 9;
     } else if (windowWidth >= 500 && windowWidth < 1000) {
@@ -14,22 +12,25 @@ function setInitialMapZoom(windowWidth) {
     } else {
         mapZoom = 11;
     }
+
     return mapZoom;
 }
 
 // Set max width of pop-up window
-function setPopupMaxWidth(windowWidth) {
+const setPopupMaxWidth = (windowWidth) => {
     let maxWidth;
+
     if (windowWidth < 450 ) {
         maxWidth = 240;
     } else {
         maxWidth = 300;
     }
+
     return maxWidth;
 }
 
 // Attach search control for desktop or mobile
-function attachSearch() {
+const attachSearch = () => {
     const parentName = $(".geocoder-control").parent().attr("id"),
     geocoder = $(".geocoder-control"),
     width = $(window).width();
@@ -44,7 +45,7 @@ function attachSearch() {
 }
 
 // function to populate zoning query results to display element
-function populateResults(results, resultsElement, resultsPanel) {
+const populateResults = (results, resultsElement, resultsPanel) => {
     // element to hold results content;
    let resultsContent = '<div>';
 
@@ -52,13 +53,13 @@ function populateResults(results, resultsElement, resultsPanel) {
    if (results.length < 1) {
       resultsContent += '<p>An error occured getting the zoning information</p>';
    } else {
-     for (let i = 0; i < results.length; i++) {
-         resultsContent += '<ul>';
-         resultsContent += '<li>Zoning District: <strong>' + results[i][0] + '</strong></li>';
-         resultsContent += '<li>Zoning Code: <strong>' + results[i][1] + '</strong></li>';
-         resultsContent += '<li>Zoning Category: <strong>' + results[i][2] + '</strong></li>';
-         resultsContent += '</ul>';
-     }
+        for (const element of results) {
+            resultsContent += '<ul>';
+            resultsContent += '<li>Zoning District: <strong>' + element[0] + '</strong></li>';
+            resultsContent += '<li>Zoning Code: <strong>' + element[1] + '</strong></li>';
+            resultsContent += '<li>Zoning Category: <strong>' + element[2] + '</strong></li>';
+            resultsContent += '</ul>';
+        }
    }
 
    // close div element
@@ -71,19 +72,19 @@ function populateResults(results, resultsElement, resultsPanel) {
 }
 
 $(document).ready(function() {
+    // update where search widget is located
     attachSearch();
 
-    // Basemap changed
-	$("#selectStandardBasemap").on("change", function(e) {
-        setBasemap($(this).val());
-    });
-
+    // close results panel
+    // remove jQuery [?]
     $('#panelResults a.panel-close').click(function() {
        $('#panelResults').css('opacity', 0);
     });
 });
 
 // resize event
+// remove jQuery [?]
 $(window).resize(function() {
+    // update where search widget is located
     attachSearch();
 });

@@ -1,5 +1,7 @@
 ﻿"use strict";
 
+// viewport width
+let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
 const resultsPanel = document.getElementById('panelResults');
 // element within results panel containing text for results of analysis

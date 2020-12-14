@@ -2,7 +2,7 @@
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) {
+const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -25,11 +25,11 @@ function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) 
           let zoningInfo = [];
 
           // loop through all zoning districts intersecting parcels
-          for (let i = 0; i < response.features.length; i++) {
-             // fields from service
-            const zoningDistrictName = response.features[i].properties.ZoneName;
-            const zoningDistrictCode = response.features[i].properties.ZoneCode;
-            const zoningDistrictCategory = response.features[i].properties.ZoneType;
+          for (const element of response.features) {
+            // fields from service
+            const zoningDistrictName = element.properties.ZoneName;
+            const zoningDistrictCode = element.properties.ZoneCode;
+            const zoningDistrictCategory = element.properties.ZoneType;
 
             // array to hold results for each zoning district
             let resultsArray = [];
@@ -48,7 +48,7 @@ function getParcelZoningDistrict(parcel,zoningURL,resultsElement, resultsPanel) 
 }
 
 // function to select parcel based upon pin
-function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
+const selectParcelByPin = (pin, taxParcelLayer, resultsElement, resultsPanel) => {
    // attribute query expression
    const queryString = "Link = '" + pin + "'";
    // tax parcel service
@@ -84,7 +84,7 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
            }
         });
         // bind popup
-        taxParcelLayer.bindPopup(function(layer) {
+        const mapPopup = taxParcelLayer.bindPopup(function(layer) {
            let popupContent = '<div class="feat-popup">';
            popupContent += '<h3>Parcel: {Link}</h3>';
            popupContent += '<ul>';
@@ -100,6 +100,8 @@ function selectParcelByPin(pin, taxParcelLayer, resultsElement, resultsPanel) {
 
         // set map around selected parcel
         map.fitBounds(taxParcelLayer.getBounds());
+
+        // open popup on map or figure out why double click is needed to open
 
         // call zoning query function
         getParcelZoningDistrict(taxParcelLayer,selectZoningService(pin), resultsElement, resultsPanel);
