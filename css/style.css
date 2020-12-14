@@ -169,9 +169,20 @@ span.glyphicon.glyphicon-menu-hamburger {
     display: block;
     left: 75px;
     top: 65px;
-    width: 300px;
+    width: auto;
+    max-width: 500px;
+    height: auto;
     opacity: 0;
     z-index: 1050;
+}
+
+#panelResults .panel-body {
+    overflow: hidden;
+}
+
+#panelResults h3 {
+    font-size: 1.15em;
+    text-align: center;
 }
 
 /*** Leaflet Controls ****/

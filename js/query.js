@@ -8,7 +8,7 @@ let windowWidth = window.innerWidth || document.documentElement.clientWidth || d
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-export const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, resultsPanel) => {
+export const getParcelZoningDistrict = (parcel, municipality, zoningURL,resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -48,7 +48,7 @@ export const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, results
           }
 
          // call populate results function
-         populateResults(zoningInfo, resultsElement, resultsPanel);
+         populateResults(municipality, zoningInfo, resultsElement, resultsPanel);
       }
     });
 }
@@ -78,16 +78,20 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          // show panel
          resultsPanel.style.opacity = 1;
       } else {
-        // add data to geojson object
-        taxParcelLayer.addData(response);
-        // style feature
-        taxParcelLayer.setStyle(function() {
-           return {
-               fillOpacity: 0,
-               color: '#000',
-               opacity: 1,
-               weight: 3
-           }
+         // name of municipality
+         // convert to title case
+         // get all features and create array of muni's
+         const muniName = response.features[0].properties.MUNI_NAME;
+         // add data to geojson object
+         taxParcelLayer.addData(response);
+         // style feature
+         taxParcelLayer.setStyle(function() {
+            return {
+                  fillOpacity: 0,
+                  color: '#000',
+                  opacity: 1,
+                  weight: 3
+            }
         });
         // bind popup
         const mapPopup = taxParcelLayer.bindPopup(function(layer) {
@@ -110,7 +114,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
         // open popup on map or figure out why double click is needed to open
 
         // call zoning query function
-        getParcelZoningDistrict(taxParcelLayer,selectZoningService(pin), resultsElement, resultsPanel);
+        getParcelZoningDistrict(taxParcelLayer, muniName, selectZoningService(pin), resultsElement, resultsPanel);
        } 
     });
 }
