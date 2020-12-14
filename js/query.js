@@ -1,8 +1,14 @@
 "use strict";
 
+import {selectZoningService} from './selectZoningService.js';
+import {setPopupMaxWidth, populateResults} from './functions.js';
+
+// viewport width
+let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, resultsPanel) => {
+export const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -48,7 +54,7 @@ const getParcelZoningDistrict = (parcel,zoningURL,resultsElement, resultsPanel) 
 }
 
 // function to select parcel based upon pin
-const selectParcelByPin = (pin, taxParcelLayer, resultsElement, resultsPanel) => {
+export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, resultsPanel) => {
    // attribute query expression
    const queryString = "Link = '" + pin + "'";
    // tax parcel service
@@ -99,7 +105,7 @@ const selectParcelByPin = (pin, taxParcelLayer, resultsElement, resultsPanel) =>
         }, {maxWidth: setPopupMaxWidth(windowWidth)});
 
         // set map around selected parcel
-        map.fitBounds(taxParcelLayer.getBounds());
+        webmap.fitBounds(taxParcelLayer.getBounds());
 
         // open popup on map or figure out why double click is needed to open
 

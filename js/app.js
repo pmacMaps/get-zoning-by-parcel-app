@@ -1,5 +1,27 @@
 ﻿"use strict";
 
+// imports
+import {selectParcelByPin} from './query.js';
+import {setInitialMapZoom, attachSearch} from './functions.js';
+
+$(document).ready(function() {
+    // update where search widget is located
+    attachSearch();
+
+    // close results panel
+    // remove jQuery [?]
+    $('#panelResults a.panel-close').click(function() {
+       $('#panelResults').css('opacity', 0);
+    });
+});
+
+// resize event
+// remove jQuery [?]
+$(window).resize(function() {
+    // update where search widget is located
+    attachSearch();
+});
+
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
@@ -41,7 +63,7 @@ function setBasemap(selectedBasemap) {
     $('#panelBasemaps').collapse("hide");
 }
 
-/*** Map Objects ***/                                                                const map = L.map('map', {
+/*** Map Objects ***/                                                        const map = L.map('map', {
    center: homeCoords,
    zoom: setInitialMapZoom(windowWidth),
    zoomControl: false
@@ -108,7 +130,7 @@ SearchControl.on('results', function(data) {
         }
 
         // call parcel query function
-        selectParcelByPin(pin, taxParcel, resultsEl, resultsPanel);
+        selectParcelByPin(map, pin, taxParcel, resultsEl, resultsPanel);
     } else { // no results found
         // add message to console
         console.log('No parcel features returned');

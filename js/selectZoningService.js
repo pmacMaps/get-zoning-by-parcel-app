@@ -1,7 +1,7 @@
 "use strict";
 
 // function to get zoning service for spatial query
-const selectZoningService = (pin) => {
+export const selectZoningService = (pin) => {
    // base zoning url
    const baseUrl = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer';
    // first two digits of parcel (municipal code)

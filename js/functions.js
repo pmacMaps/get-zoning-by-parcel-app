@@ -2,7 +2,7 @@
 
 /*** Map & Device Size Functions ***/
 // Set the initial map zoom level based upon viewport width
-const setInitialMapZoom = (windowWidth) => {
+export const setInitialMapZoom = (windowWidth) => {
     let mapZoom;
 
     if (windowWidth < 500) {
@@ -17,7 +17,7 @@ const setInitialMapZoom = (windowWidth) => {
 }
 
 // Set max width of pop-up window
-const setPopupMaxWidth = (windowWidth) => {
+export const setPopupMaxWidth = (windowWidth) => {
     let maxWidth;
 
     if (windowWidth < 450 ) {
@@ -30,7 +30,7 @@ const setPopupMaxWidth = (windowWidth) => {
 }
 
 // Attach search control for desktop or mobile
-const attachSearch = () => {
+export const attachSearch = () => {
     const parentName = $(".geocoder-control").parent().attr("id"),
     geocoder = $(".geocoder-control"),
     width = $(window).width();
@@ -45,7 +45,7 @@ const attachSearch = () => {
 }
 
 // function to populate zoning query results to display element
-const populateResults = (results, resultsElement, resultsPanel) => {
+export const populateResults = (results, resultsElement, resultsPanel) => {
     // element to hold results content;
    let resultsContent = '<div>';
 
@@ -70,21 +70,3 @@ const populateResults = (results, resultsElement, resultsPanel) => {
    // show panel
    resultsPanel.style.opacity = 1;
 }
-
-$(document).ready(function() {
-    // update where search widget is located
-    attachSearch();
-
-    // close results panel
-    // remove jQuery [?]
-    $('#panelResults a.panel-close').click(function() {
-       $('#panelResults').css('opacity', 0);
-    });
-});
-
-// resize event
-// remove jQuery [?]
-$(window).resize(function() {
-    // update where search widget is located
-    attachSearch();
-});
