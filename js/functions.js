@@ -49,7 +49,7 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
     // element to hold results content;
    let resultsContent = '<div>';
    // add municipality
-   resultsContent += '<h3>' + municipality + '</h3>';
+   resultsContent += '<h3>Municipality: ' + municipality + '</h3>';
 
    // expecting items in results
    if (results.length < 1) {
@@ -64,9 +64,6 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
         }
    }
 
-   // add note about contacting muni to verify
-   resultsContent += '<p>Please contact the municipality listed above to verify the zoning district for this property.</p>';
-   resultsContent += '<p>We could dynamically add e-mail or phone number based upon municipality (or later as enhancement)</p>';
    // close div element
    resultsContent += '</div>';
 
