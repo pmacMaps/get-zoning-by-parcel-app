@@ -1,8 +1,8 @@
 ﻿"use strict";
 
 // imports
-import {selectParcelByPin} from './query.js';
 import {setInitialMapZoom, attachSearch} from './functions.js';
+import {selectParcelByPin} from './getTaxParcel.js';
 
 $(document).ready(function() {
     // update where search widget is located
