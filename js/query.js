@@ -2,13 +2,14 @@
 
 import {selectZoningService} from './selectZoningService.js';
 import {setPopupMaxWidth, populateResults} from './functions.js';
+import {getMuniName} from './getMunicipalName.js';
 
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-export const getParcelZoningDistrict = (parcel, municipality, zoningURL,resultsElement, resultsPanel) => {
+export const getParcelZoningDistrict = (parcel, pin, zoningURL,resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -47,6 +48,9 @@ export const getParcelZoningDistrict = (parcel, municipality, zoningURL,resultsE
             zoningInfo.push(resultsArray);
           }
 
+          // get municipal name
+          const municipality = getMuniName(pin);
+
          // call populate results function
          populateResults(municipality, zoningInfo, resultsElement, resultsPanel);
       }
@@ -78,10 +82,6 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          // show panel
          resultsPanel.style.opacity = 1;
       } else {
-         // name of municipality
-         // convert to title case
-         // get all features and create array of muni's
-         const muniName = response.features[0].properties.MUNI_NAME;
          // add data to geojson object
          taxParcelLayer.addData(response);
          // style feature
@@ -114,7 +114,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
         // open popup on map or figure out why double click is needed to open
 
         // call zoning query function
-        getParcelZoningDistrict(taxParcelLayer, muniName, selectZoningService(pin), resultsElement, resultsPanel);
+        getParcelZoningDistrict(taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
        } 
     });
 }

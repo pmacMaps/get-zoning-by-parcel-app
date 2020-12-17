@@ -169,23 +169,26 @@ span.glyphicon.glyphicon-menu-hamburger {
     display: block;
     left: 75px;
     top: 65px;
-    width: auto;
-    max-width: 500px;
-    height: auto;
     opacity: 0;
     z-index: 1050;
 }
 
 #panelResults .panel-body {
     overflow-x: hidden;
-    overflow-y: scroll;
+    width: auto;
+    max-width: 400px;
 }
 
-#panelResults h3 {
+#panelResults .panel-body h3 {
     margin: 0 0 20px 0;
     font-size: 1.15em;
     text-align: center;
 }
+
+#panelResults .panel-body li {
+    margin-left: -20px;
+}
+
 
 /*** Leaflet Controls ****/
 .calcite-maps .leaflet-top, .calcite-maps .leaflet-bottom {
