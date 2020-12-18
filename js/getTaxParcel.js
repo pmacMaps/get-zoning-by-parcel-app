@@ -44,7 +44,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
              }
          });
          // bind popup
-         const mapPopup = taxParcelLayer.bindPopup(function(layer) {
+         taxParcelLayer.bindPopup(function(layer) {
             let popupContent = '<div class="feat-popup">';
             popupContent += '<h3>Parcel: {Link}</h3>';
             popupContent += '<ul>';
@@ -61,7 +61,9 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          // set map around selected parcel
          webmap.fitBounds(taxParcelLayer.getBounds());
 
-         // open popup on map or figure out why double click is needed to open
+         // open popup on map
+         // for some reason, users must click twice to open popup
+         taxParcelLayer.openPopup();
 
          // call zoning query function
          getZoningDistrict(taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
