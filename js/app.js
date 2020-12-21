@@ -1,5 +1,29 @@
 ﻿"use strict";
 
+// imports
+import {setInitialMapZoom, attachSearch, removeZoningLayerFromMap} from './functions.js';
+import {selectParcelByPin} from './getTaxParcel.js';
+
+$(document).ready(function() {
+    // update where search widget is located
+    attachSearch();
+
+    // close results panel
+    // remove jQuery [future step]
+    $('#panelResults a.panel-close').click(function() {
+       $('#panelResults').css('opacity', 0);
+    });
+});
+
+// resize event
+// remove jQuery [future step]
+$(window).resize(function() {
+    // update where search widget is located
+    attachSearch();
+});
+
+// viewport width
+let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
 const resultsPanel = document.getElementById('panelResults');
 // element within results panel containing text for results of analysis
@@ -39,7 +63,7 @@ function setBasemap(selectedBasemap) {
     $('#panelBasemaps').collapse("hide");
 }
 
-/*** Map Objects ***/                                                                const map = L.map('map', {
+/*** Map Objects ***/                                                        const map = L.map('map', {
    center: homeCoords,
    zoom: setInitialMapZoom(windowWidth),
    zoomControl: false
@@ -83,8 +107,8 @@ const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
 const SearchControl = L.esri.Geocoding.geosearch({
     useMapBounds: false,
     providers: [taxParcelsProvider],
-    placeholder: 'Tax Parcel Search (PIN or Address)',
-    title: 'Enter PIN or Address',
+    placeholder: 'Enter Property Address or PIN',
+    title: 'Enter Street Address or Parcel ID (PIN)',
     expanded: true,
     collapseAfterResult: false,
     zoomToResult: false
@@ -92,7 +116,10 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
-    // change opacity back to 0
+    // remove any existing zoning layers from map
+    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
+
+    // change opacity of results panel back to 0
     resultsPanel.style.opacity = 0;
 
     // check for results
@@ -106,7 +133,7 @@ SearchControl.on('results', function(data) {
         }
 
         // call parcel query function
-        selectParcelByPin(pin, taxParcel, resultsEl, resultsPanel);
+        selectParcelByPin(map, pin, taxParcel, resultsEl, resultsPanel);
     } else { // no results found
         // add message to console
         console.log('No parcel features returned');

@@ -1,206 +1,204 @@
 "use strict";
 
 // function to get zoning service for spatial query
-export const selectZoningService = (pin) => {
-   // base zoning url
-   const baseUrl = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer';
+export const getMuniName = (pin) => {
    // first two digits of parcel (municipal code)
    const muniCode = pin.split("-")[0];
-   // zoning URL for municipality
-   let zoningUrl;
+   // standard name for municipality
+   let name;
 
    // set URL based upon muni code
    switch(muniCode) {
          // Camp Hill
          case '01':
-            zoningUrl = `${baseUrl}/0`;
+            name = 'Camp Hill Borough';
             break;
          // Carlisle
          case '02':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '03':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
           case '04':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '05':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '06':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '49':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '50':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          case '51':
-            zoningUrl = `${baseUrl}/1`;
+            name = 'Carlisle Borough';
             break;
          // Cooke
          case '07':
-            zoningUrl = `${baseUrl}/2`;
+            name = 'Cooke Township';
             break;
          // Dickinson
          case '08':
-            zoningUrl = `${baseUrl}/3`;
+            name = 'Dickinson Township';
             break;
          // East Pennsboro
          case '09':
-            zoningUrl = `${baseUrl}/4`;
+            name = 'East Pennsboro Township';
             break;
           case '45':
-            zoningUrl = `${baseUrl}/4`;
+            name = 'East Pennsboro Township';
             break;
           // Hampden
           case '10':
-            zoningUrl = `${baseUrl}/5`;
+            name = 'Hampden Township';
             break;
           // Hopewell
           case '11':
-            zoningUrl = `${baseUrl}/6`;
+            name = 'Hopewell Township';
             break;
           // Lemoyne
           case '12':
-            zoningUrl = `${baseUrl}/7`;
+            name = 'Lemoyne Borough';
             break;
           // Lower Allen
           case '13':
-            zoningUrl = `${baseUrl}/8`;
+            name = 'Lower Allen Township';
             break;
           // Lower Frankford
           case '14':
-            zoningUrl = `${baseUrl}/9`;
+            name = 'Lower Frankford Township';
             break;
           // Lower Mifflin
           case '15':
-            zoningUrl = `${baseUrl}/10`;
+            name = 'Lower Mifflin Township';
             break;
-          // Mecchanicsburg
+          // Mechanicsburg
           case '16':
-            zoningUrl = `${baseUrl}/11`;
+            name = 'Mechanicsburg Borough';
             break;
          case '17':
-            zoningUrl = `${baseUrl}/11`;
+            name = 'Mechanicsburg Borough';
             break;
          case '18':
-            zoningUrl = `${baseUrl}/11`;
+            name = 'Mechanicsburg Borough';
             break;
          case '19':
-            zoningUrl = `${baseUrl}/11`;
+            name = 'Mechanicsburg Borough';
             break;
          case '20':
-            zoningUrl = `${baseUrl}/11`;
+            name = 'Mechanicsburg Borough';
             break;
          // Middlesex
          case '21':
-            zoningUrl = `${baseUrl}/12`;
+            name = 'Middlesex Township';
             break;
          // Monroe
          case '22':
-            zoningUrl = `${baseUrl}/13`;
+            name = 'Monroe Township';
             break;
-         // MT. Holly Springs
+         // Mt. Holly Springs
          case '23':
-            zoningUrl = `${baseUrl}/14`;
+            name = 'Mt. Holly Springs Borough';
             break;
          // Newburg
          case '24':
-            zoningUrl = `${baseUrl}/16`;
+            name = 'Newburg Borough';
             break;
          // New Cumberland
          case '25':
-            zoningUrl = `${baseUrl}/15`;
+            name = 'New Cumberland Borough';
             break;
          case '26':
-            zoningUrl = `${baseUrl}/15`;
+            name = 'New Cumberland Borough';
             break;
          // Newville
          case '27':
-            zoningUrl = `${baseUrl}/17`;
+            name = 'Newville Borough';
             break;
          case '28':
-            zoningUrl = `${baseUrl}/17`;
+            name = 'Newville Borough';
             break;
          // North Middleton
          case '29':
-            zoningUrl = `${baseUrl}/19`;
+            name = 'North Middleton Township';
             break;
          // North Newton
          case '30':
-            zoningUrl = `${baseUrl}/18`;
+            name = 'North Newton Township';
             break;
          // Penn
          case '31':
-            zoningUrl = `${baseUrl}/20`;
+            name = 'Penn Township';
             break;
          // Shippensburg Boro
          case '32':
-            zoningUrl = `${baseUrl}/21`;
+            name = 'Shippensburg Borough';
             break;
          case '33':
-            zoningUrl = `${baseUrl}/21`;
+            name = 'Shippensburg Borough';
             break;
          case '34':
-            zoningUrl = `${baseUrl}/21`;
+            name = 'Shippensburg Borough';
             break;
          case '35':
-            zoningUrl = `${baseUrl}/21`;
+            name = 'Shippensburg Borough';
             break;
          // Shippensburg Township
          case '36':
-            zoningUrl = `${baseUrl}/22`;
+            name = 'Shippensburg Township';
             break;
          // Shiremanstown
          case '37':
-            zoningUrl = `${baseUrl}/24`;
+            name = 'Shiremanstown Borough';
             break;
          case '48':
-            zoningUrl = `${baseUrl}/24`;
+            name = 'Shiremanstown Borough';
             break;
          // Silver Spring
          case '38':
-            zoningUrl = `${baseUrl}/23`;
+            name = 'Silver Spring Township';
             break;
          // Southampton
          case '39':
-            zoningUrl = `${baseUrl}/25`;
+            name = 'Southampton Township';
             break;
          // South Middleton
          case '40':
-            zoningUrl = `${baseUrl}/27`;
+            name = 'South Middleton Township';
             break;
          // South Newton
          case '41':
-            zoningUrl = `${baseUrl}/26`;
+            name = 'South Newton Township';
             break;
          // Upper Allen
          case '42':
-            zoningUrl = `${baseUrl}/28`;
+            name = 'Upper Allen Township';
             break;
          // Upper Frankford
          case '43':
-            zoningUrl = `${baseUrl}/29`;
+            name = 'Upper Frankford Township';
             break;
          // Upper Mifflin
          case '44':
-            zoningUrl = `${baseUrl}/30`;
+            name = 'Upper Mifflin Township';
             break;
          // West Pennsboro
          case '46':
-            zoningUrl = `${baseUrl}/31`;
+            name = 'West Pennsboro Township';
             break;
          // Wormleysburg
          case '47':
-            zoningUrl = `${baseUrl}/32`;
+            name = 'Wormleysburg Township';
             break;
          // other municipalities
          default:
-            zoningUrl = '';
+            name = '';
             break;
    }    
-   return zoningUrl;
+   return name;
 }
