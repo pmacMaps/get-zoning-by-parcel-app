@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // imports
-import {setInitialMapZoom, attachSearch} from './functions.js';
+import {setInitialMapZoom, attachSearch, removeZoningLayerFromMap} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 
 $(document).ready(function() {
@@ -116,6 +116,10 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
+    // remove any existing zoning layers from map
+    // where is best place for this [?]
+    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
+
     // change opacity back to 0
     resultsPanel.style.opacity = 0;
 

@@ -66,7 +66,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          taxParcelLayer.openPopup();
 
          // call zoning query function
-         getZoningDistrict(taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
+         getZoningDistrict(webmap, taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
         } 
      });
  }

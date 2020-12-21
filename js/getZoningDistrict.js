@@ -5,7 +5,7 @@ import {getMuniName} from './getMunicipalName.js';
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
-export const getZoningDistrict = (parcel, pin, zoningURL, resultsElement, resultsPanel) => {
+export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -24,6 +24,9 @@ export const getZoningDistrict = (parcel, pin, zoningURL, resultsElement, result
          resultsPanel.style.opacity = 1;
       }
         else {
+          // add zoning layer for selected municipality to map
+          const zoningLayer = L.esri.featureLayer({url: zoningURL}).addTo(webmap);
+
           // array to hold all zoning information
           let zoningInfo = [];
 
