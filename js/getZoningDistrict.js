@@ -10,7 +10,7 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
       if (error) {
          // add message to console
          console.warn('An error with zoning service request has occured');
-         console.warn('Code: ' + error.code + '; Message: ' + error.message);
+         console.warn(`Code: ${error.code}; Message: ${error.message}`);
          // set content of results element
          resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact the website manager.';
          // show panel

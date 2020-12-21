@@ -19,7 +19,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
        if (error) {
           // add message to console
           console.warn('An error with the parcels service request has occured');
-          console.warn('Code: ' + error.code + '; Message: ' + error.message);
+          console.warn(`Code: ${error.code}; Message: ${error.message}`);
           // set content of results element
           resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact the website manager.';
           // show panel
@@ -50,7 +50,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
             popupContent += '<ul>';
             popupContent += '<li>Address: {SITUS}</li>';
             popupContent += '<li>Municipality: {MUNI_NAME}</li>';
-            popupContent += '<li>Owner: {OWNER }</li>';
+            popupContent += '<li>Owner: {OWNER}</li>';
             popupContent += '</ul>';
             popupContent += '</div>';
 
