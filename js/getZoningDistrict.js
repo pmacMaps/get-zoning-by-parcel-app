@@ -5,8 +5,9 @@ import {getMuniName} from './getMunicipalName.js';
 
 // function to get zoning district for parcel
 // use intersects method (query) to catch cases where multiple zones are within a parcel
+// need to use contains and intersects as backup?
 export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement, resultsPanel) => {
-    L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
+    L.esri.query({url: zoningURL}).contains(parcel).run(function(error,response) {
       if (error) {
          // add message to console
          console.warn('An error with zoning service request has occured');
@@ -16,6 +17,8 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
          // show panel
          resultsPanel.style.opacity = 1;
       } else if (response.features < 1) {
+        // run intersect query
+        // functionize it?
          // add message to console
          console.warn('No zoning district features returned or an error occured');
          // set content of results element
