@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // imports
-import {setInitialMapZoom, attachSearch, removeZoningLayerFromMap} from './functions.js';
+import {attachSearch, removeZoningLayerFromMap} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 
 $(document).ready(function() {
@@ -31,42 +31,31 @@ const resultsEl = document.getElementById('results');
 // center coordinates for map
 const homeCoords = [40.15, -77.25];
 
-/***  Basemap Changer ***/
-// make arrow function
-function setBasemap(selectedBasemap) {
-    if (basemap) {
-	   map.removeLayer(basemap);
-    }
-    if (selectedBasemap === 'OpenStreetMap') {
-        basemap = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png");
-	} else {
-	   basemap = L.esri.basemapLayer(selectedBasemap);
-    }
-    map.addLayer(basemap);
-    if (esriLayerLabels) {
-        map.removeLayer(esriLayerLabels);
-	}
-    if (grayCanvasLabels) {
-        map.removeLayer(grayCanvasLabels);
-    }
-	if (selectedBasemap === 'Imagery' || selectedBasemap === 'Gray') {
-	    esriLayerLabels = L.esri.basemapLayer(selectedBasemap + 'Labels');
-		map.addLayer(esriLayerLabels);
-	}
-    // add world transportation service to Imagery basemap
-    if (selectedBasemap === 'Imagery') {
-            worldTransportation.addTo(map);
-    } else if (map.hasLayer(worldTransportation)) {
-            map.removeLayer(worldTransportation);
-    }
-    // close panel
-    $('#panelBasemaps').collapse("hide");
-}
+// PA State Plane South (ft) projection
+const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs',  {
+    origin: [-1.192142E8, 1.461669E8],
+    resolutions: [
+      260.41666666666663,
+      86.80555555555556,
+      43.40277777777778,
+      20.833333333333332,
+      10.416666666666666,
+      6.944444444444444,
+      4.166666666666666,
+      2.083333333333333,
+      1.0416666666666665,
+      0.5208333333333333
+    ]
+});
 
-/*** Map Objects ***/                                                        const map = L.map('map', {
-   center: homeCoords,
-   zoom: setInitialMapZoom(windowWidth),
-   zoomControl: false
+/*** Map Objects ***/
+const map = L.map('map', {
+    center: homeCoords,
+    zoom: 0,
+    zoomControl: false,
+    crs: spcPACrs,
+    minZoom: 0,
+    maxZoom: 8
 });
 
 /*** Zoom Home Control ***/
@@ -74,14 +63,30 @@ const zoomHome = L.Control.zoomHome({
     position: 'topleft',
     zoomHomeTitle: 'Full map extent',
     homeCoordinates: homeCoords,
-    homeZoom: setInitialMapZoom(windowWidth)
+    homeZoom: 0
 }).addTo(map);
 
-// ESRI Basemaps
-let basemap = L.esri.basemapLayer('Gray').addTo(map);
-const grayCanvasLabels = L.esri.basemapLayer('GrayLabels').addTo(map);
-let esriLayerLabels = L.esri.basemapLayer('ImageryLabels');
-const worldTransportation = L.esri.basemapLayer('ImageryTransportation');
+// 2020 Imagery - cached map service
+const imagery2020 = L.esri.tiledMapLayer({
+    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Imagery/Imagery2020/MapServer',
+    maxZoom: 8,
+    minZoom: 0,
+    continuousWorld: true,
+    attribution: 'Cumberland County',
+    errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
+    isLoaded: false
+}).addTo(map);
+
+// Roads & Municipal Boundaries - cached map service
+const roadsMunicipality = L.esri.tiledMapLayer({
+    url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer',
+    maxZoom: 8,
+    minZoom: 0,
+    continuousWorld: true,
+    attribution: 'Cumberland County',
+    errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
+    isLoaded: false
+}).addTo(map);
 
 // Municipal Boundaries
 const municipalService = L.esri.dynamicMapLayer({

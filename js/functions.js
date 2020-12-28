@@ -1,21 +1,6 @@
 "use strict";
 
 /*** Map & Device Size Functions ***/
-// Set the initial map zoom level based upon viewport width
-export const setInitialMapZoom = (windowWidth) => {
-    let mapZoom;
-
-    if (windowWidth < 500) {
-        mapZoom = 9;
-    } else if (windowWidth >= 500 && windowWidth < 1000) {
-        mapZoom = 10;
-    } else {
-        mapZoom = 11;
-    }
-
-    return mapZoom;
-}
-
 // Set max width of pop-up window
 export const setPopupMaxWidth = (windowWidth) => {
     let maxWidth;
