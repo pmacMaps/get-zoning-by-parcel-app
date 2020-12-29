@@ -88,12 +88,6 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     isLoaded: false
 }).addTo(map);
 
-// Municipal Boundaries
-const municipalService = L.esri.dynamicMapLayer({
-    url:'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Municipal_Boundaries/MapServer',
-    maxZoom: 14
-}).addTo(map);
-
 // Container for selected parel
 const taxParcel =  L.geoJson().addTo(map);
 
@@ -143,7 +137,7 @@ SearchControl.on('results', function(data) {
         // add message to console
         console.log('No parcel features returned');
         // set content of results element
-         resultsEl.innerHTML = 'No parcel features were found. Please check the parcel ID you entered and try again.  If problems persists, contact the website manager.';
+         resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
          // show panel
          resultsPanel.style.opacity = 1;
     }

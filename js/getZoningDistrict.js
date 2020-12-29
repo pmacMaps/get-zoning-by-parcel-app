@@ -14,32 +14,29 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
          console.warn('An error with zoning service request has occured');
          console.warn(`Code: ${error.code}; Message: ${error.message}`);
          // set content of results element
-         resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact the website manager.';
+         resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
          // show panel
          resultsPanel.style.opacity = 1;
          // end Error clause
       } else if (response.features < 1) {
         // add message to console
         console.warn('No zoning district features returned or an error occured');
-        console.warn('attempting intersects query');
-        // run intersect query
-         // run intersects query
-         L.esri.query({url: zoningURL}).intersects(parcel).run(function(error,response) {
+        console.warn('attempting "overlaps" query');
+        // run overlaps query
+        L.esri.query({url: zoningURL}).overlaps(parcel).run(function(error,response) {
           if (error) {
              // add message to console
              console.warn('An error with zoning service request has occured');
              console.warn(`Code: ${error.code}; Message: ${error.message}`);
              // set content of results element
-             resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact the website manager.';
+             resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
              // show panel
              resultsPanel.style.opacity = 1;
           } else if (response.features < 1) {
-            // run intersect query
-            // functionize it?
              // add message to console
              console.warn('No zoning district features returned or an error occured');
              // set content of results element
-             resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact the website manager.';
+             resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
              // show panel
              resultsPanel.style.opacity = 1;
           }
