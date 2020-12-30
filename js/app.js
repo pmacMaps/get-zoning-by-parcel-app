@@ -3,6 +3,7 @@
 // imports
 import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
+import {createMapLegendMS} from './mapLegend.js';
 
 $(document).ready(function() {
     // update where search widget is located
@@ -95,6 +96,9 @@ const mapServices = [imagery2020, roadsMunicipality];
 mapServices.forEach(element => processLoadEvent(element));
 // add layers to map
 mapServices.forEach(element => element.addTo(map));
+
+// Create Map Legend
+createMapLegendMS('https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer', '#map-legend-content');
 
 // Container for selected parel
 const taxParcel =  L.geoJson().addTo(map);
