@@ -2,6 +2,7 @@
 
 import {populateResults} from './functions.js';
 import {getMuniName} from './getMunicipalName.js';
+import {createMapLegendFS} from './mapLegend.js';
 
 // function to get zoning district for parcel
 // standard query is 'contains'
@@ -75,6 +76,8 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
       } else {
           // add zoning layer for selected municipality to map
           const zoningLayer = L.esri.featureLayer({url: zoningURL}).addTo(webmap);
+          // add map legend element for service
+          createMapLegendFS(zoningLayer, '#map-legend-content');
 
           // array to hold all zoning information
           let zoningInfo = [];
