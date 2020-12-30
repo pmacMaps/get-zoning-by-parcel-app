@@ -1,8 +1,9 @@
 ﻿"use strict";
 
 // imports
-import {attachSearch, removeZoningLayerFromMap} from './functions.js';
+import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
+import {createMapLegendMS} from './mapLegend.js';
 
 $(document).ready(function() {
     // update where search widget is located
@@ -87,6 +88,17 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
 }).addTo(map);
+
+// array of map services to run loading function on
+const mapServices = [imagery2020, roadsMunicipality];
+
+// call load/error events function on layers
+mapServices.forEach(element => processLoadEvent(element));
+// add layers to map
+mapServices.forEach(element => element.addTo(map));
+
+// Create Map Legend
+createMapLegendMS('https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer', '#map-legend-content');
 
 // Container for selected parel
 const taxParcel =  L.geoJson().addTo(map);
