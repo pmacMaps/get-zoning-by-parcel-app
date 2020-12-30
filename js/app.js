@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // imports
-import {attachSearch, removeZoningLayerFromMap} from './functions.js';
+import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 
 $(document).ready(function() {
@@ -87,6 +87,14 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
 }).addTo(map);
+
+// array of map services to run loading function on
+const mapServices = [imagery2020, roadsMunicipality];
+
+// call load/error events function on layers
+mapServices.forEach(element => processLoadEvent(element));
+// add layers to map
+mapServices.forEach(element => element.addTo(map));
 
 // Container for selected parel
 const taxParcel =  L.geoJson().addTo(map);
