@@ -1,4 +1,5 @@
 "use strict";
+
 /* Navigation UI Controls */
 // Make collapsed navigation scroll
 const mobileNavScroll = () => {
@@ -40,38 +41,24 @@ $("#search-btn").click(function() {
     return false;
 });
 
+//
+// Attach search control for desktop or mobile
 // Attach search control for desktop or mobile
 const attachSearch = () => {
-    const parentName = $(".geocoder-control").parent().attr("id"),
-        geocoder = $(".geocoder-control"),
-        width = $(window).width();
-    if (width <= 767 && parentName !== "geocodeMobile") {
-        geocoder.detach();
-        $("#geocodeMobile").append(geocoder);
-    } else if (width > 767 && parentName !== "geocode"){
-        geocoder.detach();
-        $("#geocode").append(geocoder);
-    }
+    const geocoder = $(".geocoder-control");
+    $("#geocode").append(geocoder);
 }
 
 $(document).ready(function() {
-    // update where search widget is located
-    attachSearch();
-    //
     mobileNavScroll();
-
+    attachSearch();
     // close results panel
     // remove jQuery [future step]
     $('#panelResults a.panel-close').click(function() {
        $('#panelResults').css('opacity', 0);
     });
-});
 
-// resize event
-// remove jQuery [future step]
-$(window).resize(function() {
-    // update where search widget is located
-    attachSearch();
-    //
-    mobileNavScroll();
+    $(window).resize(function() {
+        mobileNavScroll();
+    });
 });
