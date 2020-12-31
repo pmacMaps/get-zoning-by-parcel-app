@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Find Zoning District For Property</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,184 +45,155 @@
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
-</head><body class="calcite-maps map-position-absolute nav-position-top-fixed nav-space-none zoom-top-left panel-right">
-    <!-- Navbar -->
-	<nav id="navbar" class="navbar navbar-dark navbar-fixed-top dark-blue">
-        <div class="container-fluid">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainNav" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="https://www.ccpa.net/" target="_blank" rel="noopener">
-					<img src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
-				</a>
-				<div class="navbar-info">
-                    <div class="navbar-title text-overflow"><h1>Find Zoning District For Property</h1></div>
-					<div class="navbar-subtitle text-overflow">Cumberland County, PA</div>
-				</div>
-			</div>
-         <!-- Navbar collapse -->
-			<div id="mainNav" class="collapse navbar-collapse" aria-expanded="false" role="navigation">
-				<ul class="nav navbar-nav navbar-right">
-					<!-- Search - hidden on small screens, in options menu -->
-					<li class="hidden-xs">
-                        <form class="navbar-form navbar-search">
-                            <div id="geocode" class="geocode-navbar"></div>
-                        </form>
-                    </li>
-                    <!-- Options dropdown menu -->
-					<li class="dropdown" role="presentation" >
-						<a class="dropdown-toggle hidden-xs" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span><span class="menu-label">   Menu</span></a>
-						<ul class="dropdown-menu">
-                     <li><a id="searchNavMenu" class="visible-xs" role="button" data-target="#panelSearch"><span class="glyphicon glyphicon-search"></span> Address Search</a></li>
-                     <li><a id="infoNavMenu" class="" role="button" data-target="#panelInfo"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
-							<li><a id="legendNavMenu" class="" role="button" data-target="#panelLegend"><span class="glyphicon glyphicon-list"></span> Legend</a></li>
-							<li><a id="disclaimerNavMenu" class="" role="button" data-target="#panelDisclaimer"><span class="glyphicon glyphicon-exclamation-sign"></span> Disclaimer</a></li>
-				        </ul>
-					</li>
-				</ul><!--/.nav -->
-			</div><!--/.nav-collapse -->
-		</div><!--/.container-fluid -->
-	</nav><!--/.navbar --><!-- Map Container  -->
-<div class="map-container">
-    <!--Gear Spinner and User Click Through-->
-    <div id="back-cover">
-        <span>Map Loading ...</span>
-        <span class="map-loader-icon"></span>
-    </div>
-    <!-- Leaflet Map -->
-    <div id="map" class="map-position-absolute"></div>
-</div><!-- /.container --><!-- Panel -->
-	<div class="panel-container">
-		<!-- Collapsable panel -->
-		<div id="panelAccordion" class="panel-group"  role="tablist" aria-multiselectable="true">
-			<!-- Info Panel -->
-			 <div id="panelInfo" class="panel panel-default collapse">
-				<div id="headingInfo" class="panel-heading" role="tab">
-					<div class="panel-title">
-						<a class="panel-toggle" role="button" data-toggle="collapse" href="#collapseInfo" data-parent="#panelAccordion" aria-expanded="true" aria-controls="collapseInfo"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a>
-						<a class="panel-close" role="button" data-toggle="collapse" data-target="#panelInfo"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-					</div>
-				</div>
-				<div id="collapseInfo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingInfo">
-					<div class="panel-body">
-                  <p class="text-danger">This is a demonstration app and under active development.  It should <u>not</u> be considered a production appliction.</p>
-                  <p class="text-warning">This map is provided as a general guide to the zoning district for properties in Cumberland County. Please refer to each municipality's official zoning map and ordinance for the official district for a property.</p>
-                  <p>This is a concept app that allows users to enter a parcel ID (pin number) or address and get a listing of the zoning district(s) that intersect the property.</p>
-                  <p>Below are some sample PIN numbers to test the app.</p>
-                  <h4>Sample PIN Numbers:</h4>
-                  <ul>
-                     <li>Parcel with single zoning district: <strong>40-31-2187-062</strong></li>
-                     <li>Parcel with multiple zoning districts: <strong>22-12-0350-052</strong></li>
-                     <li>Parcel number that does not exist: <strong>52-01-123-004</strong></li>
-                  </ul>
-                  <p>Map developed by <a href="https://www.ccpa.net/116/Geographic-Information-Systems" target="_blank" rel="noopener"><strong>Cumberland County GIS</strong></a>.</p>
-                  <p>Vist our <a href="http://ccpa.maps.arcgis.com/home/gallery.html" target="_blank" rel="noopener">Map Gallery!</a></p>
-					</div>
-				</div>
-         </div><!-- /. Info Panel -->
-         <!-- Search Panel -->
-			<div id="panelSearch" class="panel panel-default collapse">
-				<div id="headingSearch" class="panel-heading" role="tab">
-					<div class="panel-title">
-						<a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseSearch" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseSearch"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search</a>
-						<a class="panel-close" role="button" data-toggle="collapse" data-target="#panelSearch"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-					</div>
-				</div>
-				<div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSearch">
-					<div class="panel-body">
-						<div class="panel-control">
-							<div id="geocodeMobile" class="geocode-panel"></div>
-						</div>
-				  </div>
-				</div>
-         </div><!-- /. Search Panel -->
-         <!-- Legend Panel -->
-			<div id="panelLegend" class="panel panel-default collapse">
-				<div id="headingLegend" class="panel-heading" role="tab">
-					<div class="panel-title">
-						<a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseLegend" aria-expanded="false" data-parent="#panelAccordion" aria-controls="collapseLegend"><span class="glyphicon glyphicon-list" aria-hidden="true"></span> Legend</a>
-						<a class="panel-close" role="button" data-toggle="collapse" data-target="#panelLegend"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-					</div>
-				</div>
-				<div id="collapseLegend" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingLegend">
-					<div id="map-legend-content" class="panel-body"></div>
-				</div>
-         </div><!-- /. Legend Panel -->
-         <!-- Disclaimer Panel -->
-			<div id="panelDisclaimer" class="panel panel-default collapse">
-				<div id="headingDisclaimer" class="panel-heading">
-				  	<div class="panel-title">
-					<a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseDisclaimer" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseDisclaimer"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Disclaimer</a>
-                    <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelDisclaimer"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-				  </div>
-				</div>
-				<div id="collapseDisclaimer" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingDisclaimer">
-				  <div class="panel-body">
-                        <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
-						<p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
-                        <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
-                        <p>PROPRIETARY INFORMATION:  All information on this website is proprietary.  Any resale of this information is prohibited.</p>
-                        <p>Contents: &copy; 2021 Cumberland County, Pennsylvania. </p>
-                        <p>BY USING THIS DATA, I UNDERSTAND AND KNOWINGLY CONSENT TO THE ABOVE TERMS AND CONDITIONS.</p>
-				  </div>
-				</div>
-         </div><!-- /. Disclaimer Panel -->
-        </div> <!-- /.panel-group -->
-   </div> <!-- /.panel-container -->
-   <!-- Results Panel -->
-   <div id="panelResults" class="panel panel-default collapse">
-    <div id="headingResults" class="panel-heading">
-       <div class="panel-title">
-          <a class="panel-toggle collapsed" role="button" data-toggle="collapse" href="#collapseResults" data-parent="#panelAccordion" aria-expanded="false" aria-controls="collapseResults"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Analysis Results</a>
-          <a class="panel-close" role="button" data-toggle="collapse" data-target="#panelResults"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
-       </div>
-    </div>
-    <div id="collapseResults" class="panel-collapse" role="tabpanel" aria-labelledby="headingResults">
-       <div class="panel-body">
-        <div class="panel-body">
-            <div id='results'></div>
-            <br />
-            <div class="small">
-                <p>Disclaimer:</p>
-                <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
-                <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
-            </div>
+
+  </head>
+  <body>
+    <!-- Navigation -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div class="navbar-icon-container">
+            <button class="navbar-icon pull-right navbar-right" id="nav-btn"><i class="fa fa-bars fa-lg white"></i>Menu</button>
+          </div>
+          <div class="navbar-title text-overflow white"><h1>Find Zoning District For Property</h1></div>
+          <div class="navbar-subtitle text-overflow white">Cumberland County, PA</div>
         </div>
-       </div>
+        <div class="navbar-collapse collapse">
+          <ul id="nav-menu" class="nav navbar-nav navbar-right">
+              <!-- Search - hidden on small screens, in options menu -->
+			<li class="hidden-xs">
+                <form class="navbar-form navbar-search">
+                    <div id="geocode" class="geocode-navbar"></div>
+                </form>
+            </li>
+            <li><button data-toggle="collapse" data-target=".navbar-collapse.in" id="search-btn" class="visible-xs"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;Search</button></li>
+            <li><button data-toggle="collapse" data-target=".navbar-collapse.in" id="about-btn"><i class="fa fa-question-circle white"></i>&nbsp;&nbsp;About the Map</button></li>
+            <li><button data-toggle="collapse" data-target=".navbar-collapse.in" id="legend-btn"><i class="fa fa-picture-o white"></i>&nbsp;&nbsp;Map Legend</button></li>
+            <li><button data-toggle="collapse" data-target=".navbar-collapse.in" id="disclaimer-btn"><i class="fa fa-exclamation-circle white"></i>&nbsp;&nbsp;Disclaimer</button></li>
+         </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div> <!-- / navigation -->
+    <div id="container">
+      <div id="map"></div> <!-- leaflet map goes in here -->
     </div>
- </div>
- <!-- /. Results Panel -->
+    <!-- Loading Screen -->
+    <div id="back-cover">
+        <h2>Map Loading &#46;&#46;&#46;</h2>
+        <span id="cog-icon"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>
+    </div>
 
-   <!-- error message modal -->
-    <div class="modal fade" id="layerErrorModal" tabindex="-1" role="dialog" aria-labelledby="layerErrorModal" aria-hidden="true">
+    <!-- mobile search window -->
+    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Error Adding Layers</h4>
-                </div>
-                <div id="erMsg" class="modal-body">
-                    <h4 class="text-danger">Warning: One or more layers failed to load on the map!</h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div> <!-- /.modal-content -->
-        </div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
-   <!-- Scripts -->
-   <script>
-      var isMobile = false;
-      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-         isMobile = true;
-      }
-   </script>
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title">Search</h4>
+            </div>
+            <div class="modal-body">
+                <div id="#geocodeMobile"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!-- /. About info window -->
 
-   <!-- jQuery -->
+    <!-- About info window -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">About</h4>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger">This is a demonstration app and under active development.  It should <u>not</u> be considered a production appliction.</p>
+            <p class="text-warning">This map is provided as a general guide to the zoning district for properties in Cumberland County. Please refer to each municipality's official zoning map and ordinance for the official district for a property.</p>
+            <p>This is a concept app that allows users to enter a parcel ID (pin number) or address and get a listing of the zoning district(s) that intersect the property.</p>
+            <p>Below are some sample PIN numbers to test the app.</p>
+            <h4>Sample PIN Numbers:</h4>
+            <ul>
+               <li>Parcel with single zoning district: <strong>40-31-2187-062</strong></li>
+               <li>Parcel with multiple zoning districts: <strong>22-12-0350-052</strong></li>
+               <li>Parcel number that does not exist: <strong>52-01-123-004</strong></li>
+            </ul>
+            <p>Map developed by <a href="https://www.ccpa.net/116/Geographic-Information-Systems" target="_blank" rel="noopener"><strong>Cumberland County GIS</strong></a>.</p>
+            <p>Vist our <a href="http://ccpa.maps.arcgis.com/home/gallery.html" target="_blank" rel="noopener">Map Gallery!</a></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+    <!-- /. About info window -->
+
+    <!-- Legend info window -->
+    <div class="modal fade" id="legendModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Map Legend</h4>
+          </div>
+          <div class="modal-body">
+            <div id="map-legend-content" class=""></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+    </div><!-- /. Legend info window -->
+
+    <!-- Disclaimer info window -->
+    <div class="modal fade" id="disclaimerModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Disclaimer</h4>
+          </div>
+          <div class="modal-body">
+            <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+			<p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
+            <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
+            <p>PROPRIETARY INFORMATION:  All information on this website is proprietary.  Any resale of this information is prohibited.</p>
+            <p>Contents: &copy; 2021 Cumberland County, Pennsylvania. </p>
+            <p>BY USING THIS DATA, I UNDERSTAND AND KNOWINGLY CONSENT TO THE ABOVE TERMS AND CONDITIONS.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /. modal-content -->
+      </div><!-- /. modal-dialog -->
+    </div><!-- /. modal -->
+    <!-- /. Discliamer info window -->
+
+    <!-- error message modal -->
+    <div class="modal fade" id="layerErrorModal" tabindex="-1" role="dialog" aria-labelledby="layerErrorModal" aria-hidden="true">
+       <div class="modal-dialog">
+          <div class="modal-content">
+             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Error Adding Layers</h4>
+             </div>
+             <div id="erMsg" class="modal-body">
+                <h4 class="text-danger">Warning: One or more layers failed to load on the map!</h4>
+             </div>
+                <div class="modal-footer">
+                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+             </div> <!-- /.modal-content -->
+       </div> <!-- /.modal-dialog -->
+    </div> <!-- /.modal -->
+    <!-- /. Error message info window -->
+
+    <!-- Scripts -->
+    <!-- jQuery -->
    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
    <!-- Bootstrap -->
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
@@ -238,18 +209,17 @@
    <!-- Esri Leaflet Bundled Plugins -->
    <!-- Esri Leaflet; Esri Renderers; Esri Geocoder -->
    <script src="https://gis.ccpa.net/assets/leaflet/bundled/js/esri-leaflet-plugins.min.js"></script>
-   <!-- Calcite -->
-   <script src="js/calcite-maps.js"></script>
+   <!-- UI -->
+   <script src="js/ui.js"></script>
    <!-- Map Application -->
    <script type="module" src="js/app.js"></script>
-
-   <!-- No Script-->
+    <!-- No Script-->
    <noscript>
-      <div>
-         <p>You are trying to view an interactive map of [update text] for Cumberland County, Pennsylvania.</p>
-         <p>This map requires JavaScript, but running JavaScript is not currently enabled by your web browser.</p>
-         <p>If you wish to view this map, please enable JavaScript in this browser or try a different browser.</p>
-      </div>
-   </noscript>
-</body>
+    <div>
+       <p>You are trying to view an interactive map of [update text] for Cumberland County, Pennsylvania.</p>
+       <p>This map requires JavaScript, but running JavaScript is not currently enabled by your web browser.</p>
+       <p>If you wish to view this map, please enable JavaScript in this browser or try a different browser.</p>
+    </div>
+ </noscript>
+  </body>
 </html>

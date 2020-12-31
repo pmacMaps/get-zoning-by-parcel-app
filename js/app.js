@@ -5,24 +5,6 @@ import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functi
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 
-$(document).ready(function() {
-    // update where search widget is located
-    attachSearch();
-
-    // close results panel
-    // remove jQuery [future step]
-    $('#panelResults a.panel-close').click(function() {
-       $('#panelResults').css('opacity', 0);
-    });
-});
-
-// resize event
-// remove jQuery [future step]
-$(window).resize(function() {
-    // update where search widget is located
-    attachSearch();
-});
-
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
