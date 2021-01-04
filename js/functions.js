@@ -56,7 +56,7 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
    // set content of resultsEl
    resultsElement.innerHTML = resultsContent;
    // show panel
-   resultsPanel.style.opacity = 1;
+   resultsPanel.style.display = 'block';
 }
 
 // removes zoning layers from webmap

@@ -111,11 +111,14 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
+    // close modal
+    $('#searchModal').modal('hide');
+
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
 
     // change opacity of results panel back to 0
-    resultsPanel.style.opacity = 0;
+    resultsPanel.style.display = 'none';
 
     // check for results
     if (data.results.length > 0) {
@@ -135,7 +138,7 @@ SearchControl.on('results', function(data) {
         // set content of results element
          resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
          // show panel
-         resultsPanel.style.opacity = 1;
+         resultsPanel.style.display = 'block';
     }
 });
 

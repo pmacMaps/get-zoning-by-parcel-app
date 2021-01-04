@@ -61,10 +61,10 @@
       <div class="nav justify-content-end">
         <button class="nav-link dropdown-toggle white font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
         <ul class="dropdown dropdown-menu">
-            <button id="search-btn" class="btn dropdown-item">Search</button>
-            <button id="about-btn" class="btn dropdown-item">About the Map</button>
-            <button id="legend-btn" class="btn dropdown-item">Map Legend</button>
-            <button id="disclaimer-btn" class="btn dropdown-item">Disclaimer</button>
+            <li><button id="search-btn" class="btn dropdown-item">Search</button></li>
+            <li><button id="about-btn" class="btn dropdown-item">About the Map</button></li>
+            <li><button id="legend-btn" class="btn dropdown-item">Map Legend</button></li>
+            <li><button id="disclaimer-btn" class="btn dropdown-item">Disclaimer</button></li>
         </ul>
       </div>
     </nav>
@@ -174,6 +174,22 @@
         </div>
       </div>
     </div>
+
+    <!-- Results Panel -->
+    <div id="panelResults">
+      <h5 class="text-center">Zoning District(s) for Property</h5>
+      <hr />
+      <div id='results'></div>
+      <br />
+      <hr />
+      <div class="text-small">
+        <p>Disclaimer:</p>
+        <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+        <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
+      </div>
+      <hr />
+        <button class="btn btn-primary float-right">Close</button>
+     </div>
 
     <!-- error message -->
     <div id="layerErrorModal" class="modal" tabindex="-1" role="dialog">

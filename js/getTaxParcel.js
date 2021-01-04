@@ -23,14 +23,14 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
           // set content of results element
           resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
           // show panel
-          resultsPanel.style.opacity = 1;
+          resultsPanel.style.display = 'block';
        } else if (response.features < 1) {
           // add message to console
           console.log('No parcel features returned');
           // set content of results element
           resultsElement.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
           // show panel
-          resultsPanel.style.opacity = 1;
+          resultsPanel.style.display = 'block';
        } else {
           // add data to geojson object
           taxParcelLayer.addData(response);

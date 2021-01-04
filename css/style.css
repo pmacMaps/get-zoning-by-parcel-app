@@ -21,7 +21,7 @@ html {
   }
 
   body {
-    padding-top: 50px;
+    padding-top: 66px;
   }
 
   .table {
@@ -37,9 +37,14 @@ html {
     margin: 0;
   }
 
-  /*============
-  *** Colors ***
-  =============*/
+.text-small {
+  font-size: 0.8em;
+}
+
+  /* Colors */
+body {
+  color: #333;
+}
 
   .white {
     color: #fff;
@@ -50,7 +55,12 @@ html {
           color: rgb(135,135,135);
   }
 
-  /*** Loading Screen ***/
+nav,
+div.modal button.btn {
+  background-color: #196fa6;
+}
+
+/*** Loading Screen ***/
 #back-cover {
   background: rgba(191, 191, 191, 1);
   margin-top: 64px;
@@ -108,6 +118,10 @@ html {
       background-color: #196fa6;
   }
 
+  div.nav button.nav-link {
+    border: none;
+  }
+
   nav ul.dropdown.dropdown-menu {
       right: 10;
       left: inherit;
@@ -117,6 +131,37 @@ html {
       background-color: #000;
       border-color: #fff;
   }
+
+/* Modals */
+div.modal button.close {
+  opacity: 1;
+}
+
+div.modal button.btn {
+  border-color: #000;
+}
+
+/* Results Panel */
+#panelResults {
+  display: none;
+  z-index: 2000;
+  position: absolute;
+  left: 50px;
+  top: 80px;
+  max-width: 500px;
+  width: 100%;
+  height: auto;
+  max-height: 350px;
+  overflow-y: scroll;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  padding: 1.25em;
+}
+
+#panelResults hr {
+  border-top-color: #000;
+}
 
 
 /*=========

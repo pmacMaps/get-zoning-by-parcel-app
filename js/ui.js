@@ -48,12 +48,6 @@ $(document).ready(function() {
     //mobileNavScroll();
     attachSearch();
     // close results panel
-    // remove jQuery [future step]
-    /*
-    $('#panelResults a.panel-close').click(function() {
-       $('#panelResults').css('opacity', 0);
-    });
-    */
 
     $(window).resize(function() {
         //mobileNavScroll();
