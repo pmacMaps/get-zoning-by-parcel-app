@@ -5,6 +5,8 @@ import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functi
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 
+// loading screen element
+const backCover = document.getElementById('back-cover');
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
@@ -58,7 +60,7 @@ const imagery2020 = L.esri.tiledMapLayer({
     attribution: 'Cumberland County',
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
-}).addTo(map);
+});
 
 // Roads & Municipal Boundaries - cached map service
 const roadsMunicipality = L.esri.tiledMapLayer({
@@ -69,7 +71,7 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     attribution: 'Cumberland County',
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
-}).addTo(map);
+});
 
 // array of map services to run loading function on
 const mapServices = [imagery2020, roadsMunicipality];
@@ -135,4 +137,31 @@ SearchControl.on('results', function(data) {
          // show panel
          resultsPanel.style.opacity = 1;
     }
+});
+
+/*** Remove loading screen after services loaded ***/
+const loadScreenTimer = window.setInterval(function() {
+    // loaded states of map services
+    let imagery2020Loaded = imagery2020.options.isLoaded;
+    let roadsMuniLoaded = roadsMunicipality.options.isLoaded;
+
+    if (imagery2020Loaded && roadsMuniLoaded) {
+        // remove loading screen
+        window.setTimeout(function() {
+            backCover.style.display = 'none';
+        }, 1500);
+
+        // clear timer
+        window.clearInterval(loadScreenTimer);
+    } else {
+      console.log('layers still loading');
+    }
+}, 1500);
+
+// Remove loading screen when warning modal is closed
+$('#layerErrorModal').on('hide.bs.modal', function(e) {
+   // remove loading screen
+   backCover.style.display = 'none';
+   // clear timer
+   window.clearInterval(loadScreenTimer);
 });

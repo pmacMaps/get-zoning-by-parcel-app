@@ -50,6 +50,59 @@ html {
           color: rgb(135,135,135);
   }
 
+  /*** Loading Screen ***/
+#back-cover {
+  background: rgba(191, 191, 191, 1);
+  margin-top: 64px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: #222;
+  z-index: 1000;
+}
+
+#back-cover span {
+  font-weight: bold;
+  font-size: 1.75em;
+  margin-bottom: 15px;
+}
+
+.map-loader-icon {
+  border: 10px solid #fff;
+  border-top: 10px solid #222;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: spin 1.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
   /* navigation bar */
   nav {
       background-color: #196fa6;
