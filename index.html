@@ -57,7 +57,6 @@
         </a>
         <h1 class="navbar-brand white">Find Zoning District For Property</h1>
         <span class="white">Cumberland County, PA</span>
-        </div>
       </div>
       <div class="nav justify-content-end">
         <button class="nav-link dropdown-toggle white font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
@@ -80,31 +79,35 @@
         <span id="cog-icon"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>
     </div>
 
-    <!-- search window -->
-    <div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title">Search</h4>
-            </div>
-            <div class="modal-body">
-                <div id="geocode"></div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-      <!-- /. About info window -->
-
-    <!-- About info window -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
+    <!-- search widget -->
+    <div id="searchModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">About</h4>
+            <h5 class="modal-title">Search Widget</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="geocode"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- about widget -->
+    <div id="aboutModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">About the Map</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p class="text-danger">This is a demonstration app and under active development.  It should <u>not</u> be considered a production appliction.</p>
@@ -121,73 +124,76 @@
             <p>Vist our <a href="http://ccpa.maps.arcgis.com/home/gallery.html" target="_blank" rel="noopener">Map Gallery!</a></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-    <!-- /. About info window -->
+        </div>
+      </div>
+    </div>
 
-    <!-- Legend info window -->
-    <div class="modal fade" id="legendModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
+    <!-- legend widget -->
+    <div id="legendModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Map Legend</h4>
+            <h5 class="modal-title">Map Legend</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
-            <div id="map-legend-content" class=""></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <div id="map-legend-content"></div>
           </div>
-          </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-      </div><!-- /.modal -->
-    </div><!-- /. Legend info window -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Disclaimer info window -->
-    <div class="modal fade" id="disclaimerModal" tabindex="-1" role="dialog">
-      <div class="modal-dialog">
+    <!-- disclaimer widget -->
+    <div id="disclaimerModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Disclaimer</h4>
+            <h5 class="modal-title">Disclaimer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
-			<p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
+            <p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
             <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
             <p>PROPRIETARY INFORMATION:  All information on this website is proprietary.  Any resale of this information is prohibited.</p>
             <p>Contents: &copy; 2021 Cumberland County, Pennsylvania. </p>
             <p>BY USING THIS DATA, I UNDERSTAND AND KNOWINGLY CONSENT TO THE ABOVE TERMS AND CONDITIONS.</p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
-        </div><!-- /. modal-content -->
-      </div><!-- /. modal-dialog -->
-    </div><!-- /. modal -->
-    <!-- /. Discliamer info window -->
+        </div>
+      </div>
+    </div>
 
-    <!-- error message modal -->
-    <div class="modal fade" id="layerErrorModal" tabindex="-1" role="dialog" aria-labelledby="layerErrorModal" aria-hidden="true">
-       <div class="modal-dialog">
-          <div class="modal-content">
-             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Error Adding Layers</h4>
-             </div>
-             <div id="erMsg" class="modal-body">
-                <h4 class="text-danger">Warning: One or more layers failed to load on the map!</h4>
-             </div>
-                <div class="modal-footer">
-                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-             </div> <!-- /.modal-content -->
-       </div> <!-- /.modal-dialog -->
-    </div> <!-- /.modal -->
-    <!-- /. Error message info window -->
+    <!-- error message -->
+    <div id="layerErrorModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error Adding Layers</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger">Warning: One or more layers failed to load on the map!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Scripts -->
     <!-- jQuery -->

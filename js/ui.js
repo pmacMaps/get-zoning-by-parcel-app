@@ -2,43 +2,38 @@
 
 /* Navigation UI Controls */
 // Make collapsed navigation scroll
+// update code, may not even need
 const mobileNavScroll = () => {
     $(".navbar-collapse").css({maxHeight: $(window).height() - $(".navbar-header").height() + "px"});
 }
 
 /*** Toggle hamburger navigation menu ***/
+/*
 $("#nav-btn").click(function() {
     $(".navbar-collapse").collapse("toggle");
     return false;
 });
+*/
 
 /*** Navigation Modal Windows ***/
+// Open Search info window
+$("#search-btn").click(function() {
+    $('#searchModal').modal('show');
+});
+
 // Open About info window
 $("#about-btn").click(function() {
-    $("#aboutModal").modal("show");
-    $(".navbar-collapse.in").collapse("hide");
-    return false;
+    $('#aboutModal').modal('show');
 });
 
 // Open Legend info window
 $("#legend-btn").click(function() {
-    $("#legendModal").modal("show");
-    $(".navbar-collapse.in").collapse("hide");
-    return false;
+    $('#legendModal').modal('show');
 });
 
 // Open Discliamer info window
 $("#disclaimer-btn").click(function() {
-    $("#disclaimerModal").modal("show");
-    $(".navbar-collapse.in").collapse("hide");
-    return false;
-});
-
-// Open Search info window
-$("#search-btn").click(function() {
-    $("#searchModal").modal("show");
-    $(".navbar-collapse.in").collapse("hide");
-    return false;
+    $('#disclaimerModal').modal('show');
 });
 
 //
@@ -50,15 +45,17 @@ const attachSearch = () => {
 }
 
 $(document).ready(function() {
-    mobileNavScroll();
+    //mobileNavScroll();
     attachSearch();
     // close results panel
     // remove jQuery [future step]
+    /*
     $('#panelResults a.panel-close').click(function() {
        $('#panelResults').css('opacity', 0);
     });
+    */
 
     $(window).resize(function() {
-        mobileNavScroll();
+        //mobileNavScroll();
     });
 });
