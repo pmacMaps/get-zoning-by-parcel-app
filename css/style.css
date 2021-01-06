@@ -21,7 +21,7 @@ html {
   }
 
   body {
-    padding-top: 66px;
+    padding-top: 64px;
   }
 
   .table {
@@ -214,6 +214,21 @@ div.modal button.btn {
 
 /* Media Queries */
 @media screen and (max-width: 576px) {
+
+  body {
+    padding-top: 84px;
+  }
+
+  h1.navbar-brand {
+    font-size: 1.05em;
+    max-width: 200px;
+    word-break: break-word;
+    white-space: normal;
+  }
+
+  nav.navbar > div img {
+    vertical-align: unset;
+  }
 
   #geocodeMobile input,
   .geocoder-control-expanded {
