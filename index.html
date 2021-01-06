@@ -53,10 +53,10 @@
       <!-- title, subtitle, org image -->
       <div class="justify-content-start">
         <a class="navbar-brand" href="https://www.ccpa.net/" target="_blank" rel="noopener">
-          <img height="40" width="40" class="img-fluid" src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
+          <img height="35" width="35" class="img-fluid" src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
         </a>
         <h1 class="navbar-brand white">Find Zoning District For Property</h1>
-        <span class="white">Cumberland County, PA</span>
+        <span class="white d-none d-md-inline"> Cumberland County, PA</span>
       </div>
       <!-- Search - hidden on small screens, in options menu -->
 			<div class="d-sm-none d-md-none d-lg-block justify-content-center">
@@ -169,6 +169,7 @@
           </div>
           <div class="modal-body">
             <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+            <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
             <p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
             <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
             <p>PROPRIETARY INFORMATION:  All information on this website is proprietary.  Any resale of this information is prohibited.</p>
@@ -185,6 +186,9 @@
     <!-- Results Panel -->
     <div id="panelResults">
       <h5 class="text-center">Zoning District(s) for Property</h5>
+      <button class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
       <hr />
       <div id='results'></div>
       <hr />
