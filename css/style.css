@@ -141,6 +141,10 @@ div.modal button.btn {
   border-color: #000;
 }
 
+#searchModal .modal-body {
+  min-height: 250px;
+}
+
 /* Results Panel - display zoning district info */
 #panelResults {
   display: none;
@@ -192,4 +196,54 @@ div.modal button.btn {
 /* popup for tax parcels */
 .feat-popup {
   font-size: 1.2em;
+}
+
+/* Geocoder control */
+#geocode input,
+#geocodeMobile input {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 0;
+  border: 1px solid #000;
+  box-shadow: none;
+}
+
+.geocoder-control-suggestions {
+  width: auto;
+}
+
+/* Media Queries */
+@media screen and (max-width: 576px) {
+
+  #geocodeMobile input,
+  .geocoder-control-expanded {
+    width: 100%;
+  }
+
+  .geocoder-control-suggestions {
+    max-width: 100%;
+
+  }
+
+  /* have suggestions break onto multiple lines */
+  .geocoder-control-suggestion {
+    overflow-wrap: break-word !important;
+    word-break: break-all !important;
+    overflow: visible !important;
+    white-space: break-spaces !important;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+
+  /* Results Panel - display zoning district info */
+  #panelResults {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    max-width: 90%;
+    transform: translate(-50%, -50%);
+  }
+
 }
