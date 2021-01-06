@@ -46,10 +46,10 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          // bind popup
          taxParcelLayer.bindPopup(function(layer) {
             let popupContent = '<div class="feat-popup">';
-            popupContent += '<h3>Parcel: {Link}</h3>';
             popupContent += '<ul>';
             popupContent += '<li>Address: {SITUS}</li>';
             popupContent += '<li>Municipality: {MUNI_NAME}</li>';
+            popupContent += '<li>PIN: {Link}</li>';
             popupContent += '<li>Owner: {OWNER}</li>';
             popupContent += '</ul>';
             popupContent += '</div>';

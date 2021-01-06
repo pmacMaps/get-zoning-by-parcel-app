@@ -50,7 +50,7 @@
   <body>
     <!-- Navigation -->
     <nav class="navbar fixed-top">
-      <!-- title -->
+      <!-- title, subtitle, org image -->
       <div class="justify-content-start">
         <a class="navbar-brand" href="https://www.ccpa.net/" target="_blank" rel="noopener">
           <img height="40" width="40" class="img-fluid" src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
@@ -58,10 +58,17 @@
         <h1 class="navbar-brand white">Find Zoning District For Property</h1>
         <span class="white">Cumberland County, PA</span>
       </div>
+      <!-- Search - hidden on small screens, in options menu -->
+			<div class="d-sm-none d-md-none d-lg-block justify-content-center">
+          <form>
+            <div id="geocode"></div>
+          </form>
+      </div>
+      <!-- navigation menu -->
       <div class="nav justify-content-end">
         <button class="nav-link dropdown-toggle white font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
         <ul class="dropdown dropdown-menu">
-            <li><button id="search-btn" class="btn dropdown-item">Search</button></li>
+            <li><button id="search-btn" class="btn dropdown-item d-sm-block d-md-block d-lg-none">Search</button></li>
             <li><button id="about-btn" class="btn dropdown-item">About the Map</button></li>
             <li><button id="legend-btn" class="btn dropdown-item">Map Legend</button></li>
             <li><button id="disclaimer-btn" class="btn dropdown-item">Disclaimer</button></li>
@@ -79,7 +86,7 @@
         <span id="cog-icon"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>
     </div>
 
-    <!-- search widget -->
+    <!-- search widget (for mobile) -->
     <div id="searchModal" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -90,7 +97,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div id="geocode"></div>
+            <div id="geocodeMobile"></div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -180,7 +187,6 @@
       <h5 class="text-center">Zoning District(s) for Property</h5>
       <hr />
       <div id='results'></div>
-      <br />
       <hr />
       <div class="text-small">
         <p>Disclaimer:</p>
@@ -188,7 +194,7 @@
         <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
       </div>
       <hr />
-        <button class="btn btn-primary float-right">Close</button>
+        <button id="resultsCloseBtn" class="btn btn-primary float-right">Close</button>
      </div>
 
     <!-- error message -->

@@ -1,5 +1,21 @@
 "use strict";
 
+// Attach search control for desktop or mobile
+// remove jQuery [future step]
+const attachSearch = () => {
+    const parentName = $(".geocoder-control").parent().attr("id"),
+    geocoder = $(".geocoder-control"),
+    width = $(window).width();
+
+    if (width < 992 && parentName !== "geocodeMobile") {
+        geocoder.detach();
+        $("#geocodeMobile").append(geocoder);
+    } else if (width >= 992 && parentName !== "geocode"){
+        geocoder.detach();
+        $("#geocode").append(geocoder);
+    }
+}
+
 /* Navigation UI Controls */
 // Make collapsed navigation scroll
 // update code, may not even need
@@ -36,14 +52,14 @@ $("#disclaimer-btn").click(function() {
     $('#disclaimerModal').modal('show');
 });
 
-//
-// Attach search control for desktop or mobile
-// Attach search control for desktop or mobile
-const attachSearch = () => {
-    const geocoder = $(".geocoder-control");
-    $("#geocode").append(geocoder);
-}
+// button to close results panel
+const resultsCloseBtn = document.getElementById('resultsCloseBtn');
+// close results panel on click
+resultsCloseBtn.addEventListener('click', function() {
+    document.getElementById('panelResults').style.display = 'none';
+});
 
+/* Document Ready */
 $(document).ready(function() {
     //mobileNavScroll();
     attachSearch();
@@ -51,5 +67,6 @@ $(document).ready(function() {
 
     $(window).resize(function() {
         //mobileNavScroll();
+        attachSearch();
     });
 });

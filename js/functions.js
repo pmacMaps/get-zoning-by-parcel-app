@@ -14,28 +14,12 @@ export const setPopupMaxWidth = (windowWidth) => {
     return maxWidth;
 }
 
-// Attach search control for desktop or mobile
-// remove jQuery [future step]
-export const attachSearch = () => {
-    const parentName = $(".geocoder-control").parent().attr("id"),
-    geocoder = $(".geocoder-control"),
-    width = $(window).width();
-
-    if (width <= 1024 && parentName !== "geocodeMobile") {
-        geocoder.detach();
-        $("#geocodeMobile").append(geocoder);
-    } else if (width > 1024 && parentName !== "geocode"){
-        geocoder.detach();
-        $("#geocode").append(geocoder);
-    }
-}
-
 // function to populate zoning query results to display element
 export const populateResults = (municipality, results, resultsElement, resultsPanel) => {
     // element to hold results content;
    let resultsContent = '<div>';
    // add municipality
-   resultsContent += `<h3>Municipality: ${municipality}</h3>`;
+   resultsContent += `<span class="text-center">Municipality: <strong>${municipality}</strong></span>`;
 
    // expecting items in results
    if (results.length < 1) {

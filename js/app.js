@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // imports
-import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functions.js';
+import {removeZoningLayerFromMap, processLoadEvent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 

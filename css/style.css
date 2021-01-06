@@ -141,35 +141,55 @@ div.modal button.btn {
   border-color: #000;
 }
 
-/* Results Panel */
+/* Results Panel - display zoning district info */
 #panelResults {
   display: none;
-  z-index: 2000;
+  z-index: 1040;
   position: absolute;
   left: 50px;
   top: 80px;
-  max-width: 500px;
+  max-width: 400px;
   width: 100%;
   height: auto;
-  max-height: 350px;
+  max-height: 300px;
   overflow-y: scroll;
+  padding: 1.25em;
   background-color: #fff;
   border: 2px solid #000;
   border-radius: 5px;
-  padding: 1.25em;
+  font-size: 0.95em;
+}
+
+#panelResults h5 {
+  font-size: 1.2em;
 }
 
 #panelResults hr {
   border-top-color: #000;
 }
 
+#panelResults span {
+  display: inline-block;
+  margin-bottom: 5px;
+}
 
-/*=========
-  *** Map ***
-  ==========*/
+#panelResults ul,
+.feat-popup ul {
+  padding-left: 0;
+}
 
-  #map {
+#panelResults li {
+  padding-top: 5px;
+}
+
+/* Map */
+#map {
     width: auto;
     height: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
+}
+
+/* popup for tax parcels */
+.feat-popup {
+  font-size: 1.2em;
+}
