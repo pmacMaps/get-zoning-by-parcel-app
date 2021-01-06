@@ -133,7 +133,8 @@ div.modal button.btn {
   }
 
 /* Modals */
-div.modal button.close {
+div.modal button.close,
+#panelResults button.close {
   opacity: 1;
 }
 
@@ -162,6 +163,12 @@ div.modal button.btn {
   border: 2px solid #000;
   border-radius: 5px;
   font-size: 0.95em;
+}
+
+#panelResults button.close {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }
 
 #panelResults h5 {

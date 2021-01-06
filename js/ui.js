@@ -52,11 +52,13 @@ $("#disclaimer-btn").click(function() {
     $('#disclaimerModal').modal('show');
 });
 
-// button to close results panel
-const resultsCloseBtn = document.getElementById('resultsCloseBtn');
-// close results panel on click
-resultsCloseBtn.addEventListener('click', function() {
-    document.getElementById('panelResults').style.display = 'none';
+// buttons to close results panel
+const resultsCloseButtons = document.querySelectorAll('#panelResults button');
+// add event listener
+resultsCloseButtons.forEach(function(element) {
+    element.addEventListener('click', function() {
+        document.getElementById('panelResults').style.display = 'none';
+    });
 });
 
 /* Document Ready */
