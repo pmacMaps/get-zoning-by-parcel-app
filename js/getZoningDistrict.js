@@ -17,7 +17,7 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
          // set content of results element
          resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
          // show panel
-         resultsPanel.style.opacity = 1;
+         resultsPanel.style.display = 'block';
          // end Error clause
       } else if (response.features < 1) {
         // add message to console
@@ -32,14 +32,14 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
              // set content of results element
              resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
              // show panel
-             resultsPanel.style.opacity = 1;
+             resultsPanel.style.display = 'block';
           } else if (response.features < 1) {
              // add message to console
              console.warn('No zoning district features returned or an error occured');
              // set content of results element
              resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
              // show panel
-             resultsPanel.style.opacity = 1;
+             resultsPanel.style.display = 'block';
           }
             else {
               // add zoning layer for selected municipality to map

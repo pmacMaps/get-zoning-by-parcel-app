@@ -1,303 +1,195 @@
-/*** General Settings ***/
-html, 
-body {
-    margin: 0;
-    padding: 0;
+html {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  *,
+  *:before,
+  *:after {
+    -webkit-box-sizing: inherit;
+    -moz-box-sizing: inherit;
+    box-sizing: inherit;
+  }
+
+  html,
+  body,
+  #container {
     height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  body {
+    padding-top: 66px;
+  }
+
+  .table {
+    margin-bottom: 0px;
+  }
+
+  ul {
+      list-style-type: none;
+  }
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0;
+  }
+
+.text-small {
+  font-size: 0.8em;
 }
 
+  /* Colors */
 body {
-    color: #333;
+  color: #333;
 }
 
-noscript div {
-    position: fixed; 
-    top: 0px; 
-    left: 0px; 
-    z-index: 3000;
-    height: 100%; 
-    width: 100%; 
-    padding: 4em;
-    background-color: #FFFFFF;       
-    font-size: 1.25em;
-}
+  .white {
+    color: #fff;
+  }
 
-noscript p:last-child {
-    font-weight: bold;
+  /* gray table text */
+  .light-gray {
+          color: rgb(135,135,135);
+  }
+
+nav,
+div.modal button.btn {
+  background-color: #196fa6;
 }
 
 /*** Loading Screen ***/
 #back-cover {
-    background: rgba(191, 191, 191, 1);
-    margin-top: 64px;
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    /*
-    display: -webkit-box;   
-    display: -moz-box;      
-    display: -ms-flexbox;   
-    display: -webkit-flex;  
-    display: flex;    
-    */
-    display: none;
-    -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-    -ms-flex-direction: column;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center; 
-    -moz-box-align: center; 
-    -ms-flex-align: center; 
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-box-pack: center; 
-    -moz-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;       
-    color: #222;
-    z-index: 999;
+  background: rgba(191, 191, 191, 1);
+  margin-top: 64px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -ms-flex-direction: column;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  color: #222;
+  z-index: 1000;
 }
 
 #back-cover span {
-    font-weight: bold;
-    font-size: 1.75em;
-    margin-bottom: 15px;
+  font-weight: bold;
+  font-size: 1.75em;
+  margin-bottom: 15px;
 }
 
 .map-loader-icon {
-    border: 10px solid #fff;
-    border-top: 10px solid #222;
-    border-radius: 50%;
-    width: 75px;
-    height: 75px;
-    animation: spin 1.5s linear infinite;
+  border: 10px solid #fff;
+  border-top: 10px solid #222;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
-/* error message modal */
-#layerErrorModal {
-   display: none;
-   z-index: 2000;
-}
-.modal-content {
-    max-width: 100%;
-    word-wrap: break-word;
-}/*** Navigation ***/
-.calcite-maps .navbar-dark .navbar-info,
-.calcite-maps .navbar-dark .navbar-info:hover {
-    color: #fff;
+  /* navigation bar */
+  nav {
+      background-color: #196fa6;
+  }
+
+  div.nav button.nav-link {
+    border: none;
+  }
+
+  nav ul.dropdown.dropdown-menu {
+      right: 10;
+      left: inherit;
+  }
+
+  nav button.nav-link.dropdown-toggle {
+      background-color: #000;
+      border-color: #fff;
+  }
+
+/* Modals */
+div.modal button.close {
+  opacity: 1;
 }
 
-.calcite-maps .navbar-info {
-    cursor: default;
+div.modal button.btn {
+  border-color: #000;
 }
 
-.calcite-maps .navbar-title {
-    font-size: inherit;
-}
-
-.calcite-maps .navbar-title h1 {
-    font-size: 1.5em;
-    margin: 0;
-    padding: 0;    
-}
-
-.calcite-maps .navbar-subtitle {
-    font-size: 0.85em;
-}
-
-span.glyphicon.glyphicon-menu-hamburger {
-    font-size: 1.5em;
-}
-
-/* Menu text */
-.menu-label {
-    font-weight: bold;    
-}
-.calcite-maps .dropdown-toggle span {
-    top: 6px;
-}/* Legend */
-#collapseLegend ul {
-	margin-top: 25px;
-	margin-left: 10px;
-	padding: 0;
-	list-style-type: none;
-}
-#collapseLegend ul li {
-	padding-bottom: 5px;
-	font-size: 1.15em;
-    font-weight: bold;
-}
-
-/*** Panels ***/
-.calcite-maps .panel {
-    min-width: 215px;
-}
-
-.calcite-maps.nav-position-top-fixed.nav-space-none .panel-container {
-    top: 90px;
-     z-index: 650;
-}
-
-.panel-title {
-    background: #196fa6;
-}
-
-.panel-title > a,
-.calcite-maps .panel-title span.glyphicon.glyphicon-remove {
-    color: #fff;
-}
-
-.calcite-maps .panel-title span.glyphicon.glyphicon-remove:hover {
-    color: #000;
-}
-
-.panel-body a {
-    text-decoration: underline;
-}
-
+/* Results Panel - display zoning district info */
 #panelResults {
-    position: absolute;
-    display: block;
-    left: 75px;
-    top: 65px;
-    opacity: 0;
-    z-index: 1050;
+  display: none;
+  z-index: 1040;
+  position: absolute;
+  left: 50px;
+  top: 80px;
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  overflow-y: scroll;
+  padding: 1.25em;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 5px;
+  font-size: 0.95em;
 }
 
-#panelResults .panel-body {
-    overflow-x: hidden;
+#panelResults h5 {
+  font-size: 1.2em;
+}
+
+#panelResults hr {
+  border-top-color: #000;
+}
+
+#panelResults span {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+#panelResults ul,
+.feat-popup ul {
+  padding-left: 0;
+}
+
+#panelResults li {
+  padding-top: 5px;
+}
+
+/* Map */
+#map {
     width: auto;
-    max-width: 400px;
+    height: 100%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-#panelResults .panel-body h3 {
-    margin: 0 0 20px 0;
-    font-size: 1.15em;
-    text-align: center;
-}
-
-#panelResults .panel-body li {
-    margin-left: -20px;
-}
-
-
-/*** Leaflet Controls ****/
-.calcite-maps .leaflet-top, .calcite-maps .leaflet-bottom {
-    z-index: 500;
-}
-
-.calcite-maps .leaflet-control-attribution {
-    position: relative;
-    right: 20px;
-}
-
-.calcite-maps .leaflet-control-zoomhome.leaflet-bar > a,
-.calcite-maps .leaflet-control-locate.leaflet-bar > a {
-    width: 32px;
-	height: 32px;
-	line-height: 32px;
-	border-radius: 0;
-}
-
-.calcite-maps .leaflet-control-zoomhome,
-.calcite-maps .leaflet-control-locate.leaflet-bar,
-.calcite-maps .leaflet-control-fullscreen.leaflet-bar.leaflet-control {
-	margin-left: 15px;
-}
-
-.calcite-maps .leaflet-control-locate.leaflet-bar {
-    margin-top: 15px;
-}
-
-/* Leaflet Zoom Home */
-.calcite-maps.nav-position-top .leaflet-control-zoomhome  {
-	margin-top: 80px;
-}
-
-.calcite-maps.nav-position-top-fixed .leaflet-control-zoomhome {
-	margin-top: 20px;
-}
-
-/* Leaflet Locate */
-.leaflet-control-locate a {
-    color: #000;
-}
-
-/* Zoom Controls */
-.leaflet-control-zoomhome,
-.leaflet-control-zoomhome-out {
-    font-size: 1.75em;
-}
-
-/* Geocoding Suggestions */
-div.geocoder-control-suggestions.leaflet-bar {
-    width: auto;
-}/*** Layer Popups ***/
-div.leaflet-popup-content {
-    font-size: 1.15em;
-    color: #000;
-}
-
-div.leaflet-popup-content h3 {
-    font-size: 1.4em;
-    font-weight: bold;
-	text-align: center;	
-}
-
-div.leaflet-popup-content h4 {
-    font-size: 1.2em;
-}
-
-div.leaflet-popup-content ul {
-    margin-bottom: 20px;
-    padding-left: 5px;
-    list-style-type: square;
-}
-
-div.leaflet-popup-content span.gray-text {
-    color: #444;
-}/*** Media Query ***/
-@media screen and (max-width: 767px) {
-    /*** Panels ***/
-    .panel-container,
-    .panel-group {
-        z-index: 2000;
-    }    
-    .calcite-maps .panel-body {
-        overflow-y: scroll;
-        min-height: 200px;
-    }    
-    #panelSearch .panel-control {
-        padding: 5px;
-    }    
-    #panelSearch .panel-body {
-        min-height: 350px;
-    }   
-    li.dropdown.open ul.dropdown-menu li:active {
-        background: #75a8c9;          
-    }
-    #ui-datepicker-div {
-        z-index: 1500 !important;
-    }
-    #back-cover {
-        margin-top: 0;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 875px) {
-    .calcite-maps .navbar-title h1 {
-        font-size: 1.05em;
-    }    
-    .calcite-maps .navbar-subtitle {
-        font-size: 0.75em;
-    }
+/* popup for tax parcels */
+.feat-popup {
+  font-size: 1.2em;
 }

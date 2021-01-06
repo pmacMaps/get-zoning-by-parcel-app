@@ -1,28 +1,12 @@
 ﻿"use strict";
 
 // imports
-import {attachSearch, removeZoningLayerFromMap, processLoadEvent} from './functions.js';
+import {removeZoningLayerFromMap, processLoadEvent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 
-$(document).ready(function() {
-    // update where search widget is located
-    attachSearch();
-
-    // close results panel
-    // remove jQuery [future step]
-    $('#panelResults a.panel-close').click(function() {
-       $('#panelResults').css('opacity', 0);
-    });
-});
-
-// resize event
-// remove jQuery [future step]
-$(window).resize(function() {
-    // update where search widget is located
-    attachSearch();
-});
-
+// loading screen element
+const backCover = document.getElementById('back-cover');
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
@@ -76,7 +60,7 @@ const imagery2020 = L.esri.tiledMapLayer({
     attribution: 'Cumberland County',
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
-}).addTo(map);
+});
 
 // Roads & Municipal Boundaries - cached map service
 const roadsMunicipality = L.esri.tiledMapLayer({
@@ -87,7 +71,7 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     attribution: 'Cumberland County',
     errorTileUrl: '//downloads2.esri.com/support/TechArticles/blank256.png',
     isLoaded: false
-}).addTo(map);
+});
 
 // array of map services to run loading function on
 const mapServices = [imagery2020, roadsMunicipality];
@@ -127,11 +111,14 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
+    // close modal
+    $('#searchModal').modal('hide');
+
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
 
     // change opacity of results panel back to 0
-    resultsPanel.style.opacity = 0;
+    resultsPanel.style.display = 'none';
 
     // check for results
     if (data.results.length > 0) {
@@ -151,6 +138,33 @@ SearchControl.on('results', function(data) {
         // set content of results element
          resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
          // show panel
-         resultsPanel.style.opacity = 1;
+         resultsPanel.style.display = 'block';
     }
+});
+
+/*** Remove loading screen after services loaded ***/
+const loadScreenTimer = window.setInterval(function() {
+    // loaded states of map services
+    let imagery2020Loaded = imagery2020.options.isLoaded;
+    let roadsMuniLoaded = roadsMunicipality.options.isLoaded;
+
+    if (imagery2020Loaded && roadsMuniLoaded) {
+        // remove loading screen
+        window.setTimeout(function() {
+            backCover.style.display = 'none';
+        }, 1500);
+
+        // clear timer
+        window.clearInterval(loadScreenTimer);
+    } else {
+      console.log('layers still loading');
+    }
+}, 1500);
+
+// Remove loading screen when warning modal is closed
+$('#layerErrorModal').on('hide.bs.modal', function(e) {
+   // remove loading screen
+   backCover.style.display = 'none';
+   // clear timer
+   window.clearInterval(loadScreenTimer);
 });
