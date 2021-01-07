@@ -54,7 +54,7 @@ body,
 }
 
 /* blue theme color */
-nav,
+header,
 div.modal button.btn,
 #panelResults button.btn {
   background-color: #196fa6;
@@ -281,7 +281,7 @@ nav button.dropdown-item:hover {
     white-space: normal;
   }
 
-  nav.navbar > div img {
+  header > div img {
     vertical-align: unset;
   }
 
