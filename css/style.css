@@ -1,61 +1,59 @@
+/* General */
 html {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-  *,
-  *:before,
-  *:after {
-    -webkit-box-sizing: inherit;
-    -moz-box-sizing: inherit;
-    box-sizing: inherit;
-  }
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
 
-  html,
-  body,
-  #container {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-  }
+html,
+body,
+#container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
 
-  body {
-    padding-top: 64px;
-  }
+/* due to fixed header */
+body {
+  padding-top: 64px;
+}
 
-  .table {
-    margin-bottom: 0px;
-  }
+.table {
+  margin-bottom: 0px;
+}
 
-  ul {
-      list-style-type: none;
-  }
+ul {
+  list-style-type: none;
+}
 
-  input[type="radio"],
-  input[type="checkbox"] {
-    margin: 0;
-  }
+input[type="radio"],
+input[type="checkbox"] {
+  margin: 0;
+}
 
 .text-small {
   font-size: 0.8em;
 }
 
-  /* Colors */
+/* Colors */
 body,
 .leaflet-container a.leaflet-popup-close-button {
   color: #333;
 }
 
-  .white {
-    color: #fff;
-  }
+.white {
+  color: #fff;
+}
 
-  /* gray table text */
-  .light-gray {
-          color: rgb(135,135,135);
-  }
-
+/* blue theme color */
 nav,
 div.modal button.btn,
 #panelResults button.btn {
@@ -67,7 +65,15 @@ div.modal button.btn:hover,
   background-color: #000;
 }
 
-/*** Loading Screen ***/
+button.close span {
+  transition: color 0.125s ease-in-out;
+}
+
+button.close span:hover {
+  color: #888;
+}
+
+/* Loading Screen */
 #back-cover {
   background: rgba(191, 191, 191, 1);
   margin-top: 64px;
@@ -120,24 +126,34 @@ div.modal button.btn:hover,
   100% { transform: rotate(360deg); }
 }
 
-  /* navigation bar */
-  nav {
-      background-color: #196fa6;
-  }
+/* navigation bar */
+nav ul.dropdown.dropdown-menu {
+  right: 10px;
+  left: inherit;
+}
 
-  div.nav button.nav-link {
+nav button.nav-link.dropdown-toggle {
+    background-color: #000;
+    border-color: #fff;
     border: none;
-  }
+    transition: background-color 0.125s ease-in-out, color 0.125s ease-in-out;
+}
 
-  nav ul.dropdown.dropdown-menu {
-      right: 10;
-      left: inherit;
-  }
+nav button.nav-link.dropdown-toggle:hover {
+  background-color: #fff;
+  color: #000;
+}
 
-  nav button.nav-link.dropdown-toggle {
-      background-color: #000;
-      border-color: #fff;
-  }
+nav button.dropdown-item {
+  border-bottom: 1px solid #fff;
+  border-top: 1px solid #fff;
+  border-radius: 0;
+}
+
+nav button.dropdown-item:hover {
+  border-bottom-color: #000;
+  border-top-color: #000;
+}
 
 /* Modals */
 div.modal button.close,
@@ -219,6 +235,17 @@ div.modal button.btn {
 .leaflet-control-zoomhome,
 .leaflet-control-zoomhome-out {
     font-size: 1.75em;
+}
+
+.leaflet-bar a,
+div.modal button.btn,
+#panelResults button.btn {
+  transition: background-color 0.125s ease-in-out;
+}
+
+.leaflet-bar a:hover,
+nav button.dropdown-item:hover {
+  background-color: #ddd;
 }
 
 /* popup for tax parcels */
