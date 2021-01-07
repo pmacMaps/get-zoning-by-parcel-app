@@ -42,7 +42,8 @@ html {
 }
 
   /* Colors */
-body {
+body,
+.leaflet-container a.leaflet-popup-close-button {
   color: #333;
 }
 
@@ -56,8 +57,14 @@ body {
   }
 
 nav,
-div.modal button.btn {
+div.modal button.btn,
+#panelResults button.btn {
   background-color: #196fa6;
+}
+
+div.modal button.btn:hover,
+#panelResults button.btn:hover {
+  background-color: #000;
 }
 
 /*** Loading Screen ***/
@@ -198,6 +205,20 @@ div.modal button.btn {
     width: auto;
     height: 100%;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* map controls */
+.leaflet-control-zoomhome.leaflet-bar > a,
+.leaflet-control-locate.leaflet-bar > a {
+  width: 32px;
+	height: 32px;
+	line-height: 32px;
+	border-radius: 0;
+}
+
+.leaflet-control-zoomhome,
+.leaflet-control-zoomhome-out {
+    font-size: 1.75em;
 }
 
 /* popup for tax parcels */
