@@ -43,7 +43,14 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
           }
             else {
               // add zoning layer for selected municipality to map
-              const zoningLayer = L.esri.featureLayer({url: zoningURL}).addTo(webmap);
+              const zoningLayer = L.esri.featureLayer({
+                url: zoningURL,
+                pane: 'zoning',
+                interactive: false
+              }).addTo(webmap);
+
+              // add map legend element for service
+              createMapLegendFS(zoningLayer, '#map-legend-content');
 
               // array to hold all zoning information
               let zoningInfo = [];
@@ -75,7 +82,10 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
         // end 0 records return clause
       } else {
           // add zoning layer for selected municipality to map
-          const zoningLayer = L.esri.featureLayer({url: zoningURL}).addTo(webmap);
+          const zoningLayer = L.esri.featureLayer({
+            url: zoningURL,
+            pane: 'zoning',
+            interactive: false}).addTo(webmap);
           // add map legend element for service
           createMapLegendFS(zoningLayer, '#map-legend-content');
 
