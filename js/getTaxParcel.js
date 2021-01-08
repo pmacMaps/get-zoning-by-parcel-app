@@ -1,6 +1,6 @@
 "use strict";
 
-import {setPopupMaxWidth} from './functions.js';
+import {setPopupMaxWidth, showResultsPanel, hideAnalysisWaitingText} from './functions.js';
 import {selectZoningService} from './selectZoningService.js';
 import {getZoningDistrict} from './getZoningDistrict.js';
 
@@ -21,16 +21,20 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
           console.warn('An error with the parcels service request has occured');
           console.warn(`Code: ${error.code}; Message: ${error.message}`);
           // set content of results element
-          resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
+          resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
+          // hide waiting text
+          hideAnalysisWaitingText();
           // show panel
-          resultsPanel.style.display = 'block';
+          showResultsPanel();
        } else if (response.features < 1) {
           // add message to console
           console.log('No parcel features returned');
           // set content of results element
-          resultsElement.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
+          resultsElement.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
+          // hide waiting text
+          hideAnalysisWaitingText();
           // show panel
-          resultsPanel.style.display = 'block';
+          showResultsPanel();
        } else {
           // add data to geojson object
           taxParcelLayer.addData(response);
@@ -64,6 +68,9 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          // open popup on map
          // for some reason, users must click twice to open popup
          taxParcelLayer.openPopup();
+
+         // show results panel
+         showResultsPanel();
 
          // call zoning query function
          getZoningDistrict(webmap, taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
