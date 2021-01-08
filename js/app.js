@@ -51,6 +51,12 @@ const zoomHome = L.Control.zoomHome({
     homeZoom: 0
 }).addTo(map);
 
+// create panes to control layer ordering
+// zoning feature layer pane
+map.createPane('zoning');
+// tax parcels
+map.createPane('parcels');
+
 // 2020 Imagery - cached map service
 const imagery2020 = L.esri.tiledMapLayer({
     url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Imagery/Imagery2020/MapServer',
@@ -85,7 +91,7 @@ mapServices.forEach(element => element.addTo(map));
 createMapLegendMS('https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer', '#map-legend-content');
 
 // Container for selected parel
-const taxParcel =  L.geoJson().addTo(map);
+const taxParcel =  L.geoJson(null, {pane: 'parcels'}).addTo(map);
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
