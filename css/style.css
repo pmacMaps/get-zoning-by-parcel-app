@@ -112,13 +112,17 @@ button.close span:hover {
   margin-bottom: 15px;
 }
 
-.map-loader-icon {
+.map-loader-icon,
+.waiting-loader-icon {
   border: 10px solid #fff;
   border-top: 10px solid #222;
   border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+}
+
+.map-loader-icon {
   width: 75px;
   height: 75px;
-  animation: spin 1.5s linear infinite;
 }
 
 @keyframes spin {
@@ -214,6 +218,17 @@ div.modal button.btn {
 
 #panelResults li {
   padding-top: 5px;
+}
+
+#resultsWaiting {
+  text-align: center;
+}
+
+.waiting-loader-icon {
+  border: 10px solid #333;
+  border-top: 10px solid #bbb;
+  width: 50px;
+  height: 50px;
 }
 
 /* Map */

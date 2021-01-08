@@ -1,7 +1,7 @@
 ﻿"use strict";
 
 // imports
-import {removeZoningLayerFromMap, processLoadEvent} from './functions.js';
+import {removeZoningLayerFromMap, processLoadEvent, showResultsPanel, showAnalysisWaitingText, resetResultsContent, hideAnalysisWaitingText} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 
@@ -123,8 +123,10 @@ SearchControl.on('results', function(data) {
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
 
-    // change opacity of results panel back to 0
-    resultsPanel.style.display = 'none';
+    // reset results list
+    resetResultsContent();
+    // show results waiting
+    showAnalysisWaitingText();
 
     // check for results
     if (data.results.length > 0) {
@@ -142,9 +144,11 @@ SearchControl.on('results', function(data) {
         // add message to console
         console.log('No parcel features returned');
         // set content of results element
-         resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS [provide phone number/e-mail].';
+         resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
+         // hide results waiting
+         hideAnalysisWaitingText();
          // show panel
-         resultsPanel.style.display = 'block';
+         showResultsPanel();
     }
 });
 

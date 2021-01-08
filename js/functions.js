@@ -14,6 +14,30 @@ export const setPopupMaxWidth = (windowWidth) => {
     return maxWidth;
 }
 
+// display results panel
+export const showResultsPanel = () => {
+    const resultsPanelEl = document.getElementById('panelResults');
+    resultsPanelEl.style.display = 'block';
+}
+
+// hide waiting on analysis text
+export const hideAnalysisWaitingText = () => {
+    const waitingText = document.getElementById('resultsWaiting');
+    waitingText.style.display = 'none';
+}
+
+// hide waiting on analysis text
+export const showAnalysisWaitingText = () => {
+    const waitingText = document.getElementById('resultsWaiting');
+    waitingText.style.display = 'block';
+}
+
+// reset content of results container
+export const resetResultsContent = () => {
+    const resultsText = document.getElementById('results');
+    resultsText.innerHTML = '';
+}
+
 // function to populate zoning query results to display element
 export const populateResults = (municipality, results, resultsElement, resultsPanel) => {
     // element to hold results content;
@@ -39,8 +63,9 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
 
    // set content of resultsEl
    resultsElement.innerHTML = resultsContent;
-   // show panel
-   resultsPanel.style.display = 'block';
+
+   // hide waiting text
+   hideAnalysisWaitingText();
 }
 
 // removes zoning layers from webmap

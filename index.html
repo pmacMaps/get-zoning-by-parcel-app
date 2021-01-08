@@ -83,7 +83,7 @@
     <!-- Loading Screen -->
     <div id="back-cover">
         <span>Map Loading &#46;&#46;&#46;</span>
-        <span id="cog-icon"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></span>
+        <span class="map-loader-icon"></span>
     </div>
 
     <!-- search widget (for mobile) -->
@@ -184,7 +184,12 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <hr />
-      <div id='results'></div>
+      <div id="resultsWaiting">
+        <span class="font-weight-bold">Performing Zoning District Search &#46;&#46;&#46;</span>
+        <br />
+        <span class="waiting-loader-icon"></span>
+      </div>
+      <div id="results"></div>
       <hr />
       <div class="text-small">
         <p>Disclaimer:</p>
