@@ -162,14 +162,14 @@ const loadScreenTimer = window.setInterval(function() {
         // remove loading screen
         window.setTimeout(function() {
             backCover.style.display = 'none';
-        }, 1500);
+        }, 500);
 
         // clear timer
         window.clearInterval(loadScreenTimer);
     } else {
       console.log('layers still loading');
     }
-}, 1500);
+}, 1000);
 
 // Remove loading screen when warning modal is closed
 $('#layerErrorModal').on('hide.bs.modal', function(e) {
