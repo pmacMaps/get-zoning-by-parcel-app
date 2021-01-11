@@ -3,7 +3,7 @@
 // function to get zoning service for spatial query
 export const selectZoningService = (pin) => {
    // base zoning url
-   const baseUrl = 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer';
+   const baseUrl = 'https://services1.arcgis.com/1Cfo0re3un0w6a30/arcgis/rest/services/Zoning_Basemap/FeatureServer';
    // first two digits of parcel (municipal code)
    const muniCode = pin.split("-")[0];
    // zoning URL for municipality
