@@ -60,13 +60,11 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
                 // fields from service
                 const zoningDistrictName = element.properties.ZoneName;
                 const zoningDistrictCode = element.properties.ZoneCode;
-                const zoningDistrictCategory = element.properties.ZoneType;
 
                 // array to hold results for each zoning district
                 let resultsArray = [];
                 resultsArray[0] = zoningDistrictName;
                 resultsArray[1] = zoningDistrictCode;
-                resultsArray[2] = zoningDistrictCategory;
 
                 // add array for each zoning district to master array
                 zoningInfo.push(resultsArray);
@@ -97,13 +95,11 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
             // fields from service
             const zoningDistrictName = element.properties.ZoneName;
             const zoningDistrictCode = element.properties.ZoneCode;
-            const zoningDistrictCategory = element.properties.ZoneType;
 
             // array to hold results for each zoning district
             let resultsArray = [];
             resultsArray[0] = zoningDistrictName;
             resultsArray[1] = zoningDistrictCode;
-            resultsArray[2] = zoningDistrictCategory;
 
             // add array for each zoning district to master array
             zoningInfo.push(resultsArray);
