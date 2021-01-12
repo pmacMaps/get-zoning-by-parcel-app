@@ -53,7 +53,6 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
             resultsContent += '<ul>';
             resultsContent += `<li>Zoning District: <strong>${element[0]}</strong></li>`;
             resultsContent += `<li>Zoning Code: <strong>${element[1]}</strong></li>`;
-            resultsContent += `<li>Zoning Category: <strong>${element[2]}</strong></li>`;
             resultsContent += '</ul>';
         }
    }
