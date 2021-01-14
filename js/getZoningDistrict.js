@@ -6,8 +6,8 @@ import {createMapLegendFS} from './mapLegend.js';
 
 // function to get zoning district for parcel
 // standard query is 'contains'
-// if no features with 'contains', use 'intersects' as backup
-// potential false positives for intersects on properties on edge of zoning districts
+// if no features with 'contains', use 'overlaps' as backup
+// need to add logic for when more than one parcel feature is returned from previous function
 export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement, resultsPanel) => {
     L.esri.query({url: zoningURL}).contains(parcel).run(function(error,response) {
       if (error) {
@@ -73,7 +73,7 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
              populateResults(municipality, zoningInfo, resultsElement, resultsPanel);
           }
         });
-        // end 0 records return clause
+        // end 0 records return clause; overlaps query backup
       } else {
           // add zoning layer for selected municipality to map
           const zoningLayer = L.esri.featureLayer({

@@ -16,21 +16,6 @@ const attachSearch = () => {
     }
 }
 
-/* Navigation UI Controls */
-// Make collapsed navigation scroll
-// update code, may not even need
-const mobileNavScroll = () => {
-    $(".navbar-collapse").css({maxHeight: $(window).height() - $(".navbar-header").height() + "px"});
-}
-
-/*** Toggle hamburger navigation menu ***/
-/*
-$("#nav-btn").click(function() {
-    $(".navbar-collapse").collapse("toggle");
-    return false;
-});
-*/
-
 /*** Navigation Modal Windows ***/
 // Open Search info window
 $("#search-btn").click(function() {
@@ -63,12 +48,9 @@ resultsCloseButtons.forEach(function(element) {
 
 /* Document Ready */
 $(document).ready(function() {
-    //mobileNavScroll();
     attachSearch();
-    // close results panel
 
     $(window).resize(function() {
-        //mobileNavScroll();
         attachSearch();
     });
 });

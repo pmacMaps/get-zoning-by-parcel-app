@@ -20,13 +20,13 @@ export const showResultsPanel = () => {
     resultsPanelEl.style.display = 'block';
 }
 
-// hide waiting on analysis text
+// hide waiting on analysis loading screen
 export const hideAnalysisWaitingText = () => {
     const waitingText = document.getElementById('resultsWaiting');
     waitingText.style.display = 'none';
 }
 
-// hide waiting on analysis text
+// show waiting on analysis waiting screen
 export const showAnalysisWaitingText = () => {
     const waitingText = document.getElementById('resultsWaiting');
     waitingText.style.display = 'block';
