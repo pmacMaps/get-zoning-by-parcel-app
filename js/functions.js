@@ -39,7 +39,7 @@ export const resetResultsContent = () => {
 }
 
 // function to populate zoning query results to display element
-export const populateResults = (municipality, results, resultsElement, resultsPanel) => {
+export const populateResults = (municipality, results, resultsElement) => {
     // element to hold results content;
    let resultsContent = '<div>';
    // add municipality
@@ -52,7 +52,6 @@ export const populateResults = (municipality, results, resultsElement, resultsPa
         for (const element of results) {
             resultsContent += '<ul>';
             resultsContent += `<li>Zoning District: <strong>${element[0]}</strong></li>`;
-            resultsContent += `<li>Zoning Code: <strong>${element[1]}</strong></li>`;
             resultsContent += '</ul>';
         }
    }

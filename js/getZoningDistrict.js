@@ -37,7 +37,7 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
              // add message to console
              console.warn('No zoning district features returned or an error occured');
              // set content of results element
-             resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact Cumberland County GIS [provide phone number/e-mail].';
+             resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net';
              // hide waiting on analysis text
              hideAnalysisWaitingText();
           }
@@ -57,15 +57,11 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
 
               // loop through all zoning districts intersecting parcels
               for (const element of response.features) {
-                // fields from service
+                // zoning district name
                 const zoningDistrictName = element.properties.ZoneName;
-                const zoningDistrictCode = element.properties.ZoneCode;
-
                 // array to hold results for each zoning district
                 let resultsArray = [];
                 resultsArray[0] = zoningDistrictName;
-                resultsArray[1] = zoningDistrictCode;
-
                 // add array for each zoning district to master array
                 zoningInfo.push(resultsArray);
               }
@@ -92,15 +88,11 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
 
           // loop through all zoning districts intersecting parcels
           for (const element of response.features) {
-            // fields from service
+            // zoning district field
             const zoningDistrictName = element.properties.ZoneName;
-            const zoningDistrictCode = element.properties.ZoneCode;
-
             // array to hold results for each zoning district
             let resultsArray = [];
             resultsArray[0] = zoningDistrictName;
-            resultsArray[1] = zoningDistrictCode;
-
             // add array for each zoning district to master array
             zoningInfo.push(resultsArray);
           }
