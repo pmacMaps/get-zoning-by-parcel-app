@@ -7,8 +7,6 @@ import {createMapLegendMS} from './mapLegend.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
-// viewport width
-let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 // panel containing results of zoning district analysis
 const resultsPanel = document.getElementById('panelResults');
 // element within results panel containing text for results of analysis
@@ -40,7 +38,7 @@ const map = L.map('map', {
     zoomControl: false,
     crs: spcPACrs,
     minZoom: 0,
-    maxZoom: 8
+    maxZoom: 9
 });
 
 /*** Zoom Home Control ***/
@@ -60,7 +58,7 @@ map.createPane('parcels');
 // 2020 Imagery - cached map service
 const imagery2020 = L.esri.tiledMapLayer({
     url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Imagery/Imagery2020/MapServer',
-    maxZoom: 8,
+    maxZoom: 9,
     minZoom: 0,
     continuousWorld: true,
     attribution: 'Cumberland County',
@@ -71,7 +69,7 @@ const imagery2020 = L.esri.tiledMapLayer({
 // Roads & Municipal Boundaries - cached map service
 const roadsMunicipality = L.esri.tiledMapLayer({
     url: 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer',
-    maxZoom: 8,
+    maxZoom: 9,
     minZoom: 0,
     continuousWorld: true,
     attribution: 'Cumberland County',
@@ -117,7 +115,7 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
-    // close modal
+    // close search modal (on mobile)
     $('#searchModal').modal('hide');
 
     // remove any existing zoning layers from map
@@ -125,7 +123,7 @@ SearchControl.on('results', function(data) {
 
     // reset results list
     resetResultsContent();
-    // show results waiting
+    // show results waiting screen
     showAnalysisWaitingText();
 
     // check for results

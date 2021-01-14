@@ -214,6 +214,7 @@ div.modal button.btn {
 #panelResults ul,
 .feat-popup ul {
   padding-left: 0;
+  margin-bottom: 0;
 }
 
 #panelResults li {
