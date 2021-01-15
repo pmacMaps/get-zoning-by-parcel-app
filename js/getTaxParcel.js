@@ -1,14 +1,15 @@
 "use strict";
 
-import {setPopupMaxWidth, showResultsPanel, hideAnalysisWaitingText} from './functions.js';
+import {setPopupMaxWidth, showElement, hideElement} from './functions.js';
 import {selectZoningService} from './selectZoningService.js';
 import {getZoningDistrict} from './getZoningDistrict.js';
+import {setMuniName, getMuniName} from './municipalityContent.js';
 
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
-// function to select parcel based upon pin
-export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, resultsPanel) => {
+// function to query parcel based upon pin
+export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) => {
     // attribute query expression
     const queryString = "Link = '" + pin + "'";
     // tax parcel service
@@ -16,26 +17,29 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
 
     // query request - where method
     L.esri.query({url: taxParcelService}).fields(['Link', 'SITUS', 'MUNI_NAME', 'OWNER']).where(queryString).run(function(error,response) {
-       if (error) {
+      // error running query
+      if (error) {
           // add message to console
           console.warn('An error with the parcels service request has occured');
           console.warn(`Code: ${error.code}; Message: ${error.message}`);
           // set content of results element
           resultsElement.innerHTML = 'An error getting the parcel has occured. Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
           // hide waiting text
-          hideAnalysisWaitingText();
-          // show panel
-          showResultsPanel();
-       } else if (response.features < 1) {
+          hideElement('resultsWaiting');
+          // show results
+          showElement('zoningResults');
+       } // no features returned
+       else if (response.features < 1) {
           // add message to console
           console.log('No parcel features returned');
           // set content of results element
           resultsElement.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
           // hide waiting text
-          hideAnalysisWaitingText();
-          // show panel
-          showResultsPanel();
-       } else {
+          hideElement('resultsWaiting');
+          // show results
+          showElement('zoningResults');
+       } // at least one feature returned
+       else {
           // add data to geojson object
           taxParcelLayer.addData(response);
           // style feature
@@ -66,14 +70,18 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement, r
          webmap.fitBounds(taxParcelLayer.getBounds());
 
          // open popup on map
-         // for some reason, users must click twice to open popup
          taxParcelLayer.openPopup();
 
-         // show results panel
-         showResultsPanel();
+         // get municipal name
+         const municipality = getMuniName(pin);
+         // set content for municpality
+         setMuniName(municipality);
 
          // call zoning query function
-         getZoningDistrict(webmap, taxParcelLayer, pin, selectZoningService(pin), resultsElement, resultsPanel);
-        } 
+         // wrap in loop in case multiple records for a specific parcel ID
+         response.features.forEach(function(feature) {
+            getZoningDistrict(webmap, feature.geometry, selectZoningService(pin), resultsElement);
+         });
+        }       
      });
  }

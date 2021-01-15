@@ -1,5 +1,13 @@
 "use strict";
 
+// function to set name of municipality
+export const setMuniName = (name) => {
+   // element to display content
+   const uiEl = document.getElementById('municipalName');
+   // set content of element
+   uiEl.innerHTML = name;
+}
+
 // function to get zoning service for spatial query
 export const getMuniName = (pin) => {
    // first two digits of parcel (municipal code)
