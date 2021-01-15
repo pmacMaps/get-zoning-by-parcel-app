@@ -1,16 +1,14 @@
 ﻿"use strict";
 
 // imports
-import {removeZoningLayerFromMap, processLoadEvent, showResultsPanel, showAnalysisWaitingText, resetResultsContent, hideAnalysisWaitingText} from './functions.js';
+import {removeZoningLayerFromMap, processLoadEvent, showElement, hideElement, resetContent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
-// panel containing results of zoning district analysis
-const resultsPanel = document.getElementById('panelResults');
 // element within results panel containing text for results of analysis
-const resultsEl = document.getElementById('results');
+const resultsEl = document.getElementById('zoningResults');
 // center coordinates for map
 const homeCoords = [40.15, -77.25];
 
@@ -118,15 +116,21 @@ SearchControl.on('results', function(data) {
     // close search modal (on mobile)
     $('#searchModal').modal('hide');
 
+    // hide results content
+    hideElement('municipalWrapper');
+    hideElement('zoningResults');
+    // reset content
+    resetContent('municipalName');
+    resetContent('zoningResults');
+    // show results waiting screen
+    showElement('resultsWaiting');
+    // show results panel
+    showElement('panelResults');
+
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
 
-    // reset results list
-    resetResultsContent();
-    // show results waiting screen
-    showAnalysisWaitingText();
-
-    // check for results
+    // case: there are results from geosearch
     if (data.results.length > 0) {
        const resultText = data.results[0].text;
        const pin = resultText.split(" ")[0];
@@ -137,16 +141,18 @@ SearchControl.on('results', function(data) {
         }
 
         // call parcel query function
-        selectParcelByPin(map, pin, taxParcel, resultsEl, resultsPanel);
-    } else { // no results found
+        // take PIN from geosearch result and pass that into parcel query
+        selectParcelByPin(map, pin, taxParcel, resultsEl);
+    } // no results from geosearch
+    else {
         // add message to console
         console.log('No parcel features returned');
         // set content of results element
          resultsEl.innerHTML = 'No matching property was found. Please check the street address or PIN you entered and try again.  If problems persists, contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
          // hide results waiting
-         hideAnalysisWaitingText();
-         // show panel
-         showResultsPanel();
+         hideElement('resultsWaiting');
+         // show results content
+         showElement('zoningResults');
     }
 });
 

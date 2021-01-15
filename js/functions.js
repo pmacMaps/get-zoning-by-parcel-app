@@ -14,37 +14,28 @@ export const setPopupMaxWidth = (windowWidth) => {
     return maxWidth;
 }
 
-// display results panel
-export const showResultsPanel = () => {
-    const resultsPanelEl = document.getElementById('panelResults');
-    resultsPanelEl.style.display = 'block';
+// display element
+export const showElement = (id) => {
+    const element = document.getElementById(id);
+    element.style.display = 'block';
 }
 
-// hide waiting on analysis loading screen
-export const hideAnalysisWaitingText = () => {
-    const waitingText = document.getElementById('resultsWaiting');
-    waitingText.style.display = 'none';
+// hide element
+export const hideElement = (id) => {
+    const element = document.getElementById(id);
+    element.style.display = 'none';
 }
 
-// show waiting on analysis waiting screen
-export const showAnalysisWaitingText = () => {
-    const waitingText = document.getElementById('resultsWaiting');
-    waitingText.style.display = 'block';
-}
-
-// reset content of results container
-export const resetResultsContent = () => {
-    const resultsText = document.getElementById('results');
-    resultsText.innerHTML = '';
+// resent content
+export const resetContent = (id) => {
+    const element = document.getElementById(id);
+    element.innerHTML = '';
 }
 
 // function to populate zoning query results to display element
-export const populateResults = (municipality, results, resultsElement) => {
+export const populateZoningDistrictResults = (results, resultsElement) => {
     // element to hold results content;
-   let resultsContent = '<div>';
-   // add municipality
-   resultsContent += `<span class="text-center">Municipality: <strong>${municipality}</strong></span>`;
-
+   let resultsContent = '';
    // expecting items in results
    if (results.length < 1) {
       resultsContent += '<p>An error occured getting the zoning information</p>';
@@ -56,14 +47,8 @@ export const populateResults = (municipality, results, resultsElement) => {
         }
    }
 
-   // close div element
-   resultsContent += '</div>';
-
    // set content of resultsEl
-   resultsElement.innerHTML = resultsContent;
-
-   // hide waiting text
-   hideAnalysisWaitingText();
+   resultsElement.innerHTML += resultsContent;
 }
 
 // removes zoning layers from webmap

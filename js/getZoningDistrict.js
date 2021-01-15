@@ -1,14 +1,13 @@
 "use strict";
 
-import {populateResults, hideAnalysisWaitingText} from './functions.js';
-import {getMuniName} from './getMunicipalName.js';
+import {populateZoningDistrictResults, hideElement, showElement} from './functions.js';
 import {createMapLegendFS} from './mapLegend.js';
 
 // function to get zoning district for parcel
 // standard query is 'contains'
 // if no features with 'contains', use 'overlaps' as backup
 // need to add logic for when more than one parcel feature is returned from previous function
-export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement, resultsPanel) => {
+export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => {
     L.esri.query({url: zoningURL}).contains(parcel).run(function(error,response) {
       if (error) {
          // add message to console
@@ -17,7 +16,9 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
          // set content of results element
          resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
          // hide waiting on analysis text
-         hideAnalysisWaitingText();
+         hideElement('resultsWaiting');
+         // show content
+         showElement('zoningResults');
          // end Error clause
       } else if (response.features < 1) {
         // add message to console
@@ -32,14 +33,18 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
              // set content of results element
              resultsElement.innerHTML = 'An error getting the zoning district has occured.  Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net.';
              // hide waiting on analysis text
-             hideAnalysisWaitingText();
+             hideElement('resultsWaiting');
+             // show content
+             showElement('zoningResults');
           } else if (response.features < 1) {
              // add message to console
              console.warn('No zoning district features returned or an error occured');
              // set content of results element
              resultsElement.innerHTML = 'No zoning district features returned or an error occured. Please try again or contact Cumberland County GIS at (717) 240-7842 or gis@ccpa.net';
              // hide waiting on analysis text
-             hideAnalysisWaitingText();
+             hideElement('resultsWaiting');
+             // show content
+             showElement('zoningResults');
           }
             else {
               // add zoning layer for selected municipality to map
@@ -66,11 +71,16 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
                 zoningInfo.push(resultsArray);
               }
 
-              // get municipal name
-              const municipality = getMuniName(pin);
-
              // call populate results function
-             populateResults(municipality, zoningInfo, resultsElement, resultsPanel);
+             populateZoningDistrictResults(zoningInfo, resultsElement);
+
+             setTimeout(function() {
+              // hide results waiting
+              hideElement('resultsWaiting');
+              // show results content
+              showElement('municipalWrapper');
+              showElement('zoningResults');
+             }, 2000);
           }
         });
         // end 0 records return clause; overlaps query backup
@@ -97,11 +107,16 @@ export const getZoningDistrict = (webmap, parcel, pin, zoningURL, resultsElement
             zoningInfo.push(resultsArray);
           }
 
-          // get municipal name
-          const municipality = getMuniName(pin);
+          // call populate results function
+          populateZoningDistrictResults(zoningInfo, resultsElement);
 
-         // call populate results function
-         populateResults(municipality, zoningInfo, resultsElement, resultsPanel);
+          setTimeout(function() {
+            // hide results waiting
+            hideElement('resultsWaiting');
+            // show results content
+            showElement('municipalWrapper');
+            showElement('zoningResults');
+          }, 2000);
       } // end Else clause
     });
 }
