@@ -1,9 +1,10 @@
 ﻿"use strict";
 
 // imports
-import {removeZoningLayerFromMap, processLoadEvent, showElement, hideElement, resetContent} from './functions.js';
+import {processLoadEvent, showElement, hideElement, resetContent} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
-import {createMapLegendMS} from './mapLegend.js';
+import {createMapLegendMS, removeZoningFromLegend} from './mapLegend.js';
+import {removeZoningLayerFromMap} from './manageZoningLayer.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
@@ -129,6 +130,8 @@ SearchControl.on('results', function(data) {
 
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
+    // remove zoning from legend
+    removeZoningFromLegend();
 
     // case: there are results from geosearch
     if (data.results.length > 0) {
