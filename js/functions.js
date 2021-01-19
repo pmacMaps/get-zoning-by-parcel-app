@@ -51,24 +51,6 @@ export const populateZoningDistrictResults = (results, resultsElement) => {
    resultsElement.innerHTML += resultsContent;
 }
 
-// removes zoning layers from webmap
-export const removeZoningLayerFromMap = (webmap, parentUrl) => {
-    // loop through layers
-    webmap.eachLayer(function(layer) {
-        // check layer has 'options' property
-        if (layer.hasOwnProperty('options')) {
-            // check that layer has 'options.url' property
-            if (layer.options.hasOwnProperty('url')) {
-                // check that layer is part of zoning basemap parent service
-                if (layer.options.url.includes(parentUrl)) {
-                    // remove layer from map
-                    webmap.removeLayer(layer);
-                }
-            }
-        }
-    });
-}
-
 // function to handle load event for map services
 export const processLoadEvent = (service) => {
    // service request success event

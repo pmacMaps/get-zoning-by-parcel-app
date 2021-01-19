@@ -75,7 +75,7 @@ const processUniqueValueRenderer = (response, legendElement) => {
 }
 
 // remove existing zoning district legend items
-const removeZoningFromLegend = () => {
+export const removeZoningFromLegend = () => {
     // get collection of existing elements
     const zoningLegendElements = document.getElementsByClassName('feature-service-legend-item');
     // remove items from DOM

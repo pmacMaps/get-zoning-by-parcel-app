@@ -1,7 +1,6 @@
 "use strict";
 
 import {populateZoningDistrictResults, hideElement, showElement} from './functions.js';
-import {createMapLegendFS} from './mapLegend.js';
 
 // function to get zoning district for parcel
 // standard query is 'contains'
@@ -47,16 +46,6 @@ export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => 
              showElement('zoningResults');
           }
             else {
-              // add zoning layer for selected municipality to map
-              const zoningLayer = L.esri.featureLayer({
-                url: zoningURL,
-                pane: 'zoning',
-                interactive: false
-              }).addTo(webmap);
-
-              // add map legend element for service
-              createMapLegendFS(zoningLayer, '#map-legend-content');
-
               // array to hold all zoning information
               let zoningInfo = [];
 
@@ -85,14 +74,6 @@ export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => 
         });
         // end 0 records return clause; overlaps query backup
       } else {
-          // add zoning layer for selected municipality to map
-          const zoningLayer = L.esri.featureLayer({
-            url: zoningURL,
-            pane: 'zoning',
-            interactive: false}).addTo(webmap);
-          // add map legend element for service
-          createMapLegendFS(zoningLayer, '#map-legend-content');
-
           // array to hold all zoning information
           let zoningInfo = [];
 

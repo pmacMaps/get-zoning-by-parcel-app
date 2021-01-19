@@ -4,6 +4,7 @@ import {setPopupMaxWidth, showElement, hideElement} from './functions.js';
 import {selectZoningService} from './selectZoningService.js';
 import {getZoningDistrict} from './getZoningDistrict.js';
 import {setMuniName, getMuniName} from './municipalityContent.js';
+import {addZoningLayerToMap} from './manageZoningLayer.js';
 
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -82,6 +83,9 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
          response.features.forEach(function(feature) {
             getZoningDistrict(webmap, feature.geometry, selectZoningService(pin), resultsElement);
          });
+
+         // add zoning layer to map
+         addZoningLayerToMap(webmap, selectZoningService(pin), 'zoning');
         }       
      });
  }
