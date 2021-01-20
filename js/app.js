@@ -11,7 +11,7 @@ const backCover = document.getElementById('back-cover');
 // element within results panel containing text for results of analysis
 const resultsEl = document.getElementById('zoningResults');
 // center coordinates for map
-const homeCoords = [40.15, -77.25];
+const homeCoords = [40.172, -77.398];
 
 // PA State Plane South (ft) projection
 const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs',  {
@@ -33,7 +33,7 @@ const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667
 /*** Map Objects ***/
 const map = L.map('map', {
     center: homeCoords,
-    zoom: 0,
+    zoom: 3,
     zoomControl: false,
     crs: spcPACrs,
     minZoom: 0,
@@ -45,7 +45,7 @@ const zoomHome = L.Control.zoomHome({
     position: 'topleft',
     zoomHomeTitle: 'Full map extent',
     homeCoordinates: homeCoords,
-    homeZoom: 0
+    homeZoom: 3
 }).addTo(map);
 
 // create panes to control layer ordering
@@ -129,7 +129,7 @@ SearchControl.on('results', function(data) {
     showElement('panelResults');
 
     // remove any existing zoning layers from map
-    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
+    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Hosted/Proposed_Newville_Zoning_Districts_2020/FeatureServer/0');
     // remove zoning from legend
     removeZoningFromLegend();
 

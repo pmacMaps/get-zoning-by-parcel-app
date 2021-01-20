@@ -67,7 +67,7 @@ const processUniqueValueRenderer = (response, legendElement) => {
     // loop through array and create legend elements
     uniqueValuesGroup.forEach(element => {
         let legendContent = '<ul class="feature-service-legend-item">';
-        legendContent += `<li>${element.label} (Generalized Zoning District)</li>`;
+        legendContent += `<li>${element.label}</li>`;
         legendContent += `<li><svg width="80" height="40"><rect width="75" height="35" style="fill:rgb(${element.symbol.color[0]},${element.symbol.color[1]}, ${element.symbol.color[2]});stroke:#000;stroke-width:0;fill-opacity:0.65" /></svg></li>`;
         legendContent += "</ul>";
         $(legendElement).append(legendContent);

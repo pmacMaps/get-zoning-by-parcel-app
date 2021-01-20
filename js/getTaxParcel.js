@@ -81,11 +81,11 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
          // call zoning query function
          // wrap in loop in case multiple records for a specific parcel ID
          response.features.forEach(function(feature) {
-            getZoningDistrict(webmap, feature.geometry, selectZoningService(pin), resultsElement);
+            getZoningDistrict(webmap, feature.geometry, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Hosted/Proposed_Newville_Zoning_Districts_2020/FeatureServer/0', resultsElement);
          });
 
          // add zoning layer to map
-         addZoningLayerToMap(webmap, selectZoningService(pin), 'zoning');
+         addZoningLayerToMap(webmap, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Hosted/Proposed_Newville_Zoning_Districts_2020/FeatureServer/0', 'zoning');
         }       
      });
  }

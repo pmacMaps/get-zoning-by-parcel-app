@@ -52,7 +52,7 @@ export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => 
               // loop through all zoning districts intersecting parcels
               for (const element of response.features) {
                 // zoning district name
-                const zoningDistrictName = element.properties.ZoneName;
+                const zoningDistrictName = element.properties.zonename;
                 // array to hold results for each zoning district
                 let resultsArray = [];
                 resultsArray[0] = zoningDistrictName;
@@ -80,7 +80,7 @@ export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => 
           // loop through all zoning districts intersecting parcels
           for (const element of response.features) {
             // zoning district field
-            const zoningDistrictName = element.properties.ZoneName;
+            const zoningDistrictName = element.properties.zonename;
             // array to hold results for each zoning district
             let resultsArray = [];
             resultsArray[0] = zoningDistrictName;
