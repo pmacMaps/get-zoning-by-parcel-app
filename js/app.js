@@ -12,6 +12,10 @@ const backCover = document.getElementById('back-cover');
 const resultsEl = document.getElementById('zoningResults');
 // center coordinates for map
 const homeCoords = [40.172, -77.398];
+// bounding box for geosearch
+const bbCorner1 = L.latLng(40.180, -77.391);
+const bbConrer2 = L.latLng(40.162, -77.412);
+const geosearchBoundingBox = L.latLngBounds(bbCorner1, bbConrer2);
 
 // PA State Plane South (ft) projection
 const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs',  {
@@ -109,7 +113,8 @@ const SearchControl = L.esri.Geocoding.geosearch({
     title: 'Enter Street Address or Parcel ID (PIN)',
     expanded: true,
     collapseAfterResult: false,
-    zoomToResult: false
+    zoomToResult: false,
+    searchBounds: geosearchBoundingBox
 }).addTo(map);
 
 /*** Address search results event ***/
