@@ -76,8 +76,25 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     isLoaded: false
 });
 
+// tax parcels feature layer
+const taxParcelsFS = L.esri.featureLayer({
+    url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
+    minZoom: 5,
+    isLoaded: false,
+    pane: 'parcels'
+});
+
+taxParcelsFS.bindPopup(function(layer) {
+    return L.Util.template('<p>{SITUS}</p>', layer.feature.properties);
+});
+
+taxParcelsFS.on('popupopen', function() {
+    console.log('popup open event fired');
+});
+
+
 // array of map services to run loading function on
-const mapServices = [imagery2020, roadsMunicipality];
+const mapServices = [imagery2020, roadsMunicipality, taxParcelsFS];
 
 // call load/error events function on layers
 mapServices.forEach(element => processLoadEvent(element));
@@ -86,6 +103,7 @@ mapServices.forEach(element => element.addTo(map));
 
 // Create Map Legend
 createMapLegendMS('https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer', '#map-legend-content');
+
 
 // Container for selected parel
 const taxParcel =  L.geoJson(null, {pane: 'parcels'}).addTo(map);
