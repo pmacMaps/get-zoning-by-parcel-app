@@ -8,10 +8,10 @@ import {addZoningLayerToMap} from './manageZoningLayer.js';
 import {setPopupMaxWidth} from './mapFunctions.js';
 
 // viewport width
-let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // function to query parcel based upon pin
-export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) => {
+export const selectParcelByPin = (webmap, pin, resultsElement, source, taxParcelLayer) => {
     // attribute query expression
     const queryString = "Link = '" + pin + "'";
     // tax parcel service
@@ -42,42 +42,43 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
           showElement('zoningResults');
        } // at least one feature returned
        else {
-          // add data to geojson object
-          //taxParcelLayer.addData(response);
-          // style feature
-          /*
-          taxParcelLayer.setStyle(function() {
-             return {
-                   fillOpacity: 0,
-                   color: '#000',
-                   opacity: 1,
-                   weight: 3
-             }
-         });
-         */
-         // bind popup
-  /*
-         taxParcelLayer.bindPopup(function(layer) {
-            let popupContent = '<div class="feat-popup">';
-            popupContent += '<ul>';
-            popupContent += '<li>Address: {SITUS}</li>';
-            popupContent += '<li>Municipality: {MUNI_NAME}</li>';
-            popupContent += '<li>PIN: {Link}</li>';
-            popupContent += '<li>Owner: {OWNER}</li>';
-            popupContent += '</ul>';
-            popupContent += '</div>';
+         // create parcel object when function called from search widget
+         if (source === 'search') {
+            // add data to geojson object
+            taxParcelLayer.addData(response);
+            // style feature
+            taxParcelLayer.setStyle(function() {
+               return {
+                     fillOpacity: 0,
+                     color: '#fff',
+                     opacity: 1,
+                     weight: 4
+               }
+            });
 
-            return L.Util.template(popupContent, layer.feature.properties);
+            // bind popup
+            taxParcelLayer.bindPopup(function(layer) {
+               let popupContent = '<div class="feat-popup">';
+               popupContent += '<ul>';
+               popupContent += '<li>Address: {SITUS}</li>';
+               popupContent += '<li>Municipality: {MUNI_NAME}</li>';
+               popupContent += '<li>PIN: {Link}</li>';
+               popupContent += '<li>Owner: {OWNER}</li>';
+               popupContent += '</ul>';
+               popupContent += '</div>';
 
-         }, {maxWidth: setPopupMaxWidth(windowWidth)});
+               return L.Util.template(popupContent, layer.feature.properties);
 
-         // set map around selected parcel
-         webmap.fitBounds(taxParcelLayer.getBounds());
+            }, {maxWidth: setPopupMaxWidth(windowWidth)});
 
-         // open popup on map
-         taxParcelLayer.openPopup();
-         */
+            // set map around selected parcel
+            webmap.fitBounds(taxParcelLayer.getBounds());
 
+            // open popup on map
+            taxParcelLayer.openPopup();
+         }
+
+         // following runs from all sources
          // get municipal name
          const municipality = getMuniName(pin);
          // set content for municpality
