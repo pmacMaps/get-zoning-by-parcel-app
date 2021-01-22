@@ -4,7 +4,7 @@
 import {showElement, hideElement, prepResultsDisplay} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
-import {processLoadEvent, setPopupMaxWidth} from './mapFunctions.js';
+import {processLoadEvent, setPopupMaxWidth, clearLayers} from './mapFunctions.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
@@ -107,13 +107,13 @@ taxParcelsFS.bindPopup(function(layer) {
 
 // run zoning query when parcel is clicked on (popup open)
 taxParcelsFS.on('popupopen', function(e) {
-    //console.log('popup open event fired');
     // set-up results panel
     prepResultsDisplay(map);
+    // Remove previous tax parcel GeoJSON feature
+    clearLayers(taxParcel);
     // call parcel query function
     selectParcelByPin(map, e.layer.feature.properties.Link, resultsEl);
 });
-
 
 // array of map services to run loading function on
 const mapServices = [imagery2020, roadsMunicipality, taxParcelsFS];
@@ -159,9 +159,7 @@ SearchControl.on('results', function(data) {
        const pin = resultText.split(" ")[0];
 
         // Remove previous tax parcel GeoJSON feature
-        if (taxParcel.getLayers().length > 0) {
-            taxParcel.clearLayers();
-        }
+        clearLayers(taxParcel);
 
         // call parcel query function
         // take PIN from geosearch result and pass that into parcel query

@@ -36,3 +36,10 @@ export const processLoadEvent = (service) => {
        }
     });
  }
+
+// clear sub-layers from group
+export const clearLayers = (layer) => {
+    if (layer.getLayers().length > 0) {
+        layer.clearLayers();
+    }
+}
