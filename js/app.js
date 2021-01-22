@@ -1,10 +1,10 @@
 ﻿"use strict";
 
 // imports
-import {processLoadEvent, showElement, hideElement, resetContent} from './functions.js';
+import {showElement, hideElement, prepResultsDisplay} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
-import {createMapLegendMS, removeZoningFromLegend} from './mapLegend.js';
-import {removeZoningLayerFromMap} from './manageZoningLayer.js';
+import {createMapLegendMS} from './mapLegend.js';
+import  {processLoadEvent} from './mapFunctions.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
@@ -88,8 +88,12 @@ taxParcelsFS.bindPopup(function(layer) {
     return L.Util.template('<p>{SITUS}</p>', layer.feature.properties);
 });
 
-taxParcelsFS.on('popupopen', function() {
-    console.log('popup open event fired');
+taxParcelsFS.on('popupopen', function(e) {
+    //console.log('popup open event fired');
+    // set-up results panel
+    prepResultsDisplay(map);
+    // call parcel query function
+    selectParcelByPin(map, e.layer.feature.properties.Link, e.layer.feature.geometry, resultsEl);
 });
 
 
@@ -132,24 +136,8 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
-    // close search modal (on mobile)
-    $('#searchModal').modal('hide');
-
-    // hide results content
-    hideElement('municipalWrapper');
-    hideElement('zoningResults');
-    // reset content
-    resetContent('municipalName');
-    resetContent('zoningResults');
-    // show results waiting screen
-    showElement('resultsWaiting');
-    // show results panel
-    showElement('panelResults');
-
-    // remove any existing zoning layers from map
-    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
-    // remove zoning from legend
-    removeZoningFromLegend();
+    // set-up results panel display
+    prepResultsDisplay(map);
 
     // case: there are results from geosearch
     if (data.results.length > 0) {

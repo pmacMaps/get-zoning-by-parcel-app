@@ -1,18 +1,7 @@
 "use strict";
 
-/*** Map & Device Size Functions ***/
-// Set max width of pop-up window
-export const setPopupMaxWidth = (windowWidth) => {
-    let maxWidth;
-
-    if (windowWidth < 450 ) {
-        maxWidth = 240;
-    } else {
-        maxWidth = 300;
-    }
-
-    return maxWidth;
-}
+import {removeZoningLayerFromMap} from './manageZoningLayer.js';
+import {removeZoningFromLegend} from './mapLegend.js';
 
 // display element
 export const showElement = (id) => {
@@ -51,25 +40,21 @@ export const populateZoningDistrictResults = (results, resultsElement) => {
    resultsElement.innerHTML += resultsContent;
 }
 
-// function to handle load event for map services
-export const processLoadEvent = (service) => {
-   // service request success event
-   service.on('requestsuccess', function(e) {
-      // set isLoaded property to true
-      service.options.isLoaded = true;
-   });
-   // request error event
-   service.on('requesterror', function(e) {
-      // if the error url matches the url for the map service, display error messages
-      // without this logic, various urls related to the service appear
-      if (e.url == service.options.url) {
-         // set isLoaded property to false
-         service.options.isLoaded = false;
-         // add warning messages to console
-         console.warn('Layer failed to load: ' + service.options.url);
-         console.warn('Code: ' + e.code + '; Message: ' + e.message);
-         // show modal window
-         $('#layerErrorModal').modal('show');
-      }
-   });
+// set-up display for zoning results
+export const prepResultsDisplay = (webmap) => {
+    $('#searchModal').modal('hide');
+    // hide results content
+    hideElement('municipalWrapper');
+    hideElement('zoningResults');
+    // reset content
+    resetContent('municipalName');
+    resetContent('zoningResults');
+    // show results waiting screen
+    showElement('resultsWaiting');
+    // show results panel
+    showElement('panelResults');
+    // remove any existing zoning layers from map
+    removeZoningLayerFromMap(webmap, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
+    // remove zoning from legend
+    removeZoningFromLegend();
 }

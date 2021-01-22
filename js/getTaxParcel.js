@@ -1,10 +1,11 @@
 "use strict";
 
-import {setPopupMaxWidth, showElement, hideElement} from './functions.js';
+import {showElement, hideElement} from './functions.js';
 import {selectZoningService} from './selectZoningService.js';
 import {getZoningDistrict} from './getZoningDistrict.js';
 import {setMuniName, getMuniName} from './municipalityContent.js';
 import {addZoningLayerToMap} from './manageZoningLayer.js';
+import {setPopupMaxWidth} from './mapFunctions.js';
 
 // viewport width
 let windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -42,8 +43,9 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
        } // at least one feature returned
        else {
           // add data to geojson object
-          taxParcelLayer.addData(response);
+          //taxParcelLayer.addData(response);
           // style feature
+          /*
           taxParcelLayer.setStyle(function() {
              return {
                    fillOpacity: 0,
@@ -52,7 +54,9 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
                    weight: 3
              }
          });
+         */
          // bind popup
+  /*
          taxParcelLayer.bindPopup(function(layer) {
             let popupContent = '<div class="feat-popup">';
             popupContent += '<ul>';
@@ -72,6 +76,7 @@ export const selectParcelByPin = (webmap, pin, taxParcelLayer, resultsElement) =
 
          // open popup on map
          taxParcelLayer.openPopup();
+         */
 
          // get municipal name
          const municipality = getMuniName(pin);
