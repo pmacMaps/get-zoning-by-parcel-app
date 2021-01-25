@@ -1,10 +1,10 @@
 ﻿"use strict";
 
 // imports
-import {processLoadEvent, showElement, hideElement, resetContent} from './functions.js';
+import {showElement, hideElement, prepResultsDisplay} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
-import {createMapLegendMS, removeZoningFromLegend} from './mapLegend.js';
-import {removeZoningLayerFromMap} from './manageZoningLayer.js';
+import {createMapLegendMS} from './mapLegend.js';
+import {processLoadEvent, setPopupMaxWidth, clearLayers} from './mapFunctions.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
@@ -12,6 +12,8 @@ const backCover = document.getElementById('back-cover');
 const resultsEl = document.getElementById('zoningResults');
 // center coordinates for map
 const homeCoords = [40.15, -77.25];
+// viewport width
+const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 // PA State Plane South (ft) projection
 const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667 +lat_2=39.93333333333333 +lat_0=39.33333333333334 +lon_0=-77.75 +x_0=600000 +y_0=0 +ellps=GRS80 +datum=NAD83 +to_meter=0.3048006096012192 +no_defs',  {
@@ -51,8 +53,10 @@ const zoomHome = L.Control.zoomHome({
 // create panes to control layer ordering
 // zoning feature layer pane
 map.createPane('zoning');
-// tax parcels
+// tax parcels standard
 map.createPane('parcels');
+// tax parcels from search
+map.createPane('parcelsSearch');
 
 // 2020 Imagery - cached map service
 const imagery2020 = L.esri.tiledMapLayer({
@@ -76,8 +80,43 @@ const roadsMunicipality = L.esri.tiledMapLayer({
     isLoaded: false
 });
 
+// Container for selected parel
+const taxParcel =  L.geoJson(null, {pane: 'parcelsSearch'}).addTo(map);
+
+// tax parcels feature layer
+const taxParcelsFS = L.esri.featureLayer({
+    url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
+    minZoom: 5,
+    isLoaded: false,
+    pane: 'parcels'
+});
+
+taxParcelsFS.bindPopup(function(layer) {
+    let popupContent = '<div class="feat-popup">';
+    popupContent += '<ul>';
+    popupContent += '<li>Address: {SITUS}</li>';
+    popupContent += '<li>Municipality: {MUNI_NAME}</li>';
+    popupContent += '<li>PIN: {Link}</li>';
+    popupContent += '<li>Owner: {OWNER}</li>';
+    popupContent += '</ul>';
+    popupContent += '</div>';
+
+    return L.Util.template(popupContent, layer.feature.properties);
+
+ }, {maxWidth: setPopupMaxWidth(windowWidth)});
+
+// run zoning query when parcel is clicked on (popup open)
+taxParcelsFS.on('popupopen', function(e) {
+    // set-up results panel
+    prepResultsDisplay(map);
+    // Remove previous tax parcel GeoJSON feature
+    clearLayers(taxParcel);
+    // call parcel query function
+    selectParcelByPin(map, e.layer.feature.properties.Link, resultsEl);
+});
+
 // array of map services to run loading function on
-const mapServices = [imagery2020, roadsMunicipality];
+const mapServices = [imagery2020, roadsMunicipality, taxParcelsFS];
 
 // call load/error events function on layers
 mapServices.forEach(element => processLoadEvent(element));
@@ -86,9 +125,6 @@ mapServices.forEach(element => element.addTo(map));
 
 // Create Map Legend
 createMapLegendMS('https://gis.ccpa.net/arcgiswebadaptor/rest/services/Property_Assessment/Roads_Municipal_Boundaries/MapServer', '#map-legend-content');
-
-// Container for selected parel
-const taxParcel =  L.geoJson(null, {pane: 'parcels'}).addTo(map);
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = L.esri.Geocoding.featureLayerProvider({
@@ -114,24 +150,8 @@ const SearchControl = L.esri.Geocoding.geosearch({
 
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
-    // close search modal (on mobile)
-    $('#searchModal').modal('hide');
-
-    // hide results content
-    hideElement('municipalWrapper');
-    hideElement('zoningResults');
-    // reset content
-    resetContent('municipalName');
-    resetContent('zoningResults');
-    // show results waiting screen
-    showElement('resultsWaiting');
-    // show results panel
-    showElement('panelResults');
-
-    // remove any existing zoning layers from map
-    removeZoningLayerFromMap(map, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
-    // remove zoning from legend
-    removeZoningFromLegend();
+    // set-up results panel display
+    prepResultsDisplay(map);
 
     // case: there are results from geosearch
     if (data.results.length > 0) {
@@ -139,13 +159,11 @@ SearchControl.on('results', function(data) {
        const pin = resultText.split(" ")[0];
 
         // Remove previous tax parcel GeoJSON feature
-        if (taxParcel.getLayers().length > 0) {
-            taxParcel.clearLayers();
-        }
+        clearLayers(taxParcel);
 
         // call parcel query function
         // take PIN from geosearch result and pass that into parcel query
-        selectParcelByPin(map, pin, taxParcel, resultsEl);
+        selectParcelByPin(map, pin, resultsEl, 'search', taxParcel);
     } // no results from geosearch
     else {
         // add message to console
