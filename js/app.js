@@ -5,6 +5,7 @@ import {showElement, hideElement, prepResultsDisplay} from './functions.js';
 import {selectParcelByPin} from './getTaxParcel.js';
 import {createMapLegendMS} from './mapLegend.js';
 import {processLoadEvent, setPopupMaxWidth, clearLayers} from './mapFunctions.js';
+import {locateControl} from './geolocate.js';
 
 // loading screen element
 const backCover = document.getElementById('back-cover');
@@ -48,6 +49,14 @@ const zoomHome = L.Control.zoomHome({
     zoomHomeTitle: 'Full map extent',
     homeCoordinates: homeCoords,
     homeZoom: 0
+}).addTo(map);
+
+// Locate Me Widget
+locateControl.addTo(map);
+
+// Full Screen Control
+const fullscreenControl = new L.Control.Fullscreen({
+    position: 'topleft'
 }).addTo(map);
 
 // create panes to control layer ordering
