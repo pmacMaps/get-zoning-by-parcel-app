@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Find Zoning District For Property</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="Web map app to identify which zoning district(s) a parcel (real estate) is within in Cumberland County, Pennsylvania">
+    <meta name="author" content="Cumberland County GIS">
+    <link rel="icon" href="https://gis.ccpa.net/gis_images/favicon.ico">
+    <link type="image/ico" rel="shortcut icon" href="https://gis.ccpa.net/gis_images/favicon.ico">
+
+    <!-- Facebook sharing -->
+    <meta property="og:type" content="article" />
+	  <meta property="og:title" content="Find Zoning District For Property" />
+    <meta property="og:image" content="img/zoning-map-screenshot.PNG" />
+    <meta property="og:image:alt" content="a zoning map for a community" />
+	  <meta property="og:description" content="Web map app to identify which zoning district(s) a parcel (real estate) is within in Cumberland County, Pennsylvania" />
+
+    <!-- Stylesheets -->
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://gis.ccpa.net/assets/font-awesome/fa-4.7.0/css/font-awesome.min.css" />
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+    <!-- bundled stylesheets for plugins-->
+    <link rel="stylesheet" href="https://gis.ccpa.net/assets/leaflet/bundled/css/leaflet-plugins.min.css" />
+    <!-- App Custom Styles -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-1529470-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-1529470-4');
+    </script>
+
+  </head>
+  <body>
+    <header class="fixed-top navbar">
+      <!-- title, subtitle, org image -->
+      <div class="justify-content-start">
+        <a class="navbar-brand" href="https://www.ccpa.net/" target="_blank" rel="noopener">
+          <img height="35" width="35" class="img-fluid d-none d-sm-inline-block" src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
+        </a>
+        <h1 class="navbar-brand white">Find Zoning District For Property</h1>
+        <span class="white d-none d-md-inline"> Cumberland County, PA</span>
+      </div>
+      <!-- Desktop Search (in modal for mobile) -->
+      <div class="d-sm-none d-md-none d-lg-block justify-content-center">
+        <form>
+          <div id="geocode"></div>
+        </form>
+      </div>
+      <!-- Navigation -->
+      <nav class="nav justify-content-end">
+        <!-- navigation menu -->
+          <button class="nav-link dropdown-toggle white font-weight-bold" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</button>
+          <ul class="dropdown dropdown-menu">
+              <li><button id="search-btn" class="btn dropdown-item d-sm-block d-md-block d-lg-none">Search</button></li>
+              <li><button id="about-btn" class="btn dropdown-item">About the Map</button></li>
+              <li><button id="legend-btn" class="btn dropdown-item">Map Legend</button></li>
+              <li><button id="disclaimer-btn" class="btn dropdown-item">Disclaimer</button></li>
+          </ul>
+      </nav>
+    </header>
+
+    <div id="container">
+      <div id="map"></div> <!-- leaflet map goes in here -->
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="back-cover">
+        <span>Map Loading &#46;&#46;&#46;</span>
+        <span class="map-loader-icon"></span>
+    </div>
+
+    <!-- search widget (for mobile) -->
+    <div id="searchModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Search Widget</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="geocodeMobile"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- about widget -->
+    <div id="aboutModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">About the Map</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>This map allows you to find the zoning district(s) for your property.</p>
+            <p>Please enter your property address or parcel ID (PIN) in the search bar to perform the search.</p>
+            <p>You can also zoom in, and click on a parcel to get the zoning district(s) for that property.</p>
+            <p>Zoning districts are symbolized by general categories instead of the the specific district as found on the official zoning map.</p>
+            <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+            <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
+            <p>Map developed by <a href="https://www.ccpa.net/116/Geographic-Information-Systems" target="_blank" rel="noopener"><strong>Cumberland County GIS</strong></a>.</p>
+            <p>Vist our <a href="http://ccpa.maps.arcgis.com/home/gallery.html" target="_blank" rel="noopener">Map Gallery!</a></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- legend widget -->
+    <div id="legendModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Map Legend</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="map-legend-content"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- disclaimer widget -->
+    <div id="disclaimerModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Disclaimer</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+            <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
+            <p>Cumberland County provides these Geographic Information System (GIS) maps and data on its web site as a public information service.  Every reasonable effort has been made to assure the accuracy of these maps and data.  No guarantee is made as to the accuracy of the maps and data and they should not be relied upon for any purpose other than general information.</p>
+            <p>CUMBERLAND COUNTY ASSUMES NO LIABILITY ARISING FROM USE OF THESE MAPS OR DATA. THE MAPS AND DATA ARE PROVIDED WITHOUT WARRANTY OF ANY KIND.</p>
+            <p>PROPRIETARY INFORMATION:  All information on this website is proprietary.  Any resale of this information is prohibited.</p>
+            <p>Contents: &copy; 2021 Cumberland County, Pennsylvania. </p>
+            <p>BY USING THIS DATA, I UNDERSTAND AND KNOWINGLY CONSENT TO THE ABOVE TERMS AND CONDITIONS.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results PanpanelResultsel -->
+    <div id="panelResults">
+      <h5 class="text-center">Zoning District(s) for Property</h5>
+      <button class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <hr />
+      <div id="resultsWaiting">
+        <span class="font-weight-bold">Performing Zoning District Search &#46;&#46;&#46;</span>
+        <br />
+        <span class="waiting-loader-icon"></span>
+      </div>
+      <div>
+        <span id="municipalWrapper">Municipality: <strong><span id="municipalName"></span></strong></span>
+        <div id="zoningResults"></div>
+      </div>
+      <hr />
+      <div class="text-small">
+        <p>Disclaimer:</p>
+        <p>The information depicted on this map is the most current data made available to the Cumberland County Planning Department.  Please contact the municipality to confirm the zoning classification for your property.</p>
+        <p>Visit <a target="_blank" rel="noopener" href="https://www.ccpa.net/BusinessDirectoryii.aspx?lngBusinessCategoryID=35">this website</a> for municipal contact information.</p>
+      </div>
+      <hr />
+        <button id="resultsCloseBtn" class="btn btn-primary float-right">Close</button>
+     </div>
+
+    <!-- error message -->
+    <div id="layerErrorModal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Error Adding Layers</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p class="text-danger">Warning: One or more layers failed to load on the map!</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="  crossorigin="anonymous"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <!-- Leaflet -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+   <!-- Non Esri Leaflet Bundled Plugins -->
+   <!-- Zoom Home; Full Screen; Locate -->
+   <script src="https://gis.ccpa.net/assets/leaflet/bundled/js/leaflet-plugins.min.js"></script>
+   <!-- Proj4JS -->
+   <script src="https://gis.ccpa.net/Assets/leaflet/plugins/proj4js/v-2.7.2/proj4.js"></script>
+   <!-- Proj4Leaflet -->
+   <script src="https://gis.ccpa.net/Assets/leaflet/plugins/proj4Leaflet/v-1.0.1/proj4leaflet.js"></script>
+   <!-- Esri Leaflet Bundled Plugins -->
+   <!-- Esri Leaflet; Esri Renderers; Esri Geocoder -->
+   <script src="https://gis.ccpa.net/assets/leaflet/bundled/js/esri-leaflet-plugins.min.js"></script>
+   <!-- UI -->
+   <script src="js/ui.js"></script>
+   <!-- Map Application -->
+   <script type="module" src="js/app.js"></script>
+    <!-- No Script-->
+   <noscript>
+    <div>
+       <p>You are trying to view an interactive map that allows people to find the zoning district(s) for their property in Cumberland County, Pennsylvania.</p>
+       <p>This map requires JavaScript, but running JavaScript is not currently enabled by your web browser.</p>
+       <p>If you wish to view this map, please enable JavaScript in this browser or try a different browser.</p>
+    </div>
+ </noscript>
+  </body>
+</html>
