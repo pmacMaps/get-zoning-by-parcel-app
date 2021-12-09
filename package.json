@@ -18,6 +18,9 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "leaflet": "^1.7.1",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet.locatecontrol": "^0.76.0",
+    "leaflet.zoomhome": "^1.0.0",
     "proj4": "^2.7.5",
     "proj4leaflet": "^1.0.2"
   },
