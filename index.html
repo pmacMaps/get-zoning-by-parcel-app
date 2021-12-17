@@ -9,8 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="description" content="Web map app to identify which zoning district(s) a parcel (real estate) is within in Cumberland County, Pennsylvania">
     <meta name="author" content="Cumberland County GIS">
-    <link rel="icon" href="https://gis.ccpa.net/gis_images/favicon.ico">
-    <link type="image/ico" rel="shortcut icon" href="https://gis.ccpa.net/gis_images/favicon.ico">
+    <link rel="icon" href="">
+    <link type="image/ico" rel="shortcut icon" href="">
 
     <!-- Facebook sharing -->
     <meta property="og:type" content="article" />
@@ -21,36 +21,32 @@
 
     <!-- Stylesheets -->
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://gis.ccpa.net/assets/font-awesome/fa-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Leaflet -->
-    <link rel="stylesheet" type="text/css" href="https://gis.ccpa.net/assets/leaflet/foundation/v-1.6.0/leaflet.css" />
-    <!-- bundled stylesheets for plugins-->
-    <link rel="stylesheet" href="https://gis.ccpa.net/assets/leaflet/bundled/css/leaflet-plugins.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+    <!-- Esri Leaflet Geocoder -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@3.1.1/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-IM3Hs+feyi40yZhDH6kV8vQMg4Fh20s9OzInIIAc4nx7aMYMfo+IenRUekoYsHZqGkREUgx0VvlEsgm7nCDW9g=="
+    crossorigin="">
+    <!-- Leaflet Locate Control -->
+    <link rel="stylesheet" href="libs/leaflet-locate/L.Control.Locate.min.css">
+    <!-- Leaflet Zoom Home -->
+    <link rel="stylesheet" href="libs/leaflet-zoomhome/leaflet.zoomhome.css">
+    <!-- Leaflet Fullscreen -->
+    <link rel="stylesheet" href="libs/leaflet-fullscreen/leaflet.fullscreen.css">
     <!-- App Custom Styles -->
     <link rel="stylesheet" href="css/style.css">
-
-    <!-- Google Analytics -->
-    <script>
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-1529470-4']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-
   </head>
   <body>
     <header class="fixed-top navbar">
       <!-- title, subtitle, org image -->
       <div class="justify-content-start">
         <a class="navbar-brand" href="https://www.ccpa.net/" target="_blank" rel="noopener">
-          <img height="35" width="35" class="img-fluid d-none d-sm-inline-block" src="//gis.ccpa.net/gis_images/CCPALogo_61x61px.gif" alt="cumberland county logo" />
+          <img height="35" width="35" class="img-fluid d-none d-sm-inline-block" src="/img/CCPALogo_61x61px.gif" alt="cumberland county logo" />
         </a>
         <h1 class="navbar-brand white">Find Zoning District For Property</h1>
         <span class="white d-none d-md-inline"> Cumberland County, PA</span>
@@ -225,21 +221,37 @@
 
     <!-- Scripts -->
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="  crossorigin="anonymous"></script>
     <!-- Bootstrap -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <!-- Leaflet -->
-   <script src="https://gis.ccpa.net/assets/leaflet/foundation/v-1.6.0/leaflet.js"></script>
-   <!-- Non Esri Leaflet Bundled Plugins -->
-   <!-- Zoom Home; Full Screen; Locate -->
-   <script src="https://gis.ccpa.net/assets/leaflet/bundled/js/leaflet-plugins.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <!-- Leaflet Locate -->
+    <script src="libs/leaflet-locate/L.Control.Locate.min.js"></script>
+   <!-- Leaflet Zoomhome -->
+   <script src="libs/leaflet-zoomhome/leaflet.zoomhome.min.js"></script>
+   <!-- Leaflet Fullscreen -->
+   <script src="libs/leaflet-fullscreen/Leaflet.fullscreen.min.js"></script>
    <!-- Proj4JS -->
-   <script src="https://gis.ccpa.net/Assets/leaflet/plugins/proj4js/v-2.6.2/proj4.js"></script>
+   <script src="/libs/proj4js/proj4.js"></script>
    <!-- Proj4Leaflet -->
-   <script src="https://gis.ccpa.net/Assets/leaflet/plugins/proj4Leaflet/v-1.0.1/proj4leaflet.js"></script>
-   <!-- Esri Leaflet Bundled Plugins -->
-   <!-- Esri Leaflet; Esri Renderers; Esri Geocoder -->
-   <script src="https://gis.ccpa.net/assets/leaflet/bundled/js/esri-leaflet-plugins.min.js"></script>
+   <script src="libs/proj4leaflet/proj4leaflet.js"></script>
+   <!-- Esri Leaflet -->
+   <script src="https://unpkg.com/esri-leaflet@3.0.4/dist/esri-leaflet.js"
+    integrity="sha512-oUArlxr7VpoY7f/dd3ZdUL7FGOvS79nXVVQhxlg6ij4Fhdc4QID43LUFRs7abwHNJ0EYWijiN5LP2ZRR2PY4hQ=="
+    crossorigin=""></script>
+    <!-- Esri Leaflet Renderers -->
+    <script src="https://unpkg.com/esri-leaflet-renderers@2.1.2/dist/esri-leaflet-renderers.js"
+    integrity="sha512-/McnqdlwYvfeOEWqoniEagFRQnLi/TNbkHe4EJypmZI02LBT7vBU/+PZ5W3FSsFFlRbnMCsJvnbp5MX8XOBrnQ=="
+    crossorigin=""></script>
+    <!-- Esri Leaflet Geocoder -->
+    <script src="https://unpkg.com/esri-leaflet-geocoder@3.1.1/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-enHceDibjfw6LYtgWU03hke20nVTm+X5CRi9ity06lGQNtC9GkBNl/6LoER6XzSudGiXy++avi1EbIg9Ip4L1w=="
+    crossorigin=""></script>
+    <!-- Esri Leaflet Legend -->
+    <script src="libs/esri-leaflet-legend/esri-leaflet-legend.js"></script>
    <!-- UI -->
    <script src="js/ui.js"></script>
    <!-- Map Application -->
