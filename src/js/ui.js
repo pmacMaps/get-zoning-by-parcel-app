@@ -1,4 +1,5 @@
-"use strict";
+//import 'jquery';
+window.$ = require('jquery');
 
 // Attach search control for desktop or mobile
 // remove jQuery [future step]
