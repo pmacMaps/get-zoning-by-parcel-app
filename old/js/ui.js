@@ -1,5 +1,3 @@
-"use strict";
-
 // Attach search control for desktop or mobile
 // remove jQuery [future step]
 const attachSearch = () => {

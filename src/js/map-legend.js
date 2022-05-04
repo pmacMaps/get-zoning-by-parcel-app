@@ -1,4 +1,5 @@
-"use strict";
+import { dynamicMapLayer } from 'esri-leaflet';
+import 'esri-leaflet-legend';
 
 // return text for map legend alt text
 const returnAltTextForLegend = (layerName, layerLabel) => {
@@ -15,7 +16,7 @@ const returnAltTextForLegend = (layerName, layerLabel) => {
 // create a legend element for a map service
 export const createMapLegendMS = (url,element) => {
 	// legend plugin uses dynamic map layer object
-	const dynamicMapService = L.esri.dynamicMapLayer({url: url});
+	const dynamicMapService = dynamicMapLayer({url: url});
 	dynamicMapService.legend(function(error, legend) {
 		let html = '';
 		if (!error) {

@@ -1,5 +1,3 @@
-"use strict";
-
 // return text for map legend alt text
 const returnAltTextForLegend = (layerName, layerLabel) => {
     let appendText;

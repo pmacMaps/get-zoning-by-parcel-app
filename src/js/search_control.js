@@ -12,7 +12,7 @@ const taxParcelsProvider = new featureLayerProvider({
         }
 });
 
-const SearchControl = new geosearch({
+export const SearchControl = new geosearch({
     useMapBounds: false,
     providers: [taxParcelsProvider],
     placeholder: 'Enter Property Address or PIN',

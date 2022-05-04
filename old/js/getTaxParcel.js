@@ -5,7 +5,7 @@ import {selectZoningService} from './selectZoningService.js';
 import {getZoningDistrict} from './getZoningDistrict.js';
 import {setMuniName, getMuniName} from './municipalityContent.js';
 import {addZoningLayerToMap} from './manageZoningLayer.js';
-import {setPopupMaxWidth} from './mapFunctions.js';
+import {setPopupMaxWidth} from './map-functions.js';
 
 // viewport width
 const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
