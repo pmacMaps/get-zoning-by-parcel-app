@@ -1,5 +1,4 @@
-"use strict";
-
+import { query } from 'esri-leaflet';
 import {populateZoningDistrictResults, hideElement, showElement} from './functions.js';
 
 // function to get zoning district for parcel
@@ -7,7 +6,7 @@ import {populateZoningDistrictResults, hideElement, showElement} from './functio
 // if no features with 'contains', use 'overlaps' as backup
 // need to add logic for when more than one parcel feature is returned from previous function
 export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => {
-    L.esri.query({url: zoningURL}).contains(parcel).run(function(error,response) {
+    query({url: zoningURL}).contains(parcel).run(function(error,response) {
       if (error) {
          // add message to console
          console.warn('An error with zoning service request has occured');

@@ -1,9 +1,11 @@
+// import modules
 import 'bootstrap';
 import './ui.js';
 import { webmap } from './webmap.js';
 import { zoomHomeControl, fullscreenControl, locateControl } from './map-controls.js';
-import { SearchControl } from './search_control.js';
+import { SearchControl } from './search-control.js';
 import { imagery2020, roadsMunicipality } from './ref-layers.js';
+import { geoJSON } from 'leaflet';
 import { processLoadEvent } from './map-functions.js';
 
 // add map controls
@@ -17,3 +19,6 @@ const refLayers = [imagery2020, roadsMunicipality];
 refLayers.forEach(element => processLoadEvent(element));
 // add layers to map
 refLayers.forEach(element => element.addTo(webmap));
+
+// Container for selected parel
+export const taxParcel =  geoJSON(null, {pane: 'parcelsSearch'}).addTo(webmap);

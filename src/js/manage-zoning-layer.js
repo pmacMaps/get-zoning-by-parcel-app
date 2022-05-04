@@ -1,6 +1,6 @@
 "use strict";
 
-import {createMapLegendFS} from './mapLegend.js';
+//import {createMapLegendFS} from './map-legend.js';
 
 // add zoning layer from webmap
 export const addZoningLayerToMap = (webmap, zoningURL, pane) => {
@@ -12,7 +12,7 @@ export const addZoningLayerToMap = (webmap, zoningURL, pane) => {
       }).addTo(webmap);
 
     // add map legend element for service
-    createMapLegendFS(zoningLayer, '#map-legend-content');
+    //createMapLegendFS(zoningLayer, '#map-legend-content');
 }
 
 // removes zoning layers from webmap

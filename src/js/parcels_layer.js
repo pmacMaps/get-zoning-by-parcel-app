@@ -1,7 +1,7 @@
-import {featureLayer} from 'esri-leaflet';
+import { featureLayer } from 'esri-leaflet';
 
 // tax parcels feature layer
-const taxParcelsFS = new featureLayer({
+export const taxParcelsFS = new featureLayer({
     url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
     minZoom: 5,
     isLoaded: false,

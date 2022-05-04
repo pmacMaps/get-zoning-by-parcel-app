@@ -1,12 +1,10 @@
-"use strict";
-
 import {showElement, hideElement} from './functions.js';
-import {selectZoningService} from './selectZoningService.js';
-import {getZoningDistrict} from './getZoningDistrict.js';
-import {setMuniName, getMuniName} from './municipalityContent.js';
-import {addZoningLayerToMap} from './manageZoningLayer.js';
-import {setPopupMaxWidth} from './mapFunctions.js';
-
+import {selectZoningService} from './select-zoning-service.js';
+import {getZoningDistrict} from './get-zoning-district.js';
+import {setMuniName, getMuniName} from './municipality-content.js';
+import {addZoningLayerToMap} from './manage-zoning-layer.js';
+import {setPopupMaxWidth} from './map-functions.js';
+import { query } from 'esri-leaflet';
 // viewport width
 const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
@@ -18,7 +16,7 @@ export const selectParcelByPin = (webmap, pin, resultsElement, source, taxParcel
     const taxParcelService = 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0';
 
     // query request - where method
-    L.esri.query({url: taxParcelService}).fields(['Link', 'SITUS', 'MUNI_NAME', 'OWNER']).where(queryString).run(function(error,response) {
+    query({url: taxParcelService}).fields(['Link', 'SITUS', 'MUNI_NAME', 'OWNER']).where(queryString).run(function(error,response) {
       // error running query
       if (error) {
           // add message to console

@@ -1,4 +1,12 @@
 import {featureLayerProvider, geosearch} from 'esri-leaflet-geocoder';
+import { webmap } from './webmap';
+import { taxParcel } from './app.js';
+import { hideElement, showElement, prepResultsDisplay } from './functions.js';
+import { clearLayers } from './map-functions.js';
+import { selectParcelByPin } from './get-tax-parcel.js';
+
+// UI element to show results in
+const resultsEl = document.getElementById('zoningResults');
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = new featureLayerProvider({
@@ -25,7 +33,7 @@ export const SearchControl = new geosearch({
 /*** Address search results event ***/
 SearchControl.on('results', function(data) {
     // set-up results panel display
-    prepResultsDisplay(map);
+    prepResultsDisplay(webmap);
 
     // case: there are results from geosearch
     if (data.results.length > 0) {
@@ -37,7 +45,7 @@ SearchControl.on('results', function(data) {
 
         // call parcel query function
         // take PIN from geosearch result and pass that into parcel query
-        selectParcelByPin(map, pin, resultsEl, 'search', taxParcel);
+        selectParcelByPin(webmap, pin, resultsEl, 'search', taxParcel);
     } // no results from geosearch
     else {
         // add message to console

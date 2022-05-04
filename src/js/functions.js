@@ -1,7 +1,5 @@
-"use strict";
-
-import {removeZoningLayerFromMap} from './manageZoningLayer.js';
-import {removeZoningFromLegend} from './mapLegend.js';
+import {removeZoningLayerFromMap} from './manage-zoning-layer.js';
+//import {removeZoningFromLegend} from './map-legend.js';
 
 // display element
 export const showElement = (id) => {
@@ -56,5 +54,5 @@ export const prepResultsDisplay = (webmap) => {
     // remove any existing zoning layers from map
     removeZoningLayerFromMap(webmap, 'https://gis.ccpa.net/arcgiswebadaptor/rest/services/Planning/Zoning_Basemap/MapServer');
     // remove zoning from legend
-    removeZoningFromLegend();
+    //removeZoningFromLegend();
 }
