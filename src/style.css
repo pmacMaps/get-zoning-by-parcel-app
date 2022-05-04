@@ -3,6 +3,8 @@
 @import '../node_modules/font-awesome/css/font-awesome.min.css';
 @import '../node_modules/leaflet/dist/leaflet.css';
 @import '../node_modules/esri-leaflet-geocoder/dist/esri-leaflet-geocoder.css';
+@import '../node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css';
+@import '../node_modules/leaflet.locatecontrol/dist/L.Control.Locate.min.css';
 
 /* General */
 html {

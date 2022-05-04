@@ -1,6 +1,4 @@
-import {map} from 'leaflet';
-import {fullscreenControl} from 'leaflet-fullscreen';
-import {zoomHome} from 'leaflet.zoomhome';
+import { map } from 'leaflet';
 
 // center coordinates for map
 const homeCoords = [40.15, -77.25];
@@ -24,11 +22,10 @@ const spcPACrs = new L.Proj.CRS('EPSG:2272', '+proj=lcc +lat_1=40.96666666666667
 });
 */
 /*** Map Objects ***/
-const map = L.map('map', {
+export const webmap = map('map', {
     center: homeCoords,
     zoom: 15,
-    zoomControl: true,
-    fullscreenControl: true
+    zoomControl: false
     //crs: spcPACrs,
     //: 0,
     //maxZoom: 9
@@ -36,27 +33,8 @@ const map = L.map('map', {
 
 // create panes to control layer ordering
 // zoning feature layer pane
-map.createPane('zoning');
+webmap.createPane('zoning');
 // tax parcels standard
-map.createPane('parcels');
+webmap.createPane('parcels');
 // tax parcels from search
-map.createPane('parcelsSearch');
-
-/*** Zoom Home Control ***/
-const zoomHome = L.Control.zoomHome({
-    position: 'topleft',
-    zoomHomeTitle: 'Full map extent',
-    homeCoordinates: homeCoords,
-    homeZoom: 15
-});
-
-// Locate Me Widget
-//locateControl.addTo(map);
-
-// Full Screen Control
-
-const fullscreenControl = new L.Control.Fullscreen({
-    position: 'topleft'
-});//.addTo(map);
-
-export {map};
+webmap.createPane('parcelsSearch');
