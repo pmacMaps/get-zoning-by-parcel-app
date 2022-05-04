@@ -1,14 +1,14 @@
 import 'leaflet-fullscreen';
 import 'leaflet.zoomhome';
 import 'leaflet.locatecontrol';
-import { homeCoords } from './webmap.js';
+import { homeCoords, initZoom } from './webmap.js';
 
 /*** Zoom Home Control ***/
 export const zoomHomeControl = L.Control.zoomHome({
     position: 'topleft',
     zoomHomeTitle: 'Full map extent',
     homeCoordinates: homeCoords,
-    homeZoom: 15
+    homeZoom: initZoom
 });
 
 // locate control
