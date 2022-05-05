@@ -23,7 +23,7 @@ export const getZoningDistrict = (webmap, parcel, zoningURL, resultsElement) => 
         console.warn('No zoning district features returned or an error occured');
         console.warn('attempting "overlaps" query');
         // run overlaps query
-        L.esri.query({url: zoningURL}).overlaps(parcel).run(function(error,response) {
+        query({url: zoningURL}).overlaps(parcel).run(function(error,response) {
           if (error) {
              // add message to console
              console.warn('An error with zoning service request has occured');

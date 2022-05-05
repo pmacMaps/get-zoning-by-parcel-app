@@ -1,5 +1,3 @@
-"use strict";
-
 // function to get zoning service for spatial query
 export const selectZoningService = (pin) => {
    // base zoning url

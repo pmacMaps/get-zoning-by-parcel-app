@@ -1,11 +1,11 @@
-"use strict";
+import { featureLayer } from 'esri-leaflet';
 
 //import {createMapLegendFS} from './map-legend.js';
 
 // add zoning layer from webmap
 export const addZoningLayerToMap = (webmap, zoningURL, pane) => {
     // add zoning layer for selected municipality to map
-    const zoningLayer = L.esri.featureLayer({
+    const zoningLayer = featureLayer({
         url: zoningURL,
         pane: pane,
         interactive: false
