@@ -1,4 +1,6 @@
 import { featureLayer } from 'esri-leaflet';
+import { setPopupMaxWidth } from './map-functions.js';
+import { windowWidth } from './webmap.js';
 
 // tax parcels feature layer
 export const taxParcelsFS = new featureLayer({

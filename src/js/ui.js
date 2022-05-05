@@ -1,4 +1,3 @@
-//import 'jquery';
 window.$ = require('jquery');
 
 // Attach search control for desktop or mobile

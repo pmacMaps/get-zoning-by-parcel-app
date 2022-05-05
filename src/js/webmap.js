@@ -4,6 +4,8 @@ import { spcPACrs } from './crs.js';
 export const homeCoords = [40.15, -77.25];
 // initial zoom
 export const initZoom = 0;
+// viewport width
+export const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
 /*** Map Objects ***/
 export const webmap = map('map', {
