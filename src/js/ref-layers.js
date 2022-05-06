@@ -1,4 +1,5 @@
 import {tiledMapLayer} from 'esri-leaflet';
+import '../../node_modules/esri-leaflet-renderers/dist/esri-leaflet-renderers.js';
 
 // 2020 Imagery - cached map service
 export const imagery2020 = new tiledMapLayer({

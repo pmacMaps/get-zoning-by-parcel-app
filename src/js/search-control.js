@@ -6,7 +6,7 @@ import { clearLayers } from './map-functions.js';
 import { selectParcelByPin } from './get-tax-parcel.js';
 
 // UI element to show results in
-const resultsEl = document.getElementById('zoningResults');
+export const resultsEl = document.getElementById('zoningResults');
 
 // call functions within Esri Leaflet Geocoder
 const taxParcelsProvider = new featureLayerProvider({

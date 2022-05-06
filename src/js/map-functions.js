@@ -1,5 +1,3 @@
-"use strict";
-
 /*** Map & Device Size Functions ***/
 // Set max width of pop-up window
 export const setPopupMaxWidth = (windowWidth) => {

@@ -1,9 +1,15 @@
 import { featureLayer } from 'esri-leaflet';
-import { setPopupMaxWidth } from './map-functions.js';
+import { webmap } from './webmap.js';
+import { taxParcel } from './app.js';
+import { setPopupMaxWidth, clearLayers } from './map-functions.js';
 import { windowWidth } from './webmap.js';
+import { prepResultsDisplay } from './functions.js';
+import { selectParcelByPin } from './get-tax-parcel.js';
+import { resultsEl } from './search-control.js';
+import { webmap } from './webmap.js';
 
 // tax parcels feature layer
-export const taxParcelsFS = new featureLayer({
+export const taxParcelsFS = featureLayer({
     url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
     minZoom: 5,
     isLoaded: false,
@@ -27,9 +33,9 @@ taxParcelsFS.bindPopup(function(layer) {
 // run zoning query when parcel is clicked on (popup open)
 taxParcelsFS.on('popupopen', function(e) {
     // set-up results panel
-    prepResultsDisplay(map);
+    prepResultsDisplay(webmap);
     // Remove previous tax parcel GeoJSON feature
     clearLayers(taxParcel);
     // call parcel query function
-    selectParcelByPin(map, e.layer.feature.properties.Link, resultsEl);
+    selectParcelByPin(webmap, e.layer.feature.properties.Link, resultsEl);
 });
