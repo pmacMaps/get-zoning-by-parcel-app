@@ -5,6 +5,7 @@ import {setMuniName, getMuniName} from './municipality-content.js';
 import {addZoningLayerToMap} from './manage-zoning-layer.js';
 import {setPopupMaxWidth} from './map-functions.js';
 import { query } from 'esri-leaflet';
+import { getSymbology } from './get-zoning-symbology.js'
 // viewport width
 const windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
@@ -88,8 +89,12 @@ export const selectParcelByPin = (webmap, pin, resultsElement, source, taxParcel
             getZoningDistrict(webmap, feature.geometry, selectZoningService(pin), resultsElement);
          });
 
+         const zoningUrl = selectZoningService(pin);
+
          // add zoning layer to map
-         addZoningLayerToMap(webmap, selectZoningService(pin), 'zoning');
+         addZoningLayerToMap(webmap, zoningUrl, 'zoning');
+         // get symbology for zoning service
+         getSymbology(zoningUrl);
         }       
      });
  }
