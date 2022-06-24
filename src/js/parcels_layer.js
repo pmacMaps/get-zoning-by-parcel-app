@@ -7,20 +7,21 @@ import { prepResultsDisplay } from './functions.js';
 import { selectParcelByPin } from './get-tax-parcel.js';
 import { resultsEl } from './search-control.js';
 import { webmap } from './webmap.js';
+import 'esri-leaflet-renderers';
 
 // tax parcels feature layer
 export const taxParcelsFS = featureLayer({
     url: 'https://services1.arcgis.com/1Cfo0re3un0w6a30/ArcGIS/rest/services/Tax_Parcels/FeatureServer/0',
     minZoom: 5,
     isLoaded: false,
-    pane: 'parcels',
+    pane: 'parcels'/*,
     style: function(feature) {
         return {
             color: '#000',
             weight: 1.75,
             fillOpacity: 0
         }
-    }
+    }*/
 });
 
 taxParcelsFS.bindPopup(function(layer) {

@@ -8,6 +8,7 @@ import { imagery2020, roadsMunicipality } from './ref-layers.js';
 import { taxParcelsFS } from './parcels_layer.js'
 import { geoJSON } from 'leaflet';
 import { processLoadEvent } from './map-functions.js';
+import 'esri-leaflet-renderers';
 
 // add map controls
 zoomHomeControl.addTo(webmap);
